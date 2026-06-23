@@ -53,6 +53,7 @@ jobs:
           --health-retries=10
     env:
       DATABASE_URL: postgresql://fdf:fdf_dev_password@localhost:5432/managerfdf_test?schema=public
+      DIRECT_URL: postgresql://fdf:fdf_dev_password@localhost:5432/managerfdf_test?schema=public
       REDIS_URL: redis://localhost:6379
       JWT_SECRET: ci_jwt_secret_for_tests_only_change_in_real_deploys
       NODE_ENV: test
