@@ -10,8 +10,7 @@ test.describe('Agente B — cierre auditoría', () => {
 
   test('CalendarPage no hardcodea 38 jornadas en el DOM', async ({ page }) => {
     await page.goto('/login');
-    const hasAuth = await page.getByTestId('login-username').isVisible();
-    expect(hasAuth).toBeTruthy();
+    await expect(page.getByTestId('login-username')).toBeVisible();
     // Smoke: la ruta existe y el bundle carga (auth requerida en runtime).
     await page.goto('/calendar');
     await expect(page).toHaveURL(/\/(calendar|login)/);
