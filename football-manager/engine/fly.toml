@@ -1,0 +1,37 @@
+# ─── Manager FDF — Motor de partido en Fly.io (issue 7.2) ─────────────────────
+# Despliegue:  cd engine && fly launch --copy-config --no-deploy && fly deploy
+# El motor es stateless y determinista por semilla: puede dormirse sin perder nada
+# (auto_stop) y Fly lo despierta en el primer /simulate del turno (~1s de cold start).
+# El backend tiene fallback al motor TS si tarda, así que el cold start no rompe el tick.
+
+app = "managerfdf-engine" # cámbialo si el nombre está cogido (fly apps create <nombre>)
+primary_region = "mad"    # Madrid — mismo huso que el cron de turnos
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  TZ = "Europe/Madrid"
+  # AUDIT-2026 §8 P1: hash() de Python estable entre máquinas/reinicios
+  # (cinturón extra: el código ya no usa hash() para sembrar RNGs).
+  PYTHONHASHSEED = "0"
+# OBLIGATORIO en producción pública: fly secrets set ENGINE_API_KEY=$(openssl rand -hex 32)
+# y la misma clave en Koyeb (ENGINE_API_KEY del backend). Sin ella, /simulate queda abierto.
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = "stop"   # 0€: la VM se para sin tráfico
+  auto_start_machines = true
+  min_machines_running = 0      # sube a 1 si quieres cero cold starts (sigue gratis con 1 shared)
+
+  [[http_service.checks]]
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "15s"
+    method = "GET"
+    path = "/health"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"   # el motor no tiene dependencias pesadas (stdlib pura)

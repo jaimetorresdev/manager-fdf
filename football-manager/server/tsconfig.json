@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "lib": ["ES2022"],
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    // Typelibs globales EXPLÍCITAS: sin esto tsc carga TODAS las carpetas de
+    // @types (incluida la duplicada "estree 2" que macOS crea al sincronizar y
+    // que el mount no deja borrar → TS2688). Los tipos de paquetes importados
+    // (ws, web-push, bcryptjs…) se resuelven igual por el import, no por aquí.
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "prisma"]
+}

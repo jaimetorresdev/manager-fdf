@@ -1,0 +1,2011 @@
+{
+  "stadium": {
+    "loading": "Cargando información del estadio...",
+    "unavailable": "Estadio no disponible",
+    "retry": "Reintentar",
+    "occupancy": "ocupación",
+    "capacity": "Capacidad",
+    "attendance": "Asistencia",
+    "revenue": "Ingresos",
+    "bonus": "Bonus",
+    "viewTitle": "Vista del Estadio",
+    "view3d": "VER EN 3D",
+    "view2d": "CAMBIAR A 2D",
+    "attendanceBonuses": "Bonificaciones por Asistencia",
+    "facilities": "Estado Instalaciones",
+    "facilitiesLabels": {
+      "seats": "Asientos",
+      "boxes": "Palcos VIP",
+      "parking": "Aparcamiento",
+      "sportsCity": "Ciudad Deportiva"
+    },
+    "upgrades": "Mejoras y Ampliaciones",
+    "worksInProgress": "Obras en Curso",
+    "workPrefix": "Ampliación",
+    "monthsRemaining": "meses restantes",
+    "build": "Construir",
+    "inProgress": "En Obra",
+    "workError": "Error al iniciar la obra",
+    "budget": "Presupuesto:",
+    "overview": {
+      "spectators": "espectadores",
+      "avgMatch": "media partido",
+      "homeMatch": "partido local"
+    },
+    "stands": {
+      "northEnd": "FONDO NORTE",
+      "southEnd": "FONDO SUR",
+      "side": "LATERAL",
+      "main": "PREFERENCIA"
+    },
+    "active": "ACTIVO",
+    "levelShort": "Niv.",
+    "months": "meses",
+    "infoNote": "Las construcciones se inician en el siguiente turno y bloquean ampliaciones adicionales hasta su finalización. La capacidad máxima del Rico Pérez puede alcanzar los <strong>42.000 espectadores</strong> tras ampliaciones completas."
+  },
+  "economy": {
+    "kicker": "Oficina del director",
+    "title": "Memoria económica del club",
+    "lede": "Los números cuentan la historia del proyecto: caja, masa salarial y proyección. No es un panel BI — es el informe que leería la prensa deportiva.",
+    "unavailable": "Economía no disponible",
+    "unavailableHint": "El módulo financiero todavía no ha devuelto datos.",
+    "retry": "Reintentar",
+    "tabs": {
+      "summary": "Resumen de economía",
+      "sponsors": "Derechos de imagen",
+      "outsourcing": "Subcontratas",
+      "analysis": "Análisis",
+      "tickets": "Entradas",
+      "preseason": "Pretemporada"
+    },
+    "sponsorBreakTitle": "Romper contrato de imagen",
+    "sponsorBreakConfirm": "Se aplicará una penalización del 8% por cada año restante. ¿Confirmas la ruptura?",
+    "sponsorBreakAction": "Romper contrato",
+    "sponsorBreakBtn": "Romper",
+    "outsourcingCancelTitle": "Cancelar subcontrata",
+    "outsourcingCancelBody": "¿Cancelar {{name}}? Dejarás de pagar el coste mensual.",
+    "outsourcingCancelAction": "Cancelar servicio",
+    "outsourcingHireTitle": "Contratar subcontrata",
+    "outsourcingHireBody": "¿Contratar {{name}} por {{cost}}/mes?",
+    "outsourcingHireAction": "Contratar",
+    "errors": {
+      "loadFailed": "No se pudo cargar la economía.",
+      "operationFailed": "Operación fallida",
+      "searchFailed": "No se pudo buscar rivales"
+    },
+    "toasts": {
+      "noSearchResults": "Sin resultados para esa búsqueda",
+      "sponsorSigned": "Contrato de {{name}} firmado ({{years}} años)",
+      "ticketPriceUpdated": "Precio de entradas: {{level}}",
+      "friendlyCancelled": "Amistoso cancelado",
+      "friendlyScheduled": "Amistoso programado",
+      "sponsorBroken": "Contrato roto (penalización pagada)",
+      "outsourcingStatus": "{{name}}: {{status}}",
+      "outsourcingHired": "contratada",
+      "outsourcingCancelled": "cancelada"
+    },
+    "common": {
+      "perMonth": "/mes",
+      "cancel": "Cancelar",
+      "sign": "Firmar",
+      "search": "Buscar",
+      "schedule": "Programar",
+      "you": "TÚ",
+      "vs": "vs",
+      "home": "casa",
+      "away": "fuera",
+      "clubFallback": "Club #{{id}}",
+      "gateAbove": "aforo > {{count}}",
+      "yearsShort": "{{years}}a · {{pct}}%",
+      "yearsCount": "{{years}} año(s) · {{pct}}% de la base"
+    },
+    "sponsors": {
+      "intro": "Cantidad base = valoración × nivel de vida (manual §7.3). Más años firmados → mayor % de la base. Romper paga el 8% por año restante. Sin contrato → ingreso 0.",
+      "activeChip": "ACTIVO · {{months}} MESES",
+      "noContract": "SIN CONTRATO",
+      "types": {
+        "tv": "Televisión",
+        "ads": "Vallas publicitarias",
+        "merch": "Merchandising"
+      }
+    },
+    "outsourcing": {
+      "intro": "Sin seguridad la asistencia se topa en 5.000 y sin mantenimiento en 10.000 (manual §7.5).",
+      "capacityCapped": "AFORO TOPADO: {{cap}}",
+      "capacityFull": "AFORO COMPLETO",
+      "hire": "Contratar",
+      "types": {
+        "travelAgency": {
+          "name": "Agencia de viajes",
+          "effect": "Sin ella: 4.000 € por partido fuera"
+        },
+        "security": {
+          "name": "Personal de seguridad",
+          "effect": "Desbloquea aforo > 5.000"
+        },
+        "maintenance": {
+          "name": "Mantenimiento",
+          "effect": "Desbloquea aforo > 10.000"
+        },
+        "cleaning": {
+          "name": "Personal de limpieza",
+          "effect": "+5% taquilla"
+        },
+        "food": {
+          "name": "Restauración",
+          "effect": "+10% taquilla"
+        },
+        "media": {
+          "name": "Difusión mediática",
+          "effect": "+10% derechos de imagen"
+        },
+        "medical": {
+          "name": "Aseguradora médica",
+          "effect": "Cobras 10.000 €/turno por lesionado"
+        }
+      }
+    },
+    "tickets": {
+      "title": "Entradas y taquilla",
+      "monthlyBreakdown": "Desglose mensual",
+      "gate": "Taquilla",
+      "tv": "Televisión",
+      "sponsorship": "Patrocinio / vallas",
+      "merch": "Merchandising",
+      "salaries": "Salarios",
+      "outsourcing": "Subcontratas",
+      "priceTitle": "Precio de entradas",
+      "countryLevel": "(nivel del país: {{level}})",
+      "priceOption": "{{label}} · {{price}} €",
+      "levels": {
+        "low": {
+          "label": "BAJO",
+          "note": "Asistencia completa"
+        },
+        "medium": {
+          "label": "MEDIO",
+          "note": "−25% público"
+        },
+        "high": {
+          "label": "ALTO",
+          "note": "−50% público"
+        }
+      }
+    },
+    "preseason": {
+      "title": "Pretemporada · amistosos y concentraciones",
+      "windowOpen": "VENTANA ABIERTA",
+      "windowClosed": "VENTANA {{window}}",
+      "intro": "Se contratan en julio y ocurren en agosto (manual §7.4): afectan a toda la plantilla — forma 70–90%, moral +2 a +15, prestigio +1 a +10, habilidades +1 a +10 sin superar el talento.",
+      "friendliesUsed": " · Amistosos: {{used}}/{{max}} usados.",
+      "noFriendlies": "No hay amistosos programados.",
+      "scheduleFriendly": "Programar amistoso",
+      "searchPlaceholder": "Buscar rival (nombre del club)…",
+      "searchAria": "Buscar club rival",
+      "dateAria": "Fecha del amistoso",
+      "scheduleHint": "Solo dentro de la ventana de pretemporada ({{window}}, fecha in-game) · máx. {{max}}/temporada.",
+      "defaultWindow": "5 jul – 20 ago"
+    },
+    "analysis": {
+      "unavailable": "Análisis no disponible",
+      "unavailableHint": "El endpoint de análisis no ha respondido. Reintenta en unos segundos.",
+      "salaryRatioTitle": "Ratio masa salarial / ingresos",
+      "monthlySalaryMass": "Masa salarial mensual",
+      "monthlyBalance": "Balance mensual",
+      "valuationEvolution": "Evolución de la valoración",
+      "competitionIncome": "Ingresos por competición",
+      "topVariations": "Top variaciones",
+      "comparisonTitle": "Comparativa · {{name}}",
+      "rankValuation": "VALORACIÓN #{{rank}}",
+      "rankBudget": "PRESUPUESTO #{{rank}}",
+      "rankSalary": "MASA #{{rank}}",
+      "leagueFallback": "liga",
+      "leagueAverage": "MEDIA DE LA LIGA · valoración {{valuation}} · presupuesto {{budget}} · masa salarial {{salary}}/mes",
+      "columns": {
+        "club": "Club",
+        "valuation": "Valoración",
+        "budget": "Presupuesto",
+        "salaryMass": "Masa salarial/mes"
+      }
+    },
+    "summary": {
+      "cashAvailable": "Efectivo disponible",
+      "immobilizedMargin": "Margen inmovilizado: {{amount}}",
+      "expenseForecast30": "Previsión de gastos a 30 días",
+      "squadSalaries": "Salarios plantilla",
+      "outsourcingServices": "Subcontratas y servicios",
+      "estimatedTotal": "Total estimado",
+      "incomeForecast30": "Previsión de ingresos a 30 días",
+      "estimatedGate": "Taquilla estimada",
+      "sponsorships": "Patrocinios",
+      "forecast12m": "Previsión a 12 meses",
+      "months12": "12 meses",
+      "months24": "24 meses",
+      "months36": "36 meses",
+      "noForecast": "Sin previsión disponible",
+      "cashMovements": "Listado de movimientos de caja",
+      "incomeGate": "Ingresos Taquilla",
+      "incomeTv": "Ingresos TV",
+      "incomeSponsorship": "Ingresos Patrocinio",
+      "incomeMerch": "Ingresos Merch",
+      "paySalaries": "Pago Salarios",
+      "payOutsourcing": "Pago Subcontratas",
+      "netMonthlyBalance": "Balance mensual neto",
+      "clubValue": "Valor del club",
+      "shareholders": "Accionarios: 100% propiedad local",
+      "cashEvolution": "Evolución del efectivo"
+    }
+  },
+  "market": {
+    "kicker": "Ventana de fichajes",
+    "title": "Mercado de fichajes",
+    "lede": "Teléfonos calientes, cláusulas y rumores en la mesa del director. Aquí se decide el futuro de la plantilla — con el reloj del mercado siempre encima.",
+    "tabs": {
+      "search": "Buscar",
+      "free": "Libres",
+      "sale": "En venta",
+      "loans": "Cesiones",
+      "offers": "Mis ofertas",
+      "rumors": "Rumores"
+    },
+    "window": {
+      "transfer": "VENTANA",
+      "open": "ABIERTA",
+      "closed": "CERRADA",
+      "loans": "CESIONES",
+      "loansOpen": "ABIERTAS",
+      "loansClosed": "CERRADAS"
+    },
+    "filters": {
+      "position": "Posición",
+      "ageMin": "Edad mín",
+      "ageMax": "Edad máx",
+      "valueMax": "Valor máx (€)",
+      "potentialMin": "Potencial mín",
+      "country": "País",
+      "countryPlaceholder": "Ej: España",
+      "minOverall": "Media mín",
+      "minPassing": "Pase mín",
+      "minShooting": "Tiro mín",
+      "minDribbling": "Regate mín",
+      "minTackling": "Robo mín",
+      "allPositions": "Todas",
+      "search": "Buscar",
+      "advanced": "Avanzados",
+      "lessFilters": "Menos filtros",
+      "available": "Disponibles",
+      "noResults": "Sin jugadores para estos filtros.",
+      "loadError": "No se pudo cargar el mercado"
+    },
+    "empty": {
+      "freeAgents": "No hay agentes libres",
+      "freeAgentsHint": "Los jugadores sin club aparecerán aquí.",
+      "listings": "Nadie ha puesto jugadores a la venta",
+      "listingsHint": "Pon a la venta desde tu Plantilla.",
+      "squad": "Plantilla no disponible",
+      "rumors": "Sin rumores",
+      "rumorsHint": "El mercado está muy tranquilo esta semana.",
+      "offers": "Sin ofertas en curso",
+      "offersHint": "Tus ofertas de traspaso aparecerán aquí."
+    },
+    "loanSearchLabel": "Club destino",
+    "retry": "Reintentar",
+    "clause": {
+      "label": "Cláusula de rescisión:",
+      "hint": "Pago inmediato e irrevocable.",
+      "windowClosed": "Ventana cerrada: el server lo rechazará.",
+      "payAction": "Pagar cláusula",
+      "confirmTitle": "Confirmar pago de cláusula",
+      "confirmBody": "Pagarás {{amount}} por la cláusula de {{player}}. Esta operación es irrevocable.",
+      "confirmAction": "Confirmar pago"
+    },
+    "freeAgent": {
+      "intro": "Agente libre — firma directa sin traspaso (cuenta para el tope salarial):",
+      "wageLabel": "Salario/mes",
+      "yearsLabel": "Años (1-5)",
+      "sign": "Firmar"
+    },
+    "confirm": {
+      "withdrawTitle": "Retirar oferta",
+      "withdrawBody": "¿Retirar esta oferta del mercado? No podrás recuperarla.",
+      "withdrawAction": "Retirar oferta",
+      "listingTitle": "Retirar de la venta",
+      "listingBody": "¿Quitar este jugador del mercado de traspasos?",
+      "listingAction": "Retirar jugador",
+      "sabotageTitle": "Plantar crisis de vestuario",
+      "sabotageBody": "Gastarás 120 puntos de prestigio para sembrar una crisis en el vestuario rival. Máximo 1 por semana.",
+      "sabotageAction": "Plantar rumor (−120 prestigio)",
+      "loanTitle": "Confirmar cesión",
+      "loanAction": "Ceder jugador",
+      "loanBody": "¿Ceder a {{player}} al {{club}}? El club destino asumirá el salario hasta fin de temporada."
+    },
+    "toasts": {
+      "clauseSigned": "¡{{player}} es tuyo por cláusula!",
+      "freeAgentSigned": "{{player}} firma {{years}} años",
+      "loanDone": "{{player}} cedido al {{club}}",
+      "offerWithdrawn": "Oferta retirada",
+      "listingRemoved": "Retirado de la venta",
+      "denialPublished": "Desmentido publicado",
+      "offerSent": "Oferta enviada",
+      "rumorPlanted": "Rumor plantado en la prensa"
+    },
+    "actions": {
+      "offer": "Ofertar",
+      "sign": "Fichar",
+      "withdraw": "Retirar",
+      "loan": "Ceder",
+      "shortlist": "Shortlist",
+      "fullProfile": "Ficha completa →",
+      "deny": "Desmentir (−60 prestigio)"
+    },
+    "cap": {
+      "summary": "Tope salarial (15%) · usado {{used}} de {{cap}}",
+      "exceeded": "EXCEDIDO {{amount}}",
+      "margin": "Margen para fichar: {{amount}}/mes"
+    },
+    "squadLimits": {
+      "firstTeam": "Plantilla · 1º Equipo: {{current}}/{{max}}",
+      "youth": "Juveniles: {{current}}/{{max}} · Cedidos f.: {{loanedOut}}"
+    },
+    "pagination": {
+      "prev": "Anterior",
+      "page": "Pág {{page}} de {{total}}",
+      "next": "Siguiente"
+    },
+    "ageYears": "{{age}} años",
+    "freeAgentLabel": "LIBRE",
+    "perMonth": "/mes",
+    "rumors": {
+      "title": "Rumorómetro",
+      "dirtyWarTitle": "Guerra sucia (N4-2):",
+      "dirtyWarBefore": "gasta 120 de prestigio para plantar una crisis de vestuario contra",
+      "dirtyWarAfter": "antes del derbi. Máx. 1/semana. El rival puede desmentir (60 prestigio).",
+      "plantCrisis": "Plantar crisis de vestuario (−120 prestigio)",
+      "activeCrisis": "Crisis activa contra tu club"
+    },
+    "loan": {
+      "windowClosed": "⚠ La ventana de cesiones está cerrada — el server rechazará la operación hasta que abra.",
+      "loanedHere": "CEDIDO AQUÍ",
+      "modalTitle": "Ceder a {{player}}",
+      "modalHint": "El club destino paga el salario durante la cesión. Vuelve al final de temporada.",
+      "noResults": "Sin resultados.",
+      "searchPlaceholder": "Buscar club destino…",
+      "searchAria": "Buscar club destino para la cesión"
+    },
+    "offers": {
+      "salary": "Salario:",
+      "duration": "Duración:",
+      "clause": "Cláusula:",
+      "years_one": "{{count}} año",
+      "years_other": "{{count}} años"
+    }
+  },
+  "sportingHub": {
+    "matchday": "Jornada {{week}}",
+    "navLabel": "Departamento deportivo",
+    "nav": {
+      "squad": "Plantilla",
+      "tactics": "Táctica",
+      "training": "Entrenamiento"
+    }
+  },
+  "squad": {
+    "kicker": "Vestuario",
+    "title": "Tu plantilla, cara a cara",
+    "lede": "Conoce a cada jugador antes de alinear el once. La vista vestuario es la de referencia; la tabla queda para el análisis frío.",
+    "emptyTitle": "Plantilla vacía",
+    "emptyHint": "Todavía no hay jugadores en este listado.",
+    "loadError": "No se pudo cargar la plantilla",
+    "retry": "Reintentar",
+    "tabs": {
+      "firstTeam": "1er equipo",
+      "loanedOut": "Jugadores cedidos",
+      "youth": "Equipo sub19"
+    },
+    "views": {
+      "locker": "Vestuario",
+      "table": "Tabla"
+    },
+    "tableTabs": {
+      "skills": "Habilidades",
+      "contracts": "Contratos",
+      "stats": "Estadísticas"
+    },
+    "status": {
+      "injured": "Lesionado",
+      "suspended": "Sancionado",
+      "available": "Disponible"
+    },
+    "fullProfile": "Ficha completa →",
+    "renewOffer": "📝 Ofrecer renovación",
+    "command": {
+      "eyebrow": "Departamento deportivo · Plantilla",
+      "title": "Centro de plantilla",
+      "description": "Decide el once, detecta bajas, controla contratos y compara el estado competitivo de cada jugador.",
+      "xiReady": "Once disponible y completo",
+      "unavailableStarters": "{{count}} titulares no disponibles",
+      "xiIncomplete": "Once incompleto: {{count}}/11",
+      "xiReadyHint": "La alineación puede competir en el próximo turno.",
+      "xiNeedsWork": "Revisa el once antes del siguiente partido.",
+      "metrics": {
+        "squad": "Primer equipo",
+        "xi": "Once",
+        "overall": "Media",
+        "fitness": "Forma"
+      },
+      "boardTitle": "Mesa de decisiones",
+      "boardHint": "Lo que requiere atención antes del próximo turno",
+      "boardUnavailable": "{{count}} titulares causan baja",
+      "boardAvailable": "Once sin bajas",
+      "boardAvailableHint": "Todos los titulares están disponibles.",
+      "boardContracts": "{{count}} contratos críticos",
+      "boardContractsClear": "Contratos bajo control",
+      "boardContractsHint": "No hay vencimientos inmediatos.",
+      "boardCondition": "Forma {{fitness}}% · moral {{morale}}%",
+      "boardAbsences": "{{count}} bajas totales en plantilla",
+      "boardNoAbsences": "Plantilla completa para competir.",
+      "boardLimit": "Sin espacio para fichar",
+      "boardRoom": "Margen de plantilla disponible",
+      "boardLimitDetail": "{{current}} jugadores · máximo operativo {{max}}",
+      "boardLimitPending": "Calculando límites federativos.",
+      "search": "Buscar jugador…",
+      "positionFilter": "Filtrar por línea",
+      "allPositions": "Todas las líneas",
+      "statusFilter": "Filtrar por estado",
+      "allStatuses": "Todos los estados",
+      "onlyStarters": "Solo titulares",
+      "onlyAvailable": "Solo disponibles",
+      "needsAttention": "Requieren atención",
+      "sort": "Ordenar plantilla",
+      "sortPosition": "Por posición",
+      "sortOverall": "Por media",
+      "sortFitness": "Por forma",
+      "sortAge": "Por edad",
+      "roleStarter": "Titular",
+      "roleRotation": "Rotación",
+      "years": "años",
+      "contractShort": "Contrato corto",
+      "cardFitness": "Forma",
+      "cardMorale": "Moral",
+      "cardValue": "Valor",
+      "cardContract": "Contrato",
+      "contractYears": "{{count}} temp.",
+      "openDossier": "Abrir dossier",
+      "removeXI": "Sacar del XI",
+      "addXI": "Añadir al XI",
+      "noFilterResults": "Ningún jugador coincide",
+      "noFilterResultsHint": "Cambia los filtros para volver a mostrar jugadores.",
+      "clearFilters": "Limpiar filtros",
+      "addedToXI": "Jugador añadido al once",
+      "removedFromXI": "Jugador retirado del once",
+      "updateError": "No se pudo actualizar el once"
+    }
+  },
+  "tactics": {
+    "loading": "Cargando pizarra táctica...",
+    "starters": "Titulares",
+    "subs": "Suplentes",
+    "autoLineup": "Alineación óptima",
+    "autoLineupLoading": "Calculando...",
+    "newTactic": "+ Nueva",
+    "setDefault": "Hacer Principal",
+    "loadError": "No se pudo cargar la táctica",
+    "retry": "Reintentar",
+    "saveError": "No se pudo guardar la táctica",
+    "saveMidfieldError": "No se pudo guardar centro del campo",
+    "autoLineupError": "Error al calcular alineación óptima",
+    "autoLineupSuccess": "Alineación óptima aplicada",
+    "command": {
+      "eyebrow": "Departamento deportivo · Táctica",
+      "title": "Sala táctica",
+      "description": "Construye el once, valida el encaje posicional y define cómo debe reaccionar el equipo durante el partido.",
+      "ready": "Plan de partido preparado",
+      "notReady": "Plan pendiente de corregir",
+      "readyHint": "Once, portero y posiciones validados.",
+      "notReadyHint": "XI {{count}}/11 · {{unavailable}} bajas · {{alerts}} alertas críticas",
+      "metrics": {
+        "formation": "Dibujo",
+        "xi": "Once",
+        "overall": "Media XI",
+        "fitness": "Forma XI"
+      },
+      "readinessTitle": "El plan está listo para competir",
+      "readinessProblem": "La alineación necesita intervención",
+      "readinessReady": "{{formation}} validado y sin bloqueos.",
+      "readinessDetail": "{{starters}} titulares · {{goalkeepers}} porteros · {{unavailable}} bajas · {{alerts}} alertas críticas",
+      "repairXI": "Reparar con XI óptimo",
+      "boardTitle": "Pizarra principal",
+      "boardHint": "Arrastra para ajustar posiciones",
+      "moreAlerts": "Ver {{count}} alertas adicionales",
+      "workspaceNav": "Navegación de la mesa táctica"
+    },
+    "sideTabs": {
+      "settings": "Ajustes",
+      "settingsHint": "Dibujo, encaje y palancas del equipo",
+      "style": "Estilo",
+      "styleHint": "Plan ofensivo, defensivo y zonas",
+      "match": "Partido",
+      "matchHint": "Jugadas, sustituciones y reacción"
+    },
+    "toasts": {
+      "layoutSaveError": "No se pudo guardar el dibujo",
+      "setDefaultSuccess": "Táctica establecida como principal",
+      "setDefaultError": "No se pudo establecer como principal",
+      "createError": "No se pudo crear la táctica",
+      "benchUnavailable": "{{name}} no puede jugar (lesión/sanción)",
+      "subSuccess": "⇄ {{in}} entra por {{out}}",
+      "subError": "No se pudo hacer el cambio",
+      "renewSuccess": "Renovación aceptada",
+      "renewReject": "El jugador rechaza la renovación.",
+      "renewError": "No se pudo renovar."
+    },
+    "panels": {
+      "common": {
+        "low": "Baja",
+        "high": "Alta",
+        "slow": "Lento",
+        "fast": "Rápido",
+        "narrow": "Estrecho",
+        "wide": "Ancho",
+        "defensive": "Defensiva",
+        "offensive": "Ofensiva",
+        "zonal": "ZONAL",
+        "individual": "INDIVIDUAL",
+        "dash": "—",
+        "base": "(base {{value}})",
+        "minute": "min {{value}}",
+        "minuteRange": "min {{from}}–{{to}}",
+        "choose": "— elegir —",
+        "level": "Nivel {{level}}/5"
+      },
+      "midfield": {
+        "title": "Centro del campo",
+        "xpPenalty": "Penalización XP",
+        "xpValue": "−{{penalty}} (XP: {{avg}})",
+        "construction": "Construcción",
+        "destruction": "Destrucción"
+      },
+      "advanced": {
+        "title": "Instrucciones avanzadas",
+        "pressing": "Presión",
+        "tempo": "Ritmo",
+        "width": "Amplitud",
+        "mentality": "Mentalidad",
+        "marking": "Marcaje"
+      },
+      "style": {
+        "title": "Estilo de juego",
+        "helpToggle": "[?] ¿Qué hace esto?",
+        "hint": "Piedra-papel-tijera contra el estilo rival. No elegir regala +10 al contrario.",
+        "helpTitle": "Matriz de contrarrestos (Piedra-Papel-Tijera)",
+        "helpIntro": "Tu estilo ofensivo contra el defensivo rival te da +6/+2 de construcción si ganas, o da +6/+4 de destrucción al rival si te contrarresta.",
+        "helpItem1": "Abrir campo: le gana a Presión centro, lo frena Presión bandas.",
+        "helpItem2": "Pases cortos: le gana a Presión bandas, lo frena Presión centro.",
+        "helpItem3": "Buscar la espalda: le gana a Defensa adelantada, lo frena Fuera de juego / Presión mediocentro.",
+        "helpItem4": "Entre líneas: le gana a Fuera de juego, lo frena Defensa adelantada / Presión mediocentro.",
+        "helpItem5": "Pases largos: le gana a Presión mediocentro, lo frena Fuera de juego / Defensa adelantada.",
+        "offensive": "Ofensivo",
+        "defensive": "Defensivo",
+        "warnBoth": "Sin estilos elegidos: el rival gana +10 en ambos lados.",
+        "warnOffensive": "Sin estilo ofensivo: la defensa rival gana +10.",
+        "warnDefensive": "Sin estilo defensivo: el ataque rival gana +10."
+      },
+      "styleLabels": {
+        "abrir_campo": "Abrir campo",
+        "pases_cortos": "Pases cortos",
+        "buscar_espalda": "Buscar espalda",
+        "moverse_entre_lineas": "Entre líneas",
+        "pases_largos": "Pases largos",
+        "presion_bandas": "Presión bandas",
+        "presion_centro": "Presión centro",
+        "fuera_de_juego": "Fuera de juego",
+        "defensa_adelantada": "Def. adelantada",
+        "presion_mediocentro": "Presión MC"
+      },
+      "zones": {
+        "title": "Zonas",
+        "rightPts": "{{pts}} pts def.",
+        "hint": "% de ataque por carril y refuerzo defensivo ({{pts}} pts con {{defs}} defensas; cada punto −5% al rival en ese carril).",
+        "attackPct": "% ataque",
+        "warnSum": "⚠ El reparto de ataque suma {{sum}}% (debe sumar 100%)."
+      },
+      "subs": {
+        "title": "Sustituciones programadas",
+        "rightCount": "{{count}}/3",
+        "hint": "Se ejecutan solas durante el partido si se cumple la condición.",
+        "empty": "No hay cambios programados. Añade uno para automatizar el banquillo.",
+        "playerOut": "↓ Sale...",
+        "playerIn": "↑ Entra...",
+        "addBtn": "+ Añadir sustitución"
+      },
+      "rival": {
+        "title": "Próximo rival",
+        "right": "Simulación de prueba",
+        "name": "Rival Genérico",
+        "rivalConstr": "CONSTR. RIVAL",
+        "rivalDestr": "DESTR. RIVAL"
+      },
+      "formationInsight": {
+        "title": "Análisis del dibujo",
+        "style": "Estilo",
+        "physicalDemand": "Demanda física",
+        "counters": "Counters",
+        "strong": "Fuerte:",
+        "weak": "Débil:",
+        "xiNatural": "XI en sus posiciones naturales.",
+        "outOfPosition": "{{count}} fuera de posición",
+        "uncoveredSlots": "{{count}} hueco(s) sin cubrir",
+        "separator": " · ",
+        "formationStyles": {
+          "posesion": "Posesión",
+          "contraataque": "Contraataque",
+          "equilibrada": "Equilibrada",
+          "defensiva": "Defensiva",
+          "ofensiva": "Ofensiva",
+          "historica": "Histórica"
+        }
+      },
+      "matchPlan": {
+        "title": "Plan de partido condicional",
+        "rightCount": "{{count}}/{{max}}",
+        "hint": "Reglas «SI <marcador> ENTONCES <palancas>» que el motor aplica solo durante el partido desde el minuto elegido. Reproducible por semilla.",
+        "empty": "Aún no hay reglas. Añade una para reaccionar al marcador.",
+        "if": "Si",
+        "from": "desde",
+        "then": "Entonces",
+        "removeRule": "Eliminar regla",
+        "addRule": "+ Añadir regla condicional",
+        "levers": {
+          "mentality": "Mentalidad",
+          "pressing": "Presión",
+          "tempo": "Ritmo",
+          "width": "Amplitud",
+          "construction": "Construcción",
+          "destruction": "Destrucción",
+          "marking": "Marcaje",
+          "offensiveStyle": "Estilo ofensivo",
+          "defensiveStyle": "Estilo defensivo",
+          "formation": "Dibujo"
+        }
+      },
+      "conditions": {
+        "any": "Siempre",
+        "winning": "Ganando",
+        "drawing": "Empatando",
+        "losing": "Perdiendo"
+      },
+      "appliedChanges": {
+        "title": "Ajustes aplicados (último partido)",
+        "loading": "Cargando ajustes del último partido…",
+        "unseen": "Marca como visto el resultado del último partido para ver los ajustes que ejecutó tu plan.",
+        "none": "Tu plan condicional no llegó a dispararse en el último partido.",
+        "error": "⚠ No se pudieron cargar los ajustes del último partido.",
+        "minute": "min {{value}}'"
+      },
+      "squadList": {
+        "search": "Buscar…",
+        "filterLine": "Filtrar por línea",
+        "sortBy": "Ordenar por",
+        "all": "Todos",
+        "sorts": {
+          "pos": "Posición",
+          "ovr": "Media",
+          "form": "Forma",
+          "age": "Edad"
+        },
+        "injured": "Lesionado",
+        "suspended": "Sancionado",
+        "injuredShort": "LES",
+        "suspendedShort": "SAN",
+        "formTitle": "Forma {{value}}",
+        "moraleTitle": "Moral {{value}}",
+        "fitnessTitle": "Fitness {{value}}",
+        "swapCancel": "Cancelar intercambio",
+        "swapStart": "Intercambiar (titular ⇄ suplente o posición)",
+        "noPlayers": "Sin jugadores.",
+        "noFilterMatch": "Ningún jugador coincide con el filtro."
+      },
+      "summaryBar": {
+        "formation": "Dibujo",
+        "constr": "Constr",
+        "destr": "Destr",
+        "pressing": "Presión",
+        "tempo": "Ritmo",
+        "ment": "Ment",
+        "marking": "Marcaje",
+        "off": "Of",
+        "def": "Df",
+        "levelHigh": "ALTA",
+        "levelMid": "MEDIA",
+        "levelLow": "BAJA",
+        "mentOffensive": "OFENSIVA",
+        "mentBalanced": "EQUILIBRADA",
+        "mentDefensive": "DEFENSIVA",
+        "saving": "Guardando…",
+        "saved": "Guardado",
+        "saveError": "Error al guardar",
+        "autosave": "Autosave"
+      }
+    },
+    "dossierTitle": "Dossier Técnico",
+    "fullProfile": "Ficha completa →",
+    "renewOffer": "📝 Ofrecer renovación"
+  },
+  "scout": {
+    "kicker": "Departamento de ojeo",
+    "title": "Scouting",
+    "zoneLabel": "Zona de ojeo",
+    "missionScout": "Ojeador",
+    "missionTarget": "Club objetivo",
+    "loadError": "No se pudo cargar el ojeo",
+    "retry": "Reintentar",
+    "toasts": {
+      "hireSuccess": "Ojeador contratado",
+      "missionCreated": "Misión de ojeo creada",
+      "reportAdvanced": "Informe avanzado",
+      "failed": "Operación fallida"
+    },
+    "staffTitle": "Ojeadores",
+    "noStaff": "Sin ojeadores. Contrata el primero.",
+    "staffLevel": "Nivel {{level}}",
+    "signingFee": "{{fee}} firma",
+    "hire": "Contratar",
+    "staffFallback": "Ojeador #{{id}}",
+    "zonePlaceholder": "Zona…",
+    "missionsTitle": "Misiones de ojeo",
+    "scoutPlaceholder": "Ojeador…",
+    "targetPlaceholder": "Club objetivo…",
+    "sendScout": "Enviar a ojear",
+    "missionInProgress": "En curso",
+    "missionRecommended": "Recomendado: {{name}}",
+    "scoutFallback": "ojeador",
+    "hireFirst": "Contrata un ojeador para poder crear misiones.",
+    "clubFallback": "Club",
+    "advanceReport": "Avanzar informe",
+    "playersTitle": "Jugadores ojeados",
+    "noReports": "Aún no hay informes de ojeo.",
+    "playerFallback": "Jugador",
+    "freeAgent": "Libre",
+    "ovr": "OVR",
+    "fullProfile": "Ficha completa →",
+    "potentialNote": "Potencial {{potential}} · valor {{value}}"
+  },
+  "negotiations": {
+    "title": "Negociaciones",
+    "loadError": "Negociaciones no disponibles",
+    "retry": "Reintentar",
+    "tabs": {
+      "in": "Recibidas",
+      "out": "Enviadas",
+      "history": "Historial"
+    },
+    "empty": {
+      "inTitle": "Sin propuestas recibidas",
+      "outTitle": "Sin propuestas enviadas",
+      "historyTitle": "Sin historial",
+      "historyHint": "Las negociaciones aceptadas o rechazadas aparecerán aquí.",
+      "defaultHint": "Usa \"Proponer traspaso\" para abrir una negociación formal con otro club."
+    },
+    "acceptConfirm": "¿Aceptar esta propuesta de traspaso? El movimiento se ejecutará de forma irreversible.",
+    "rejectConfirm": "¿Rechazar esta propuesta? No podrás recuperarla.",
+    "acceptAction": "Aceptar traspaso",
+    "rejectAction": "Rechazar propuesta",
+    "liveWs": "· 🟢 en vivo",
+    "livePoll": "· 🟡 refresco",
+    "multiplayer": "Multijugador",
+    "proposeTransfer": "Proponer traspaso",
+    "accept": "Aceptar",
+    "counter": "Contraoferta",
+    "reject": "Rechazar",
+    "sale": "VENTA",
+    "buy": "COMPRA",
+    "marketValue": "valor de mercado {{value}}",
+    "counterModalTitle": "Contraoferta · {{player}}",
+    "counterOriginal": "Propuesta original:",
+    "counterHint": "Tu contraoferta la rechaza y abre una propuesta inversa.",
+    "send": "Enviar",
+    "status": {
+      "proposed": "PROPUESTA",
+      "accepted": "ACEPTADA",
+      "rejected": "RECHAZADA"
+    },
+    "propose": {
+      "buyTitle": "Proponer oferta de compra",
+      "sellTitle": "Ofrecer jugador en venta",
+      "buyTab": "Comprar jugador",
+      "sellTab": "Vender jugador",
+      "ownerClub": "Club propietario del jugador",
+      "targetClub": "Club al que ofreces a tu jugador",
+      "searchClub": "Buscar club…",
+      "player": "Jugador",
+      "pickClubFirst": "Elige primero el club…",
+      "pickPlayer": "Selecciona jugador…",
+      "amount": "Importe del traspaso",
+      "sendBuy": "Enviar oferta de compra",
+      "sendSell": "Ofrecer jugador a este club"
+    },
+    "toasts": {
+      "invalidCounter": "Importe de contraoferta no válido.",
+      "pickClubPlayer": "Elige club y jugador.",
+      "invalidAmount": "Importe no válido.",
+      "counterSent": "Contraoferta enviada (la propuesta original queda rechazada)"
+    }
+  },
+  "calendar": {
+    "advanceConfirm": "Se simularán los partidos pendientes de la jornada actual. Esta acción no se puede deshacer.",
+    "advanceTitle": "Avanzar jornada",
+    "advanceAction": "Avanzar jornada",
+    "simulateConfirm": "¿Simular este partido ahora?",
+    "simulateTitle": "Simular partido",
+    "simulateAction": "Simular ahora",
+    "simulateBody": "¿Simular {{home}} vs {{away}}?",
+    "loadError": "No se pudo cargar el calendario",
+    "retry": "Reintentar",
+    "title": "Calendario",
+    "kicker": "Temporada en curso",
+    "matchday": "Jornada {{week}}",
+    "inGameDate": "Fecha in-game: {{date}}",
+    "advanceMatchday": "Avanzar jornada",
+    "reload": "Recargar",
+    "noClockTitle": "Sin reloj de partida",
+    "noClockHint": "No se pudo leer la fecha in-game del servidor; usa la vista Lista por jornadas.",
+    "noMonthMatches": "Sin partidos en {{month}}",
+    "noMonthHint": "Navega con ‹ › o pulsa HOY para volver a la fecha actual.",
+    "noWeekMatches": "Sin partidos en la jornada {{week}}",
+    "noWeekHint": "Selecciona otra jornada en el navegador superior.",
+    "myTeam": "MI EQUIPO",
+    "derby": "DERBI",
+    "demoMode": "(modo demo)",
+    "today": "Hoy",
+    "viewWeek": "Jornada {{week}}",
+    "views": {
+      "month": "Mes",
+      "list": "Lista"
+    },
+    "legend": {
+      "home": "Casa",
+      "resultHint": "V/E/D = resultado · C/F = casa/fuera"
+    },
+    "matchdayShort": "Jornada {{week}}",
+    "vs": "VS",
+    "tacticsSummary": "Formación: {{formation}} · Construcción: {{construction}}%",
+    "tactics": "Táctica",
+    "simulate": "Simular",
+    "viewSheet": "Ver ficha",
+    "tacticsPanel": {
+      "kicker": "Pizarra táctica",
+      "title": "Táctica — Jornada {{week}}",
+      "vs": "{{home}} vs {{away}}",
+      "formation": "Formación",
+      "construction": "Construcción",
+      "destruction": "Destrucción",
+      "defensive": "Defensivo",
+      "offensive": "Ofensivo",
+      "calm": "Tranquilo",
+      "aggressive": "Agresivo",
+      "cancel": "Cancelar",
+      "save": "Guardar táctica"
+    },
+    "toasts": {
+      "tacticsSaved": "Táctica guardada correctamente",
+      "tacticsSaveError": "Error al guardar la táctica: {{msg}}",
+      "serverUnavailable": "Servidor no disponible",
+      "simulateError": "Error al simular: {{msg}}",
+      "advanceSuccess": "Jornada procesada — {{count}} partido(s) jugado(s)",
+      "advanceError": "Error al avanzar jornada: {{msg}}",
+      "prevMonth": "Mes anterior",
+      "nextMonth": "Mes siguiente",
+      "prevWeek": "Jornada anterior",
+      "nextWeek": "Jornada siguiente",
+      "viewToggle": "Vista del calendario"
+    }
+  },
+  "shares": {
+    "buyConfirm": "¿Confirmar compra de acciones?",
+    "sellConfirm": "¿Confirmar venta de acciones?",
+    "loadError": "Error cargando acciones",
+    "retry": "Reintentar",
+    "noShareholders": "Sin accionistas registrados",
+    "noShareholdersHint": "Sé el primero en hacerte con un paquete de acciones.",
+    "noRanking": "Sin datos de ranking",
+    "noRankingHint": "Todavía no hay managers con patrimonio registrado.",
+    "kicker": "Mercado de las 1.500 acciones por club",
+    "title": "Acciones",
+    "tabs": {
+      "club": "Mi Club",
+      "ranking": "Ranking"
+    },
+    "noClubTitle": "Sin club asociado",
+    "noClubHint": "Asóciate a un club para ver y operar con sus acciones.",
+    "rankingTitle": "Ranking de patrimonio",
+    "shareholdersTitle": "Libro de accionistas",
+    "kpis": {
+      "shareValue": "Valor por acción",
+      "portfolio": "Mi cartera",
+      "noStake": "Sin participación",
+      "totalShares": "Total acciones",
+      "distributed": "% Distribuido"
+    },
+    "trade": {
+      "buyTitle": "▲ Comprar acciones",
+      "sellTitle": "▼ Vender acciones",
+      "unitPrice": "Precio unitario:",
+      "buy": "Comprar",
+      "sell": "Vender",
+      "total": "Total:",
+      "proceeds": "Ingresos:"
+    },
+    "table": {
+      "manager": "Manager",
+      "shares": "Acciones",
+      "pct": "%",
+      "totalValue": "Valor total",
+      "portfolio": "Cartera",
+      "netWorth": "Patrimonio",
+      "unknown": "Desconocido",
+      "youSuffix": " · TÚ"
+    },
+    "confirm": {
+      "buyTitle": "Confirmar compra de acciones",
+      "buyAction": "Comprar acciones",
+      "buyBody": "¿Comprar {{count}} acción(es) por {{amount}}?",
+      "sellTitle": "Confirmar venta de acciones",
+      "sellAction": "Vender acciones",
+      "sellBody": "¿Vender {{count}} acción(es) por aprox. {{amount}}?",
+      "owned": "Posees {{count}} acciones."
+    },
+    "toasts": {
+      "insufficientFunds": "Saldo insuficiente para esta compra",
+      "buySuccess": "Compradas {{count}} acciones",
+      "sellOverLimit": "Solo tienes {{owned}} acciones",
+      "sellSuccess": "Vendidas {{count}} acciones · {{proceeds}}"
+    }
+  },
+  "auction": {
+    "title": "Subastas en vivo",
+    "kicker": "Multijugador",
+    "filters": {
+      "active": "Activas",
+      "finished": "Cerradas",
+      "all": "Todas"
+    },
+    "loadError": "Subastas no disponibles",
+    "retry": "Reintentar",
+    "emptyTitle": "Sin subastas",
+    "emptyActiveHint": "No hay subastas activas ahora mismo. Crea una desde un jugador en venta del mercado.",
+    "emptyFilterHint": "No hay subastas en este filtro.",
+    "closed": "CERRADA",
+    "awarded": "ADJUDICADA",
+    "noSale": "SIN VENTA",
+    "wonByYou": "ADJUDICADA A TI",
+    "bidLabel": "Importe de puja (€)",
+    "bidAction": "Pujar",
+    "bidding": "Enviando…",
+    "bidTooLow": "La puja debe superar la actual.",
+    "bidSuccess": "Puja enviada",
+    "bidError": "No se pudo pujar",
+    "confirmTitle": "Confirmar puja",
+    "confirmBody": "¿Pujar {{amount}} por {{player}}? El importe quedará sellado hasta el cierre.",
+    "confirmAction": "Confirmar puja",
+    "noBidsYet": "Sin pujas todavía. ¡Sé el primero!",
+    "sealed": "sellada",
+    "yourBid": "Tu puja",
+    "sealedBid": "Puja sellada #{{id}}",
+    "room": {
+      "currentBid": "puja actual (sellada en red) · sala {{mode}}",
+      "bidCount": " · {{count}} puja(s)",
+      "live": "🟢 en vivo",
+      "poll": "🟡 refresco 4s",
+      "antiSnipe": "anti-snipe: +30s si hay puja al final"
+    },
+    "closed": {
+      "base": "Subasta cerrada",
+      "won": " — ¡te la has llevado! 🏆",
+      "lost": " — adjudicada a otro club.",
+      "noBid": " sin puja válida."
+    }
+  },
+  "shortlist": {
+    "title": "Objetivos de Fichaje",
+    "lede": "Jugadores que estás siguiendo. Automáticamente asignados a ojeadores libres si hay disponibilidad.",
+    "loadError": "No se pudo cargar la lista de objetivos",
+    "retry": "Reintentar",
+    "emptyTitle": "No hay objetivos",
+    "emptyHint": "Ve al buscador o a la plantilla de otro equipo y haz click en 'Seguir' sobre un jugador.",
+    "goMarket": "Ir al Mercado",
+    "removeTitle": "Quitar de objetivos",
+    "removeBody": "¿Dejar de seguir a este jugador?",
+    "removeAction": "Quitar",
+    "sign": "Fichar",
+    "signMarket": "Ir al mercado",
+    "signPlayer": "Abrir oferta en mercado",
+    "freeAgent": "Agente Libre",
+    "table": {
+      "player": "Jugador",
+      "pos": "Pos",
+      "age": "Edad",
+      "overall": "Media",
+      "value": "Valor",
+      "club": "Club",
+      "actions": "Acciones"
+    }
+  },
+  "career": {
+    "kicker": "Carrera del mánager",
+    "title": "Mi Carrera",
+    "loadError": "No se pudo cargar la carrera",
+    "unavailable": "Sin datos de carrera",
+    "retry": "Reintentar",
+    "kpis": {
+      "level": "Nivel",
+      "prestige": "Prestigio",
+      "prestigeHint": "el indicador del mánager",
+      "reputation": "Reputación",
+      "skillPoints": "Puntos de habilidad"
+    },
+    "xpProgress": "Progreso al nivel {{level}}",
+    "prestigeTitle": "Prestigio 2.0",
+    "prestigeOf": "de {{max}}",
+    "breakdown": {
+      "achievements": "Logros",
+      "experience": "Experiencia",
+      "wealth": "Patrimonio",
+      "objective": "Objetivo"
+    },
+    "rankingTitle": "Ranking de mánagers",
+    "rankingEmpty": "Ranking aún sin datos.",
+    "benchTitle": "Banquillo actual",
+    "noClub": "Sin club",
+    "boardObjective": "Objetivo de la junta: {{objective}}",
+    "vacanciesLink": "Ver ofertas y vacantes →",
+    "achievementsTitle": "Logros ({{count}})",
+    "achievementsEmpty": "Aún sin logros. El primer título te espera.",
+    "skillTreeTitle": "Árbol de habilidades",
+    "pointsAvailable": "· {{count}} punto disponible",
+    "pointsAvailable_plural": "· {{count}} puntos disponibles",
+    "unlock": "Desbloquear",
+    "unlocking": "...",
+    "unlockError": "No se pudo desbloquear",
+    "skills": {
+      "motivator": {
+        "branch": "Motivador",
+        "desc": "Gestión del vestuario y la moral",
+        "mot_1": {
+          "label": "Charla técnica",
+          "effect": "+1 uso de discurso por temporada"
+        },
+        "mot_2": {
+          "label": "Líder del vestuario",
+          "effect": "La moral cae más despacio tras derrotas"
+        },
+        "mot_3": {
+          "label": "Psicólogo de élite",
+          "effect": "Motiva jugadores afines también en agosto"
+        }
+      },
+      "tactician": {
+        "branch": "Genio Táctico",
+        "desc": "Pizarra, jugadas y partido",
+        "tac_1": {
+          "label": "Ojeador propio",
+          "effect": "+1 informe de rival por jornada"
+        },
+        "tac_2": {
+          "label": "Pizarra avanzada",
+          "effect": "+1 sustitución programada (4 reglas)"
+        },
+        "tac_3": {
+          "label": "Maestro de jugadas",
+          "effect": "+2 jugadas activas por partido (10)"
+        }
+      },
+      "financier": {
+        "branch": "Rey de las Finanzas",
+        "desc": "Economía y negociación",
+        "fin_1": {
+          "label": "Negociador",
+          "effect": "Los agentes aceptan un 5% menos de salario"
+        },
+        "fin_2": {
+          "label": "Comercial nato",
+          "effect": "+5% en derechos de imagen"
+        },
+        "fin_3": {
+          "label": "Tiburón del mercado",
+          "effect": "Ve la valoración exacta de las pujas rivales"
+        }
+      }
+    }
+  },
+  "player": {
+    "loadError": "No se pudo cargar el jugador",
+    "unavailable": "Jugador no disponible",
+    "retry": "Reintentar",
+    "toasts": {
+      "shortlistAdded": "Añadido a objetivos y ojeador asignado.",
+      "followError": "No se pudo seguir al jugador."
+    },
+    "dossier": {
+      "physicalReport": "Informe físico",
+      "physicalStats": "Forma {{fitness}}% · Muscular {{muscular}}%.",
+      "physicalInjury": "⚠️ Requiere protocolo de recuperación.",
+      "physicalFit": "Apto para carga completa."
+    },
+    "follow": "Seguir",
+    "following": "Siguiendo...",
+    "freeAgent": "Libre",
+    "career": {
+      "title": "Trayectoria",
+      "empty": "Sin temporadas registradas todavía.",
+      "total": "TOTAL CARRERA",
+      "avgRating": "nota media",
+      "xg": "xG"
+    },
+    "matches": {
+      "title": "Últimos partidos",
+      "empty": "Aún no ha jugado."
+    },
+    "avatar": {
+      "title": "Retrato oficial",
+      "subtitle": "Rostro único generado para este futbolista"
+    },
+    "availability": {
+      "title": "Estado: No Disponible",
+      "injured": "🏥 Lesionado",
+      "suspended": "🟥 Sancionado",
+      "until": "Disponible el: {{date}}"
+    },
+    "contract": {
+      "title": "Contrato",
+      "club": "Club",
+      "wage": "Salario Anual",
+      "clause": "Cláusula de rescisión",
+      "yearsLeft": "Años restantes",
+      "endsAt": "Fin de contrato",
+      "marketValue": "Valor de mercado",
+      "squadNumber": "Dorsal",
+      "foot": "Pie",
+      "footLeft": "Zurdo",
+      "footRight": "Diestro",
+      "personality": "Personalidad"
+    },
+    "transfers": {
+      "title": "Traspasos",
+      "free": "Libre"
+    },
+    "progression": {
+      "title": "Progresión",
+      "empty": "Aún sin historial de desarrollo — la curva crece con entrenamientos y minutos.",
+      "totalChange": "Cambio total registrado",
+      "points": "pts de atributo"
+    },
+    "honours": {
+      "title": "Palmarés",
+      "empty": "Sin títulos individuales todavía."
+    },
+    "table": {
+      "season": "Temporada",
+      "played": "PJ",
+      "minutes": "Min",
+      "goals": "Goles",
+      "assists": "Asis",
+      "rating": "Nota",
+      "match": "Partido",
+      "date": "Fecha"
+    }
+  },
+  "competition": {
+    "invalid": "Competición no válida",
+    "loadError": "No se pudo cargar la competición",
+    "unavailable": "Competición no disponible",
+    "retry": "Reintentar",
+    "kicker": "Torneo",
+    "typeCup": "Eliminatoria",
+    "typeLeaguePhase": "Fase liga (36)",
+    "typeLeague": "Liga",
+    "tabs": {
+      "table": "Clasificación",
+      "leaguePhase": "Fase liga",
+      "bracket": "Cuadro",
+      "matchdays": "Jornadas",
+      "rankings": "Rankings"
+    },
+    "rounds": {
+      "final": "FINAL",
+      "semis": "Semifinales",
+      "quarters": "Cuartos",
+      "round16": "Octavos",
+      "roundN": "Ronda {{n}}"
+    },
+    "table": {
+      "club": "Club",
+      "played": "PJ",
+      "won": "G",
+      "drawn": "E",
+      "lost": "P",
+      "gf": "GF",
+      "ga": "GC",
+      "gd": "DG",
+      "pts": "Pts",
+      "player": "Jugador",
+      "goals": "Goles",
+      "assists": "Asistencias",
+      "rating": "Nota"
+    },
+    "emptyBracket": "Sin cuadro disponible",
+    "emptyBracketHint": "Las eliminatorias aparecerán al sortearse.",
+    "emptyBracketPending": "Eliminatorias aún no sorteadas",
+    "emptyMatchdays": "Sin jornadas",
+    "emptyTable": "Sin clasificación todavía.",
+    "leaguePhaseLegend": {
+      "direct": "1-8 octavos directos",
+      "playoff": "9-24 playoff",
+      "eliminated": "25-36 eliminados"
+    },
+    "rankings": {
+      "scorers": "Goleadores",
+      "assists": "Asistentes",
+      "bestRating": "Mejor nota media",
+      "noData": "Sin datos."
+    },
+    "roundClosed": "· cerrada",
+    "matchday": "Jornada {{n}}",
+    "matchdayPlayed": "· jugada"
+  },
+  "clubMatches": {
+    "kicker": "Diario",
+    "title": "Mis Partidos",
+    "upcoming": "Próximos Partidos",
+    "played": "Jugados",
+    "loadError": "No se pudieron cargar los partidos",
+    "retry": "Reintentar",
+    "empty": "No hay partidos en la temporada actual.",
+    "friendly": "Amistoso",
+    "watchMatch": "VER PARTIDO",
+    "final": "FINAL",
+    "replay": "Revivir",
+    "vs": "VS",
+    "showAll": "Ver todo el historial",
+    "showRecent": "Mostrar recientes"
+  },
+  "kit": {
+    "loadError": "No se pudieron cargar las equipaciones",
+    "retry": "Reintentar",
+    "kicker": "Identidad del club",
+    "title": "Equipaciones",
+    "sponsor": {
+      "label": "Patrocinador de camiseta:",
+      "years": "{{years}} año(s)",
+      "perYear": "/año",
+      "none": "Sin patrocinador de camiseta — gestiona los derechos de imagen en Economía.",
+      "fallback": "FDF Kit"
+    },
+    "fields": {
+      "pattern": "Patrón",
+      "primary": "Principal",
+      "secondary": "Secundario",
+      "accent": "Acento",
+      "sponsorText": "Texto del pecho (patrocinador)"
+    },
+    "save": "Guardar diseño",
+    "saving": "Guardando…",
+    "kinds": {
+      "home": "1ª equipación",
+      "away": "2ª equipación",
+      "third": "3ª equipación"
+    },
+    "unsaved": " · sin guardar",
+    "toasts": {
+      "designSaved": "Diseño guardado"
+    }
+  },
+  "league": {
+    "kicker": "Competiciones",
+    "title": "Clasificación",
+    "compError": "No se pudieron cargar las competiciones",
+    "retry": "Reintentar",
+    "zoneChampions": "Champions League",
+    "zoneEuropa": "Europa League",
+    "zoneRelegation": "Zona de descenso",
+    "zoneAriaChampions": "Zona Champions League, posición {{pos}}",
+    "zoneAriaEuropa": "Zona Europa League, posición {{pos}}",
+    "zoneAriaRelegation": "Zona de descenso, posición {{pos}}",
+    "zoneAriaNormal": "Posición {{pos}}",
+    "emptyTitle": "Sin clasificación",
+    "emptyHint": "No hay equipos en esta liga todavía.",
+    "loadError": "No se pudo cargar la clasificación",
+    "table": {
+      "team": "Equipo",
+      "form": "Forma"
+    },
+    "youTag": "TÚ",
+    "formLegend": "Forma: últimos 5 (V/E/D)",
+    "loading": "Cargando...",
+    "seasonMatchday": "Temporada actual · Jornada {{week}}"
+  },
+  "hub": {
+    "views": {
+      "cover": "FDF Today",
+      "classic": "Centro de operaciones",
+      "profile": "Perfil del club"
+    },
+    "tabs": {
+      "cover": "Portada",
+      "classic": "Clásico",
+      "profile": "Perfil"
+    },
+    "shortcuts": {
+      "tactics": "Tácticas",
+      "market": "Mercado",
+      "calendar": "Calendario",
+      "live": "En vivo"
+    },
+    "mood": {
+      "title": "Humor de la afición",
+      "euphoria": "Euforia",
+      "calm": "Tranquilidad",
+      "tension": "Tensión"
+    },
+    "checklist": {
+      "title": "Preparar próximo turno",
+      "readyTitle": "Operativa lista",
+      "readyHint": "El club está al día. Revisa la portada y prepara el próximo encuentro."
+    }
+  },
+  "clubCommand": {
+    "kicker": "Centro de mando",
+    "matchday": "Jornada {{week}}",
+    "fallbackClub": "Mi club",
+    "status": {
+      "pending": "{{count}} decisiones prioritarias",
+      "ready": "Operativa lista",
+      "nextTurn": "Próximo turno · {{time}}",
+      "synced": "Información sincronizada"
+    },
+    "nextMatch": {
+      "eyebrow": "Foco competitivo",
+      "title": "Próximo partido",
+      "home": "En casa",
+      "away": "A domicilio",
+      "yourClub": "Tu club",
+      "opponent": "Rival",
+      "vs": "VS",
+      "open": "Abrir centro de partido",
+      "prepare": "Preparar táctica",
+      "emptyTitle": "Sin partido programado",
+      "emptyHint": "Consulta el calendario completo o aprovecha para preparar el siguiente bloque.",
+      "openCalendar": "Abrir calendario"
+    },
+    "priorities": {
+      "eyebrow": "Decisiones antes del próximo turno",
+      "title": "Mesa del mánager",
+      "more": "+{{count}} asuntos adicionales",
+      "clearTitle": "No hay asuntos bloqueantes",
+      "clearHint": "El once, la táctica y la gestión diaria están al día."
+    },
+    "kpis": {
+      "label": "Indicadores principales del club",
+      "position": "Posición",
+      "points": "{{count}} puntos",
+      "league": "Clasificación de liga",
+      "cash": "Caja",
+      "available": "Liquidez disponible",
+      "morale": "Moral",
+      "dressingRoomStrong": "Vestuario conectado",
+      "dressingRoomWatch": "Vestuario a vigilar",
+      "prestige": "Prestigio",
+      "clubProjection": "Proyección institucional"
+    },
+    "health": {
+      "eyebrow": "Diagnóstico transversal",
+      "title": "Pulso del club",
+      "serverSource": "Cálculo oficial del club",
+      "empty": "El diagnóstico se actualizará en el próximo refresco.",
+      "areas": {
+        "sporting": "Deportivo",
+        "economy": "Economía",
+        "squad": "Plantilla",
+        "academy": "Cantera",
+        "fans": "Afición",
+        "board": "Directiva"
+      }
+    },
+    "squad": {
+      "eyebrow": "Disponibilidad inmediata",
+      "title": "Vestuario",
+      "players": "Jugadores",
+      "starters": "Titulares",
+      "fitness": "Forma",
+      "unavailable": "Bajas",
+      "empty": "La plantilla se cargará en el próximo refresco."
+    },
+    "league": {
+      "eyebrow": "Contexto competitivo",
+      "title": "Tu zona de la tabla",
+      "played": "PJ",
+      "you": "TÚ",
+      "empty": "La clasificación todavía no está disponible."
+    },
+    "briefing": {
+      "eyebrow": "Directiva y entorno",
+      "title": "Briefing institucional",
+      "today": "FDF Today"
+    },
+    "board": {
+      "confidence": "Confianza",
+      "objective": "Objetivo de temporada",
+      "noObjective": "Sin objetivo pendiente",
+      "leagueObjective": "Acabar entre los {{position}} primeros",
+      "cupObjective": "Firmar una buena trayectoria en copa",
+      "economyObjective": "Alcanzar {{amount}} de objetivo económico",
+      "defaultObjective": "Cumplir las expectativas de la directiva"
+    },
+    "common": {
+      "open": "Abrir",
+      "fullTable": "Tabla completa",
+      "news": "Noticias"
+    },
+    "departments": {
+      "eyebrow": "Navegación operativa",
+      "title": "Todos los departamentos",
+      "hint": "El centro de mando resume; cada departamento conserva la profundidad de gestión.",
+      "team": "Equipo",
+      "teamHint": "Rendimiento y preparación",
+      "competition": "Competición",
+      "competitionHint": "Partidos y contexto",
+      "institution": "Institución",
+      "institutionHint": "Recursos y estructura",
+      "future": "Futuro",
+      "futureHint": "Crecimiento e identidad"
+    },
+    "links": {
+      "squad": "Plantilla",
+      "tactics": "Tácticas",
+      "profile": "Perfil",
+      "training": "Entrenamiento",
+      "matches": "Partidos",
+      "calendar": "Calendario",
+      "league": "Liga",
+      "economy": "Economía",
+      "stadium": "Estadio",
+      "staff": "Personal",
+      "academy": "Cantera",
+      "fans": "Afición",
+      "kits": "Equipaciones"
+    }
+  },
+  "dashboard": {
+    "windowOpen": "ABIERTA",
+    "windowClosed": "CERRADA",
+    "transferWindow": "VENTANA",
+    "week": "SEMANA {{week}}",
+    "alertsTitle": "Acciones requeridas",
+    "offers": "{{count}} oferta en mercado",
+    "offers_plural": "{{count}} ofertas en mercado",
+    "youth": "{{count}} canterano listo para subir",
+    "youth_plural": "{{count}} canteranos listos para subir",
+    "pressPending": "Rueda de prensa pendiente",
+    "unread": "{{count}} mensaje sin leer",
+    "unread_plural": "{{count}} mensajes sin leer",
+    "advisorTitle": "El DD Recomienda",
+    "nextMatch": "PRÓXIMO PARTIDO",
+    "defaultLeague": "Liga",
+    "formLabel": "Tu racha:",
+    "goMatchCenter": "Ir a Centro de Partido",
+    "noMatches": "No hay partidos programados.",
+    "kpis": {
+      "position": "Posición",
+      "cash": "Caja",
+      "morale": "Moral media",
+      "prestige": "Prestigio"
+    },
+    "standingsTitle": "Clasificación de Liga",
+    "inForm": "Jugadores en forma",
+    "noSquad": "No hay jugadores en plantilla.",
+    "newsTitle": "Últimas Noticias",
+    "noNews": "No hay noticias.",
+    "newsCategory": "Noticia",
+    "marketTitle": "Info Mercado",
+    "squadCount": "{{count}} jg.",
+    "squadLabel": "Plantilla",
+    "standingsRow": "Posición {{pos}}, {{club}}",
+    "rivalWeek": "RIVAL DE LA SEMANA",
+    "squadTitle": "Estado de la Plantilla",
+    "meanHealth": "Salud media",
+    "missionsTitle": "Misiones Semanales",
+    "missionComplete": "COMPLETADA",
+    "vs": "VS",
+    "salaryCap": "Tope salarial",
+    "spent": "Gastado:",
+    "limit": "Límite:",
+    "rewardXp": "+{{count}} XP",
+    "rewardPrestige": "+{{count}} Prest.",
+    "standingsTable": {
+      "club": "Club",
+      "played": "PJ",
+      "won": "G",
+      "drawn": "E",
+      "lost": "P",
+      "points": "Pts"
+    }
+  },
+  "training": {
+    "kicker": "Centro de entrenamiento",
+    "title": "Entrenamiento",
+    "loadError": "No se pudo cargar el entrenamiento",
+    "retry": "Reintentar",
+    "closeTitle": "Cerrar entrenamientos",
+    "closeAction": "Sí, cerrar",
+    "closeBody": "¿Quieres cerrar los entrenamientos a puerta cerrada?",
+    "closeHint": "Esto ocultará tu táctica a rivales durante 3 turnos, pero consumirá un uso de la directiva.",
+    "stimulateTitle": "Dar discurso local",
+    "stimulateAction": "Sí, dar discurso",
+    "stimulateBody": "¿Quieres dar un discurso motivacional al equipo local?",
+    "stimulateHint": "Mejorará la moral y rendimiento en el próximo partido en casa, consumiendo un uso de la directiva.",
+    "kpis": {
+      "coaches": "Entrenadores",
+      "assigned": "Jugadores en grupos",
+      "categories": "Categorías cubiertas"
+    },
+    "controlTitle": "Acciones de equipo",
+    "controlHint": "Turno {{turn}}. Cierra entrenamientos (3t) o da un discurso local (2t). Coste de directiva tras uso 2.",
+    "closedBadge": "CERRADO (hasta T{{turn}})",
+    "closeBtn": "Cerrar Entreno ({{uses}}/2)",
+    "speechActive": "DISCURSO ACTIVO (hasta T{{turn}})",
+    "speechBtn": "Dar Discurso ({{uses}}/2)",
+    "emptyCoaches": "Sin cuerpo técnico",
+    "emptyCoachesHint": "Contrata entrenadores por categoría para mejorar a tus jugadores en cada sesión.",
+    "hireCoachTitle": "Contratar nuevo entrenador",
+    "staffFull": "Plantilla técnica completa ({{current}}/{{max}}). Despide a un entrenador para contratar otro.",
+    "playsHint": "Cada jugada en desarrollo ocupa 1 hueco de entrenamiento. Máximo 8 jugadas activas por partido (regla FDF §2.7).",
+    "command": {
+      "eyebrow": "Departamento deportivo · Entrenamiento",
+      "title": "Centro de rendimiento",
+      "description": "Planifica sesiones, distribuye grupos de trabajo y conecta la preparación semanal con tu plan de partido.",
+      "ready": "Programa de trabajo cubierto",
+      "needsWork": "Programa con huecos",
+      "readyHint": "Todas las líneas están cubiertas y los titulares tienen grupo.",
+      "needsWorkHint": "{{missing}} áreas sin entrenador · {{unassigned}} titulares sin grupo",
+      "metrics": {
+        "coaches": "Entrenadores",
+        "coverage": "Cobertura",
+        "assigned": "Asignados",
+        "level": "Nivel medio"
+      },
+      "partialLoad": "Parte del centro no pudo actualizarse",
+      "sessionEyebrow": "Trabajo del turno",
+      "sessionTitle": "Sesión manual",
+      "sessionLimit": "1 por entrenador y turno",
+      "coach": "Entrenador",
+      "sessionType": "Tipo de sesión",
+      "recovery": "Recuperación de forma",
+      "choosePlayers": "Selecciona hasta 6 jugadores",
+      "running": "Ejecutando sesión…",
+      "run": "Ejecutar entrenamiento",
+      "resultTitle": "Informe de la sesión",
+      "noImprovement": "sin mejora de atributo",
+      "dayEyebrow": "Palancas especiales",
+      "controlUnavailable": "Los controles especiales no están disponibles ahora.",
+      "closedTitle": "Entrenamiento a puerta cerrada",
+      "speechTitle": "Discurso para el próximo partido local",
+      "activate": "Activar",
+      "coverageEyebrow": "Mapa de especialidades",
+      "coverageTitle": "Cobertura técnica",
+      "coverageHint": "Cada línea necesita una referencia clara de trabajo.",
+      "noCoach": "Sin entrenador",
+      "coverageDetail": "{{coaches}} ent. · {{players}} jugadores",
+      "staffEyebrow": "Grupos de trabajo",
+      "staffTitle": "Cuerpo de entrenadores",
+      "unassignedStarters": "{{count}} titulares sin grupo",
+      "allStartersAssigned": "Todos los titulares tienen grupo",
+      "hireHint": "Completa la estructura hasta seis entrenadores.",
+      "hireError": "No se pudo contratar",
+      "fireError": "No se pudo despedir",
+      "actionError": "No se pudo activar la acción",
+      "assignError": "No se pudo actualizar el grupo",
+      "sessionComplete": "Sesión completada",
+      "sessionError": "No se pudo ejecutar la sesión"
+    },
+    "toasts": {
+      "coachHired": "Entrenador contratado",
+      "coachFired": "Entrenador despedido",
+      "closed": "Entrenamiento cerrado",
+      "speechApplied": "Discurso al equipo aplicado",
+      "maxPlayers": "Un entrenador solo puede tener 6 jugadores asignados"
+    }
+  },
+  "staff": {
+    "kicker": "Gestión del personal del equipo",
+    "title": "Cuerpo Técnico",
+    "loadError": "No se pudo cargar el cuerpo técnico",
+    "retry": "Reintentar",
+    "fireTitle": "Despedir miembro del staff",
+    "fireBody": "¿Confirmas el despido? Se aplicará la indemnización correspondiente.",
+    "fireAction": "Despedir",
+    "emptyTitle": "Sin staff contratado",
+    "emptyHint": "No tienes staff contratado en este momento. Usa «Contratar Staff» para fichar candidatos.",
+    "table": {
+      "name": "Nombre",
+      "role": "Rol",
+      "level": "Nivel",
+      "salary": "Salario",
+      "actions": "Acciones"
+    },
+    "essential": "Imprescindible",
+    "kpis": {
+      "total": "Total personal",
+      "payroll": "Salarios mensuales",
+      "roles": "Roles únicos"
+    },
+    "structureTitle": "Estructura del Staff",
+    "hireSuccess": "{{name}} contratado",
+    "hireError": "Error al contratar. Revisa tu presupuesto.",
+    "fireSuccess": "Miembro del staff despedido",
+    "fireError": "Error al despedir.",
+    "filterRole": "Filtrar por rol...",
+    "viewMode": "Modo de vista",
+    "viewCards": "Tarjetas",
+    "viewTable": "Tabla",
+    "hideCandidates": "Ocultar Candidatos",
+    "hireStaff": "Contratar Staff",
+    "candidatesTitle": "Candidatos disponibles",
+    "noCandidates": "No hay candidatos disponibles ahora mismo.",
+    "salary": "Salario:",
+    "signingFee": "Coste firma:",
+    "salaryPerMonth": "{{amount}} €/mes",
+    "signingFeeAmount": "{{amount}} €",
+    "vsAvg": "{{pct}}% vs media del plantel",
+    "hire": "Contratar",
+    "pyramid": {
+      "manager": "Mánager",
+      "coach": "Entrenadores",
+      "scout": "Ojeadores",
+      "physio": "Médicos/Fisios",
+      "total": "Total Staff:"
+    }
+  },
+  "match": {
+    "loadError": "No se encontró el partido",
+    "retry": "Reintentar",
+    "sharePoster": "Compartir cartel del partido",
+    "backToCalendar": "Calendario",
+    "headerMeta": "{{competition}} · Jornada {{number}}",
+    "defaultCompetition": "Liga",
+    "title": "Día de Partido",
+    "toolbar": {
+      "preview": "Previa",
+      "match": "Partido",
+      "analysis": "Análisis",
+      "timeMachineTitle": "Túnel del Tiempo",
+      "reviving": "Reviviendo…",
+      "revive": "Revivir",
+      "shareTitle": "Compartir partido",
+      "copied": "Copiado",
+      "share": "Compartir",
+      "refresh": "Refrescar"
+    },
+    "hidden": {
+      "badge": "El partido ya se jugó",
+      "sealedHint": "El resultado permanece sellado hasta que tú decidas.",
+      "watch": "Ver el partido",
+      "skipToResult": "⏭ Saltar al resultado"
+    },
+    "pending": {
+      "title": "Partido pendiente",
+      "hint": "Cuando el turno lo simule, podrás ver el partido aquí."
+    },
+    "goToMatch": "▶ Ir al Partido",
+    "auditSummary": "Auditoría de semilla · Túnel del tiempo",
+    "tunnel": {
+      "loadingTitle": "TÚNEL DEL TIEMPO — cargando",
+      "loadingBody": "Re-simulando el partido desde la semilla original. Mantén la ventana abierta…",
+      "successTitle": "REVIVIR — recreación histórica",
+      "successBefore": "Estás viendo una re-simulación en vivo basada en el ",
+      "successBold": "mismo seed original",
+      "successAfter": ". El desarrollo coincide con lo que sucedió ese día.",
+      "warningTitle": "REVIVIR — recreación aproximada",
+      "warningBody": "Motor actualizado: el marcador puede coincidir pero el desarrollo de la jugada puede diferir. La alineación y tácticas de aquel día se mantienen."
+    },
+    "analysisUnavailable": {
+      "title": "Análisis avanzado no disponible",
+      "hint": "Este partido puede verse en el visor, pero no trae todavía xG, duelos o narrativa avanzada.",
+      "openViewer": "Abrir visor"
+    },
+    "toasts": {
+      "cardGenerated": "Tarjeta social generada",
+      "linkCopied": "Enlace del partido copiado al portapapeles",
+      "shareError": "No se pudo compartir el partido",
+      "replayError": "No se pudo revivir el partido"
+    }
+  },
+  "matchdayLive": {
+    "emptyTitle": "Sin partidos en esta jornada",
+    "emptyHint": "Elige otra competición o espera al próximo turno.",
+    "kicker": "El evento de la jornada",
+    "title": "Jornada en Vivo",
+    "live": "EN DIRECTO",
+    "polling": "AUTO-REFRESCO",
+    "statusLive": "EN JUEGO",
+    "statusPlayed": "FINAL",
+    "statusPending": "PENDIENTE",
+    "tickerTitle": "Así van cayendo los goles",
+    "goal": "Gol"
+  },
+  "npcCoach": {
+    "notFound": "Entrenador no encontrado",
+    "retry": "Reintentar",
+    "kicker": "Banquillo NPC",
+    "noClub": "Sin club",
+    "lede": "Técnico de {{club}}",
+    "loading": "Cargando ficha del banquillo…",
+    "stage": "Etapa:",
+    "monthsInCharge": "Meses en el cargo:",
+    "previousClubs": "Clubes previos:",
+    "viewClub": "Ver club →",
+    "careerTitle": "Trayectoria"
+  },
+  "residences": {
+    "closedTitle": "Academia clausurada",
+    "loadError": "No se pudo cargar la cantera",
+    "retry": "Reintentar acceso",
+    "toasts": {
+      "promoted": "¡Jugador promocionado al primer equipo!",
+      "upgradeDone": "Mejora arquitectónica completada",
+      "promoteError": "Error al promover",
+      "upgradeError": "Error al mejorar (¿Falta de fondos?)"
+    },
+    "kicker": "Complejo Deportivo FDF",
+    "title": "Academia & Cantera",
+    "loadErrorToast": "No se pudo cargar la cantera",
+    "kpis": {
+      "capacity": "Capacidad Instalada",
+      "slots": "plazas",
+      "residents": "Residentes Actuales",
+      "archLevel": "Nivel Arquitectónico",
+      "modules_one": "{{count}} Módulo Operativo",
+      "modules_other": "{{count}} Módulos Operativos"
+    },
+    "campus": {
+      "title": "Instalaciones del Campus",
+      "currentLevel": "Nivel actual",
+      "max": "/ 5 MAX",
+      "desc": "La planta iluminada marca el progreso tecnológico de tu academia. Cada nivel aumenta la media base de los canteranos generados.",
+      "optimal": "Operación Óptima",
+      "floorPlan": "Plano de Habitaciones",
+      "occupied": "{{occupied}} / {{capacity}} Ocupadas",
+      "roomOccupied": "Residente asignado",
+      "roomEmpty": "Habitación disponible",
+      "floorLabel": "L{{level}}",
+      "levelShort": "Lv.{{level}}"
+    },
+    "youth": {
+      "title": "Promesas en Desarrollo",
+      "prospect": "Prospecto",
+      "role": "Rol",
+      "age": "Edad",
+      "projection": "Proyección",
+      "talent": "Talento Base",
+      "action": "Decisión",
+      "promote": "Ascender",
+      "empty": "Las instalaciones están vacías. Los ojeadores están buscando talentos.",
+      "playerFallback": "Jugador #{{id}}",
+      "potential": "Potencial {{talent}}/99"
+    },
+    "upgrades": {
+      "title": "Árbol de Desarrollo",
+      "lede": "Invierte fondos del club para expandir las instalaciones y mejorar la calidad de los entrenamientos juveniles.",
+      "capacityTitle": "Ampliar Dormitorios",
+      "capacityHint": "+10 plazas para nuevos prospectos",
+      "capacityCost": "150.000 €",
+      "levelTitle": "Mejorar Tecnología",
+      "levelHint": "+ Nivel Academia (Mejores Stats Base)",
+      "levelCost": "250.000 €",
+      "invest": "Invertir",
+      "maxLevel": "MAX LEVEL",
+      "evolve": "Evolucionar"
+    },
+    "formula": {
+      "title": "Archivos FDF: Generación de Talentos",
+      "l1": "· Cada ~3 meses de juego sale un jugador por residencia (puedes elegir su demarcación).",
+      "l2": "· Media base = nivel de residencia × 3 + azar(−5..25) − azar(0..residencias) + 13 + valor de ubicación (1-20). Acotada entre 20 y 75.",
+      "l3": "· Cada atributo = media − 50 + azar(0..30) − penalización por posición.",
+      "l4": "· Talento (techo) = atributo + 50 + azar(0..15). La ciudad deportiva sube el rango (sin ella 15-60; nivel 8: 43-84).",
+      "l5": "· Límite mundial anual: 3 jugadores de 7 barras y 21 de 6 barras. Emblemáticos retirados suman bonus."
+    },
+    "promo": {
+      "title": "Firma Profesional: {{name}}",
+      "prospect": "Prospecto #{{id}}",
+      "years": "{{count}} años",
+      "demands": "Demandas del Representante",
+      "salaryRequired": "Salario Inicial Requerido",
+      "perMonth": "/mes",
+      "salaryOffer": "Oferta Salarial",
+      "duration": "Duración (Años)",
+      "offerRejected": "La oferta será rechazada por el jugador.",
+      "break": "Romper Negociaciones",
+      "sign": "Firma de Contrato",
+      "attrs": {
+        "passing": "Pase",
+        "tackling": "Entrada",
+        "shooting": "Tiro",
+        "organization": "Organización",
+        "unmarking": "Desmarque",
+        "finishing": "Definición",
+        "dribbling": "Regate",
+        "goalkeeping": "Portería"
+      }
+    },
+    "confirm": {
+      "capacityTitle": "Aprobación de Plan de Expansión",
+      "levelTitle": "Aprobación de Mejora Tecnológica",
+      "confirm": "Autorizar Fondos",
+      "body": "¿Confirmas la autorización de la junta directiva para invertir {{amount}} en el proyecto de {{project}}?",
+      "capacityProject": "ampliación de los dormitorios (+10 plazas)",
+      "levelProject": "actualización de las instalaciones (Nivel +1)"
+    }
+  },
+  "whileAway": {
+    "title": "Mientras no estabas",
+    "loading": "Recopilando eventos recientes...",
+    "summary": "Resumen de eventos desde tu última sesión ({{since}}).",
+    "yourMatches": "Tus partidos",
+    "you": "Tú",
+    "go": "Ir",
+    "standings": "Clasificación: {{league}}",
+    "movedUp_one": "Has subido {{count}} puesto",
+    "movedUp_other": "Has subido {{count}} puestos",
+    "movedDown_one": "Has bajado {{count}} puesto",
+    "movedDown_other": "Has bajado {{count}} puestos",
+    "market": "Mercado",
+    "newOffer": "NUEVA OFERTA",
+    "offerFor": "Por {{player}}",
+    "offerFrom": "{{club}} ofrece {{amount}}",
+    "offerAccepted": "OFERTA ACEPTADA",
+    "offerRejected": "OFERTA RECHAZADA",
+    "health": "Enfermería y sanciones",
+    "academy": "Academia",
+    "until": "hasta {{date}}",
+    "suspensionMatches": "{{count}} partidos",
+    "rival": "El rival directo",
+    "rivalPlayed": "{{name}} jugó su partido:",
+    "continue": "Continuar al dashboard"
+  },
+  "common": {
+    "copyCover": "¡Portada copiada al portapapeles!",
+    "shareCover": "Compartir portada del dashboard",
+    "copyPoster": "¡Cartel copiado al portapapeles!",
+    "maxActivePlays": "Máximo {{max}} jugadas activas por partido (regla FDF). Desactiva otra primero.",
+    "trainingPlay": "Entrenando «{{type}}»",
+    "playStatus": {
+      "developing": "Entrenando...",
+      "maxed": "Máximo",
+      "available": "Disponible"
+    }
+  },
+  "postTurn": {
+    "title": "La Jornada",
+    "loading": "Preparando el resumen del turno…",
+    "turn": "Turno {{turn}}",
+    "headlineDefault": "El mundo FDF ha dado un paso más.",
+    "matchTitle": "Partido destacado",
+    "matchSealed": "Tu encuentro sigue sellado. Ábrelo cuando quieras.",
+    "matchScore": "{{home}} {{homeGoals}} – {{awayGoals}} {{away}}",
+    "noFeatured": "Sin resultado estrella en esta jornada.",
+    "goalTitle": "Gol de la semana",
+    "goalBody": "Vota la jugada más espectacular de la comunidad y deja tu huella en la crónica.",
+    "goalKicker": "Votación abierta",
+    "coverTitle": "FDF Today",
+    "coverHero": "{{name}} lidera la portada con nota {{rating}}.",
+    "coverDefault": "La portada del día ya está lista en tu club.",
+    "coverKicker": "Mañana en portada",
+    "viewMatch": "Ver partido",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "openCover": "Abrir FDF Today",
+    "goToGoal": "Ir al gol de la semana",
+    "you": "Tú",
+    "home": "Local",
+    "away": "Visit."
+  },
+  "plays": {
+    "title": "Jugadas entrenadas",
+    "inMatch": "{{active}}/{{max}} en partido",
+    "emptyTitle": "Sin jugadas entrenadas",
+    "emptyHint": "Inicia el entrenamiento de una jugada para que tu equipo la domine en los partidos.",
+    "level": "NIVEL {{level}}",
+    "statusDeveloping": "ENTRENANDO…",
+    "statusMaxed": "MÁXIMO",
+    "statusAvailable": "DISPONIBLE",
+    "deactivate": "Desactivar",
+    "activate": "Activar en partido",
+    "newPlay": "Nueva jugada",
+    "train": "Entrenar",
+    "loadError": "No se pudieron cargar las jugadas",
+    "startError": "Error al iniciar jugada",
+    "toggleError": "Error al activar/desactivar",
+    "types": {
+      "corner": "Saque de esquina",
+      "freekick": "Falta directa",
+      "offside": "Fuera de juego",
+      "counter": "Contragolpe"
+    }
+  },
+  "errorBoundary": {
+    "title": "Error al cargar la página",
+    "fallback": "Se ha producido un error inesperado en el renderizado.",
+    "retry": "Reintentar",
+    "goHome": "Volver al inicio"
+  },
+  "rival": {
+    "derbyWeek": "Semana de derbi",
+    "historicRival": "Rival histórico",
+    "home": "en casa",
+    "away": "a domicilio",
+    "awayShort": "fuera",
+    "you": "Tú",
+    "them": "Ellos",
+    "pointsTied": "Empatados a puntos",
+    "pointsGap": "{{count}} pts de diferencia",
+    "prestigeMult": "×{{mult}} prestigio",
+    "intensity": "Intensidad",
+    "wins": "Victorias",
+    "draws": "Empates",
+    "losses": "Derrotas",
+    "last": "Último:",
+    "next": "Próximo",
+    "reasons": {
+      "points": "Pelea por los puntos",
+      "cup_elimination": "Eliminación de copa",
+      "transfer_sniper": "Te robó un fichaje",
+      "head_to_head": "Historial igualado",
+      "city": "Derbi de ciudad",
+      "finals": "Rivales en finales",
+      "frequency": "Se cruzan a menudo",
+      "human_duel": "Duelo de mánagers"
+    }
+  },
+  "live": {
+    "pressConference": "RUEDA PRENSA",
+    "news_one": "{{count}} NOTICIA",
+    "news_other": "{{count}} NOTICIAS",
+    "tickerLabel": "FDF AL DÍA"
+  },
+  "clubRadar": {
+    "title": "ADN táctico",
+    "derivedStyle": "Estilo derivado",
+    "description": "Radar de identidad: presión, verticalidad, anchura de sistema, ritmo con balón y altura de la línea defensiva.",
+    "publicEstimate": "Estimación pública a partir del estilo declarado del club."
+  },
+  "competitionsHub": {
+    "title": "Competiciones",
+    "quickAccess": "Acceso rápido",
+    "european": "Europeas",
+    "byCountry": "Por país",
+    "countries": "Países",
+    "types": {
+      "european": "Competiciones europeas",
+      "cup": "Copas nacionales",
+      "league": "Ligas",
+      "other": "Otras competiciones"
+    },
+    "links": {
+      "league": "Mi liga",
+      "live": "En vivo",
+      "calendar": "Calendario",
+      "matches": "Mis partidos"
+    },
+    "trophies": {
+      "champions": "Champions",
+      "europa": "Europa League",
+      "conference": "Conference"
+    }
+  },
+  "trophyModal": {
+    "viewCompetition": "Ver Competición"
+  },
+  "stadium3d": {
+    "loadError": "Error al cargar 3D. Usa la vista 2D.",
+    "architecture": "Arquitectura FDF",
+    "title": "ESTADIO GLOBAL"
+  }
+}

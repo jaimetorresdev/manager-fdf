@@ -1,0 +1,4 @@
+ALTER TABLE "Manager"
+  ADD COLUMN "tutorialStep" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "tutorialCompleted" BOOLEAN NOT NULL DEFAULT false,
+  ADD COLUMN "tutorialSkipped" BOOLEAN NOT NULL DEFAULT false;

@@ -1,0 +1,6996 @@
+{
+  "meta": {
+    "generated": "2026-06-14",
+    "author": "Claude Cowork — issue 0 (prerequisito Y-seed)",
+    "purpose": "Dataset de 50 ligas (mundial) para const leagues=[...] en server/src/db/seed.ts (X2)",
+    "season": "2024/25",
+    "badgeFormat": "https://cdn.sofascore.com/api/v1/team/{sofascoreId}/image",
+    "notes": [
+      "sofascoreId/badge = null cuando el ID no está verificado → usar fallback de iniciales/emoji de ClubBadge.tsx.",
+      "primaryColor/secondaryColor en hex; primaryColor = color dominante de la camiseta local.",
+      "teams[] ordenado de mayor a menor estatura → derivar reputación/presupuesto/aforo de la posición + leagueStrength.",
+      "leagueStrength (0-100) = fuerza relativa de la liga para escalar economía y reputación.",
+      "Scottish Premiership: IDs Sofascore omitidos (la doc tenía 45/46 en colisión con Southampton).",
+      "Mantener intacta la sección de competiciones europeas (UCL/UEL/UECL) del seed.",
+      "X2 (14 jun): ampliado 20->50 ligas (Europa/Sudamérica/Norteamérica/Asia/África). Clubes nuevos con sofascoreId/badge=null (fallback iniciales). status: 18 ligas más fuertes=OPEN, resto=WAITLIST (abren por demanda)."
+    ],
+    "leagueCount": 50
+  },
+  "leagueCount": 50,
+  "clubCount": 708,
+  "leagues": [
+    {
+      "name": "Primera División",
+      "shortName": "LaLiga",
+      "country": "España",
+      "countryCode": "ES",
+      "tier": 1,
+      "leagueStrength": 97,
+      "teams": [
+        {
+          "name": "Real Madrid",
+          "shortName": "RMA",
+          "city": "Madrid",
+          "sofascoreId": 2829,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2829/image",
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#00529F"
+        },
+        {
+          "name": "FC Barcelona",
+          "shortName": "BAR",
+          "city": "Barcelona",
+          "sofascoreId": 2817,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2817/image",
+          "primaryColor": "#004D98",
+          "secondaryColor": "#A50044",
+          "isUserClub": true
+        },
+        {
+          "name": "Atlético de Madrid",
+          "shortName": "ATM",
+          "city": "Madrid",
+          "sofascoreId": 2836,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2836/image",
+          "primaryColor": "#CB3524",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Sevilla FC",
+          "shortName": "SEV",
+          "city": "Sevilla",
+          "sofascoreId": 2833,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2833/image",
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#CB0000"
+        },
+        {
+          "name": "Real Sociedad",
+          "shortName": "RSO",
+          "city": "San Sebastián",
+          "sofascoreId": 2824,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2824/image",
+          "primaryColor": "#0067B1",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Athletic Club",
+          "shortName": "ATH",
+          "city": "Bilbao",
+          "sofascoreId": 2825,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2825/image",
+          "primaryColor": "#EE2523",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Real Betis",
+          "shortName": "BET",
+          "city": "Sevilla",
+          "sofascoreId": 2838,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2838/image",
+          "primaryColor": "#00954C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Villarreal CF",
+          "shortName": "VIL",
+          "city": "Villarreal",
+          "sofascoreId": 2828,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2828/image",
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#004B87"
+        },
+        {
+          "name": "Valencia CF",
+          "shortName": "VAL",
+          "city": "Valencia",
+          "sofascoreId": 2821,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2821/image",
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#EE3524"
+        },
+        {
+          "name": "CA Osasuna",
+          "shortName": "OSA",
+          "city": "Pamplona",
+          "sofascoreId": 2826,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2826/image",
+          "primaryColor": "#D91A21",
+          "secondaryColor": "#0A346F"
+        },
+        {
+          "name": "Girona FC",
+          "shortName": "GIR",
+          "city": "Girona",
+          "sofascoreId": 11066,
+          "badge": "https://cdn.sofascore.com/api/v1/team/11066/image",
+          "primaryColor": "#CD2534",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Getafe CF",
+          "shortName": "GET",
+          "city": "Getafe",
+          "sofascoreId": 2859,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2859/image",
+          "primaryColor": "#005999",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Celta de Vigo",
+          "shortName": "CEL",
+          "city": "Vigo",
+          "sofascoreId": 2842,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2842/image",
+          "primaryColor": "#6FB0E8",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Rayo Vallecano",
+          "shortName": "RAY",
+          "city": "Madrid",
+          "sofascoreId": 2853,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2853/image",
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#E53027"
+        },
+        {
+          "name": "RCD Espanyol",
+          "shortName": "ESP",
+          "city": "Barcelona",
+          "sofascoreId": 2820,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2820/image",
+          "primaryColor": "#007FC8",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "RCD Mallorca",
+          "shortName": "MAL",
+          "city": "Palma",
+          "sofascoreId": 2843,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2843/image",
+          "primaryColor": "#E20613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Deportivo Alavés",
+          "shortName": "ALA",
+          "city": "Vitoria-Gasteiz",
+          "sofascoreId": 2862,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2862/image",
+          "primaryColor": "#0761AF",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "UD Las Palmas",
+          "shortName": "LPA",
+          "city": "Las Palmas",
+          "sofascoreId": 2858,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2858/image",
+          "primaryColor": "#FEE000",
+          "secondaryColor": "#004F9F"
+        },
+        {
+          "name": "CD Leganés",
+          "shortName": "LEG",
+          "city": "Leganés",
+          "sofascoreId": 2932,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2932/image",
+          "primaryColor": "#005BAC",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Real Valladolid",
+          "shortName": "VLL",
+          "city": "Valladolid",
+          "sofascoreId": 2832,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2832/image",
+          "primaryColor": "#5A1A8B",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 20,
+      "status": "OPEN"
+    },
+    {
+      "name": "Premier League",
+      "shortName": "Premier",
+      "country": "Inglaterra",
+      "countryCode": "GB",
+      "tier": 1,
+      "leagueStrength": 98,
+      "teams": [
+        {
+          "name": "Manchester City",
+          "shortName": "MCI",
+          "city": "Manchester",
+          "sofascoreId": 17,
+          "badge": "https://cdn.sofascore.com/api/v1/team/17/image",
+          "primaryColor": "#6CABDD",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Arsenal",
+          "shortName": "ARS",
+          "city": "Londres",
+          "sofascoreId": 42,
+          "badge": "https://cdn.sofascore.com/api/v1/team/42/image",
+          "primaryColor": "#EF0107",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Liverpool",
+          "shortName": "LIV",
+          "city": "Liverpool",
+          "sofascoreId": 44,
+          "badge": "https://cdn.sofascore.com/api/v1/team/44/image",
+          "primaryColor": "#C8102E",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Manchester United",
+          "shortName": "MUN",
+          "city": "Manchester",
+          "sofascoreId": 35,
+          "badge": "https://cdn.sofascore.com/api/v1/team/35/image",
+          "primaryColor": "#DA291C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Chelsea",
+          "shortName": "CHE",
+          "city": "Londres",
+          "sofascoreId": 38,
+          "badge": "https://cdn.sofascore.com/api/v1/team/38/image",
+          "primaryColor": "#034694",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Tottenham Hotspur",
+          "shortName": "TOT",
+          "city": "Londres",
+          "sofascoreId": 33,
+          "badge": "https://cdn.sofascore.com/api/v1/team/33/image",
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#132257"
+        },
+        {
+          "name": "Newcastle United",
+          "shortName": "NEW",
+          "city": "Newcastle",
+          "sofascoreId": 39,
+          "badge": "https://cdn.sofascore.com/api/v1/team/39/image",
+          "primaryColor": "#241F20",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Aston Villa",
+          "shortName": "AVL",
+          "city": "Birmingham",
+          "sofascoreId": 40,
+          "badge": "https://cdn.sofascore.com/api/v1/team/40/image",
+          "primaryColor": "#670E36",
+          "secondaryColor": "#95BFE5"
+        },
+        {
+          "name": "West Ham United",
+          "shortName": "WHU",
+          "city": "Londres",
+          "sofascoreId": 37,
+          "badge": "https://cdn.sofascore.com/api/v1/team/37/image",
+          "primaryColor": "#7A263A",
+          "secondaryColor": "#1BB1E7"
+        },
+        {
+          "name": "Brighton & Hove Albion",
+          "shortName": "BHA",
+          "city": "Brighton",
+          "sofascoreId": 30,
+          "badge": "https://cdn.sofascore.com/api/v1/team/30/image",
+          "primaryColor": "#0057B8",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Wolverhampton",
+          "shortName": "WOL",
+          "city": "Wolverhampton",
+          "sofascoreId": 3,
+          "badge": "https://cdn.sofascore.com/api/v1/team/3/image",
+          "primaryColor": "#FDB913",
+          "secondaryColor": "#231F20"
+        },
+        {
+          "name": "Fulham",
+          "shortName": "FUL",
+          "city": "Londres",
+          "sofascoreId": 5765,
+          "badge": "https://cdn.sofascore.com/api/v1/team/5765/image",
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "AFC Bournemouth",
+          "shortName": "BOU",
+          "city": "Bournemouth",
+          "sofascoreId": 8,
+          "badge": "https://cdn.sofascore.com/api/v1/team/8/image",
+          "primaryColor": "#DA291C",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Crystal Palace",
+          "shortName": "CRY",
+          "city": "Londres",
+          "sofascoreId": 7,
+          "badge": "https://cdn.sofascore.com/api/v1/team/7/image",
+          "primaryColor": "#1B458F",
+          "secondaryColor": "#C4122E"
+        },
+        {
+          "name": "Brentford",
+          "shortName": "BRE",
+          "city": "Londres",
+          "sofascoreId": 9737,
+          "badge": "https://cdn.sofascore.com/api/v1/team/9737/image",
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Everton",
+          "shortName": "EVE",
+          "city": "Liverpool",
+          "sofascoreId": 48,
+          "badge": "https://cdn.sofascore.com/api/v1/team/48/image",
+          "primaryColor": "#003399",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Nottingham Forest",
+          "shortName": "NFO",
+          "city": "Nottingham",
+          "sofascoreId": 14,
+          "badge": "https://cdn.sofascore.com/api/v1/team/14/image",
+          "primaryColor": "#DD0000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Southampton",
+          "shortName": "SOU",
+          "city": "Southampton",
+          "sofascoreId": 45,
+          "badge": "https://cdn.sofascore.com/api/v1/team/45/image",
+          "primaryColor": "#D71920",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Leicester City",
+          "shortName": "LEI",
+          "city": "Leicester",
+          "sofascoreId": 31,
+          "badge": "https://cdn.sofascore.com/api/v1/team/31/image",
+          "primaryColor": "#003090",
+          "secondaryColor": "#FDBE11"
+        },
+        {
+          "name": "Ipswich Town",
+          "shortName": "IPS",
+          "city": "Ipswich",
+          "sofascoreId": 32,
+          "badge": "https://cdn.sofascore.com/api/v1/team/32/image",
+          "primaryColor": "#0044A9",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 20,
+      "status": "OPEN"
+    },
+    {
+      "name": "Bundesliga",
+      "shortName": "Bundesliga",
+      "country": "Alemania",
+      "countryCode": "DE",
+      "tier": 1,
+      "leagueStrength": 94,
+      "teams": [
+        {
+          "name": "Bayern de Múnich",
+          "shortName": "BAY",
+          "city": "Múnich",
+          "sofascoreId": 2672,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2672/image",
+          "primaryColor": "#DC052D",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Bayer Leverkusen",
+          "shortName": "B04",
+          "city": "Leverkusen",
+          "sofascoreId": 10239,
+          "badge": "https://cdn.sofascore.com/api/v1/team/10239/image",
+          "primaryColor": "#E32221",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Borussia Dortmund",
+          "shortName": "BVB",
+          "city": "Dortmund",
+          "sofascoreId": 2673,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2673/image",
+          "primaryColor": "#FDE100",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "RB Leipzig",
+          "shortName": "RBL",
+          "city": "Leipzig",
+          "sofascoreId": 23826,
+          "badge": "https://cdn.sofascore.com/api/v1/team/23826/image",
+          "primaryColor": "#DD0741",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Eintracht Fráncfort",
+          "shortName": "SGE",
+          "city": "Fráncfort",
+          "sofascoreId": 2671,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2671/image",
+          "primaryColor": "#E1000F",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "VfB Stuttgart",
+          "shortName": "VFB",
+          "city": "Stuttgart",
+          "sofascoreId": 2597,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2597/image",
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#E32219"
+        },
+        {
+          "name": "VfL Wolfsburg",
+          "shortName": "WOB",
+          "city": "Wolfsburgo",
+          "sofascoreId": 2678,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2678/image",
+          "primaryColor": "#65B32E",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Borussia Mönchengladbach",
+          "shortName": "BMG",
+          "city": "Mönchengladbach",
+          "sofascoreId": 2675,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2675/image",
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#009933"
+        },
+        {
+          "name": "Union Berlín",
+          "shortName": "FCU",
+          "city": "Berlín",
+          "sofascoreId": 20360,
+          "badge": "https://cdn.sofascore.com/api/v1/team/20360/image",
+          "primaryColor": "#EB1923",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "SC Freiburg",
+          "shortName": "SCF",
+          "city": "Friburgo",
+          "sofascoreId": 2670,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2670/image",
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "1. FSV Mainz 05",
+          "shortName": "M05",
+          "city": "Maguncia",
+          "sofascoreId": 2676,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2676/image",
+          "primaryColor": "#C3141E",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "TSG Hoffenheim",
+          "shortName": "TSG",
+          "city": "Sinsheim",
+          "sofascoreId": 2669,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2669/image",
+          "primaryColor": "#1C63B7",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Werder Bremen",
+          "shortName": "SVW",
+          "city": "Bremen",
+          "sofascoreId": 2668,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2668/image",
+          "primaryColor": "#1D9053",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC Augsburg",
+          "shortName": "FCA",
+          "city": "Augsburgo",
+          "sofascoreId": 2667,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2667/image",
+          "primaryColor": "#BA3733",
+          "secondaryColor": "#46714D"
+        },
+        {
+          "name": "VfL Bochum",
+          "shortName": "BOC",
+          "city": "Bochum",
+          "sofascoreId": 2674,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2674/image",
+          "primaryColor": "#005CA9",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC St. Pauli",
+          "shortName": "STP",
+          "city": "Hamburgo",
+          "sofascoreId": 2660,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2660/image",
+          "primaryColor": "#614E37",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "1. FC Heidenheim",
+          "shortName": "FCH",
+          "city": "Heidenheim",
+          "sofascoreId": 35016,
+          "badge": "https://cdn.sofascore.com/api/v1/team/35016/image",
+          "primaryColor": "#E20613",
+          "secondaryColor": "#003F87"
+        },
+        {
+          "name": "Holstein Kiel",
+          "shortName": "KIE",
+          "city": "Kiel",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#005CA9",
+          "secondaryColor": "#E2001A"
+        }
+      ],
+      "teamCount": 18,
+      "status": "OPEN"
+    },
+    {
+      "name": "Serie A",
+      "shortName": "Serie A",
+      "country": "Italia",
+      "countryCode": "IT",
+      "tier": 1,
+      "leagueStrength": 93,
+      "teams": [
+        {
+          "name": "Inter de Milán",
+          "shortName": "INT",
+          "city": "Milán",
+          "sofascoreId": 2697,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2697/image",
+          "primaryColor": "#0068A8",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "AC Milan",
+          "shortName": "MIL",
+          "city": "Milán",
+          "sofascoreId": 2692,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2692/image",
+          "primaryColor": "#FB090B",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Juventus",
+          "shortName": "JUV",
+          "city": "Turín",
+          "sofascoreId": 2686,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2686/image",
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Napoli",
+          "shortName": "NAP",
+          "city": "Nápoles",
+          "sofascoreId": 2714,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2714/image",
+          "primaryColor": "#12A0D7",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Atalanta",
+          "shortName": "ATA",
+          "city": "Bérgamo",
+          "sofascoreId": 2681,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2681/image",
+          "primaryColor": "#1E71B8",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "AS Roma",
+          "shortName": "ROM",
+          "city": "Roma",
+          "sofascoreId": 2699,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2699/image",
+          "primaryColor": "#8E1F2F",
+          "secondaryColor": "#F0BC42"
+        },
+        {
+          "name": "Lazio",
+          "shortName": "LAZ",
+          "city": "Roma",
+          "sofascoreId": 2687,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2687/image",
+          "primaryColor": "#87D8F7",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Fiorentina",
+          "shortName": "FIO",
+          "city": "Florencia",
+          "sofascoreId": 2684,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2684/image",
+          "primaryColor": "#592C82",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Torino",
+          "shortName": "TOR",
+          "city": "Turín",
+          "sofascoreId": 2703,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2703/image",
+          "primaryColor": "#881C24",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Bologna",
+          "shortName": "BOL",
+          "city": "Bolonia",
+          "sofascoreId": 2682,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2682/image",
+          "primaryColor": "#1A2F48",
+          "secondaryColor": "#A21C26"
+        },
+        {
+          "name": "Genoa",
+          "shortName": "GEN",
+          "city": "Génova",
+          "sofascoreId": 2685,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2685/image",
+          "primaryColor": "#C20E2A",
+          "secondaryColor": "#002B5C"
+        },
+        {
+          "name": "Udinese",
+          "shortName": "UDI",
+          "city": "Údine",
+          "sofascoreId": 2704,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2704/image",
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Hellas Verona",
+          "shortName": "VER",
+          "city": "Verona",
+          "sofascoreId": 2689,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2689/image",
+          "primaryColor": "#FFD400",
+          "secondaryColor": "#002E5B"
+        },
+        {
+          "name": "Cagliari",
+          "shortName": "CAG",
+          "city": "Cagliari",
+          "sofascoreId": 2683,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2683/image",
+          "primaryColor": "#AD1F23",
+          "secondaryColor": "#00295B"
+        },
+        {
+          "name": "AC Monza",
+          "shortName": "MON",
+          "city": "Monza",
+          "sofascoreId": 2691,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2691/image",
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Empoli",
+          "shortName": "EMP",
+          "city": "Empoli",
+          "sofascoreId": 14931,
+          "badge": "https://cdn.sofascore.com/api/v1/team/14931/image",
+          "primaryColor": "#00579C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "US Lecce",
+          "shortName": "LEC",
+          "city": "Lecce",
+          "sofascoreId": 2688,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2688/image",
+          "primaryColor": "#F2C500",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Parma",
+          "shortName": "PAR",
+          "city": "Parma",
+          "sofascoreId": 2695,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2695/image",
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#003B7F"
+        },
+        {
+          "name": "Como 1907",
+          "shortName": "COM",
+          "city": "Como",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0067B2",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Venezia",
+          "shortName": "VEN",
+          "city": "Venecia",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#F58220"
+        }
+      ],
+      "teamCount": 20,
+      "status": "OPEN"
+    },
+    {
+      "name": "Ligue 1",
+      "shortName": "Ligue 1",
+      "country": "Francia",
+      "countryCode": "FR",
+      "tier": 1,
+      "leagueStrength": 89,
+      "teams": [
+        {
+          "name": "Paris Saint-Germain",
+          "shortName": "PSG",
+          "city": "París",
+          "sofascoreId": 1644,
+          "badge": "https://cdn.sofascore.com/api/v1/team/1644/image",
+          "primaryColor": "#004170",
+          "secondaryColor": "#DA291C"
+        },
+        {
+          "name": "AS Monaco",
+          "shortName": "MON",
+          "city": "Mónaco",
+          "sofascoreId": 1648,
+          "badge": "https://cdn.sofascore.com/api/v1/team/1648/image",
+          "primaryColor": "#E63329",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Olympique de Marsella",
+          "shortName": "OM",
+          "city": "Marsella",
+          "sofascoreId": 1641,
+          "badge": "https://cdn.sofascore.com/api/v1/team/1641/image",
+          "primaryColor": "#2FAEE0",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Olympique de Lyon",
+          "shortName": "OL",
+          "city": "Lyon",
+          "sofascoreId": 1645,
+          "badge": "https://cdn.sofascore.com/api/v1/team/1645/image",
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#1D2D5C"
+        },
+        {
+          "name": "LOSC Lille",
+          "shortName": "LIL",
+          "city": "Lille",
+          "sofascoreId": 1643,
+          "badge": "https://cdn.sofascore.com/api/v1/team/1643/image",
+          "primaryColor": "#E01E13",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "OGC Nice",
+          "shortName": "NIC",
+          "city": "Niza",
+          "sofascoreId": 1647,
+          "badge": "https://cdn.sofascore.com/api/v1/team/1647/image",
+          "primaryColor": "#C8102E",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "RC Lens",
+          "shortName": "RCL",
+          "city": "Lens",
+          "sofascoreId": 1642,
+          "badge": "https://cdn.sofascore.com/api/v1/team/1642/image",
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Stade Rennais",
+          "shortName": "REN",
+          "city": "Rennes",
+          "sofascoreId": 1640,
+          "badge": "https://cdn.sofascore.com/api/v1/team/1640/image",
+          "primaryColor": "#E23226",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Stade Brestois",
+          "shortName": "BRE",
+          "city": "Brest",
+          "sofascoreId": 1677,
+          "badge": "https://cdn.sofascore.com/api/v1/team/1677/image",
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Toulouse FC",
+          "shortName": "TFC",
+          "city": "Toulouse",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#642B8F",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Stade de Reims",
+          "shortName": "REI",
+          "city": "Reims",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "RC Strasbourg",
+          "shortName": "STR",
+          "city": "Estrasburgo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#009FE3",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC Nantes",
+          "shortName": "NAN",
+          "city": "Nantes",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FCD405",
+          "secondaryColor": "#008D36"
+        },
+        {
+          "name": "Montpellier HSC",
+          "shortName": "MTP",
+          "city": "Montpellier",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#F77F00",
+          "secondaryColor": "#002F87"
+        },
+        {
+          "name": "Le Havre AC",
+          "shortName": "HAC",
+          "city": "Le Havre",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#00529F",
+          "secondaryColor": "#87CEEB"
+        },
+        {
+          "name": "AJ Auxerre",
+          "shortName": "AJA",
+          "city": "Auxerre",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#006BB6",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Angers SCO",
+          "shortName": "ANG",
+          "city": "Angers",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "AS Saint-Étienne",
+          "shortName": "ASSE",
+          "city": "Saint-Étienne",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#009639",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 18,
+      "status": "OPEN"
+    },
+    {
+      "name": "Eredivisie",
+      "shortName": "Eredivisie",
+      "country": "Países Bajos",
+      "countryCode": "NL",
+      "tier": 1,
+      "leagueStrength": 85,
+      "teams": [
+        {
+          "name": "PSV Eindhoven",
+          "shortName": "PSV",
+          "city": "Eindhoven",
+          "sofascoreId": 2608,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2608/image",
+          "primaryColor": "#ED1C24",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Feyenoord",
+          "shortName": "FEY",
+          "city": "Róterdam",
+          "sofascoreId": 2603,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2603/image",
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Ajax",
+          "shortName": "AJA",
+          "city": "Ámsterdam",
+          "sofascoreId": 2604,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2604/image",
+          "primaryColor": "#D2122E",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "AZ Alkmaar",
+          "shortName": "AZ",
+          "city": "Alkmaar",
+          "sofascoreId": 2600,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2600/image",
+          "primaryColor": "#ED1C24",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC Twente",
+          "shortName": "TWE",
+          "city": "Enschede",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC Utrecht",
+          "shortName": "UTR",
+          "city": "Utrecht",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "SC Heerenveen",
+          "shortName": "HEE",
+          "city": "Heerenveen",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "Go Ahead Eagles",
+          "shortName": "GAE",
+          "city": "Deventer",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFEE00"
+        },
+        {
+          "name": "Sparta Róterdam",
+          "shortName": "SPA",
+          "city": "Róterdam",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "NEC Nijmegen",
+          "shortName": "NEC",
+          "city": "Nimega",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Fortuna Sittard",
+          "shortName": "FOR",
+          "city": "Sittard",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#008542"
+        },
+        {
+          "name": "PEC Zwolle",
+          "shortName": "PEC",
+          "city": "Zwolle",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Heracles Almelo",
+          "shortName": "HER",
+          "city": "Almelo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Almere City",
+          "shortName": "ALM",
+          "city": "Almere",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "RKC Waalwijk",
+          "shortName": "RKC",
+          "city": "Waalwijk",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#0033A0"
+        },
+        {
+          "name": "Willem II",
+          "shortName": "WIL",
+          "city": "Tilburg",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#0033A0"
+        },
+        {
+          "name": "NAC Breda",
+          "shortName": "NAC",
+          "city": "Breda",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "FC Groningen",
+          "shortName": "GRO",
+          "city": "Groninga",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#00A94F",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 18,
+      "status": "OPEN"
+    },
+    {
+      "name": "Primeira Liga",
+      "shortName": "Primeira",
+      "country": "Portugal",
+      "countryCode": "PT",
+      "tier": 1,
+      "leagueStrength": 84,
+      "teams": [
+        {
+          "name": "SL Benfica",
+          "shortName": "BEN",
+          "city": "Lisboa",
+          "sofascoreId": 1714,
+          "badge": "https://cdn.sofascore.com/api/v1/team/1714/image",
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Sporting CP",
+          "shortName": "SCP",
+          "city": "Lisboa",
+          "sofascoreId": 1713,
+          "badge": "https://cdn.sofascore.com/api/v1/team/1713/image",
+          "primaryColor": "#008057",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC Porto",
+          "shortName": "POR",
+          "city": "Oporto",
+          "sofascoreId": 1715,
+          "badge": "https://cdn.sofascore.com/api/v1/team/1715/image",
+          "primaryColor": "#00428C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "SC Braga",
+          "shortName": "BRA",
+          "city": "Braga",
+          "sofascoreId": 1716,
+          "badge": "https://cdn.sofascore.com/api/v1/team/1716/image",
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Vitória de Guimarães",
+          "shortName": "VSC",
+          "city": "Guimarães",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Moreirense",
+          "shortName": "MOR",
+          "city": "Moreira de Cónegos",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#00A859",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC Famalicão",
+          "shortName": "FAM",
+          "city": "Famalicão",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#009FE3",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Gil Vicente",
+          "shortName": "GIL",
+          "city": "Barcelos",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "Estoril Praia",
+          "shortName": "EST",
+          "city": "Estoril",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "Casa Pia",
+          "shortName": "CAS",
+          "city": "Lisboa",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Boavista",
+          "shortName": "BOA",
+          "city": "Oporto",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Rio Ave",
+          "shortName": "RIO",
+          "city": "Vila do Conde",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "FC Arouca",
+          "shortName": "ARO",
+          "city": "Arouca",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Estrela da Amadora",
+          "shortName": "AMA",
+          "city": "Amadora",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "SC Farense",
+          "shortName": "FAR",
+          "city": "Faro",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "AVS Futebol SAD",
+          "shortName": "AVS",
+          "city": "Vila das Aves",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "CD Nacional",
+          "shortName": "NAC",
+          "city": "Funchal",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Santa Clara",
+          "shortName": "SCL",
+          "city": "Ponta Delgada",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 18,
+      "status": "OPEN"
+    },
+    {
+      "name": "Süper Lig",
+      "shortName": "Süper Lig",
+      "country": "Turquía",
+      "countryCode": "TR",
+      "tier": 1,
+      "leagueStrength": 82,
+      "teams": [
+        {
+          "name": "Galatasaray",
+          "shortName": "GS",
+          "city": "Estambul",
+          "sofascoreId": 2637,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2637/image",
+          "primaryColor": "#FCB904",
+          "secondaryColor": "#A90432"
+        },
+        {
+          "name": "Fenerbahçe",
+          "shortName": "FB",
+          "city": "Estambul",
+          "sofascoreId": 2636,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2636/image",
+          "primaryColor": "#FFED00",
+          "secondaryColor": "#00296B"
+        },
+        {
+          "name": "Beşiktaş",
+          "shortName": "BJK",
+          "city": "Estambul",
+          "sofascoreId": 2635,
+          "badge": "https://cdn.sofascore.com/api/v1/team/2635/image",
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Trabzonspor",
+          "shortName": "TS",
+          "city": "Trebisonda",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#6E1129",
+          "secondaryColor": "#41B6E6"
+        },
+        {
+          "name": "İstanbul Başakşehir",
+          "shortName": "IBFK",
+          "city": "Estambul",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#F37021",
+          "secondaryColor": "#1A2D5A"
+        },
+        {
+          "name": "Adana Demirspor",
+          "shortName": "ADS",
+          "city": "Adana",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#002D72",
+          "secondaryColor": "#0093D0"
+        },
+        {
+          "name": "Konyaspor",
+          "shortName": "KON",
+          "city": "Konya",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Antalyaspor",
+          "shortName": "ANT",
+          "city": "Antalya",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Alanyaspor",
+          "shortName": "ALA",
+          "city": "Alanya",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2541E",
+          "secondaryColor": "#008542"
+        },
+        {
+          "name": "Kasımpaşa",
+          "shortName": "KAS",
+          "city": "Estambul",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#00205B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Sivasspor",
+          "shortName": "SIV",
+          "city": "Sivas",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Kayserispor",
+          "shortName": "KAY",
+          "city": "Kayseri",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Çaykur Rizespor",
+          "shortName": "RIZ",
+          "city": "Rize",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "Gaziantep FK",
+          "shortName": "GFK",
+          "city": "Gaziantep",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Samsunspor",
+          "shortName": "SAM",
+          "city": "Samsun",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Hatayspor",
+          "shortName": "HAT",
+          "city": "Antioquía",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#6E1129",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Bodrum FK",
+          "shortName": "BOD",
+          "city": "Bodrum",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Eyüpspor",
+          "shortName": "EYP",
+          "city": "Estambul",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#4B0082",
+          "secondaryColor": "#FFE600"
+        },
+        {
+          "name": "Göztepe",
+          "shortName": "GOZ",
+          "city": "Esmirna",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFE600"
+        },
+        {
+          "name": "MKE Ankaragücü",
+          "shortName": "ANK",
+          "city": "Ankara",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#00205B"
+        }
+      ],
+      "teamCount": 20,
+      "status": "OPEN"
+    },
+    {
+      "name": "Scottish Premiership",
+      "shortName": "Scottish",
+      "country": "Escocia",
+      "countryCode": "GB-SCT",
+      "tier": 1,
+      "leagueStrength": 74,
+      "teams": [
+        {
+          "name": "Celtic",
+          "shortName": "CEL",
+          "city": "Glasgow",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#018749",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Rangers",
+          "shortName": "RAN",
+          "city": "Glasgow",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#1B458F",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Aberdeen",
+          "shortName": "ABE",
+          "city": "Aberdeen",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Heart of Midlothian",
+          "shortName": "HEA",
+          "city": "Edimburgo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#6C1D45",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Hibernian",
+          "shortName": "HIB",
+          "city": "Edimburgo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Dundee United",
+          "shortName": "DUU",
+          "city": "Dundee",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FF6600",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Dundee FC",
+          "shortName": "DUN",
+          "city": "Dundee",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#001B4E",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Motherwell",
+          "shortName": "MOT",
+          "city": "Motherwell",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD100",
+          "secondaryColor": "#8B0000"
+        },
+        {
+          "name": "St Mirren",
+          "shortName": "STM",
+          "city": "Paisley",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Kilmarnock",
+          "shortName": "KIL",
+          "city": "Kilmarnock",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Ross County",
+          "shortName": "ROS",
+          "city": "Dingwall",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#002D72",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "St Johnstone",
+          "shortName": "STJ",
+          "city": "Perth",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Jupiler Pro League",
+      "shortName": "Pro League",
+      "country": "Bélgica",
+      "countryCode": "BE",
+      "tier": 1,
+      "leagueStrength": 80,
+      "teams": [
+        {
+          "name": "Club Brugge",
+          "shortName": "CLB",
+          "city": "Brujas",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0066B3",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "RSC Anderlecht",
+          "shortName": "AND",
+          "city": "Bruselas",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#4F2D7F",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "KRC Genk",
+          "shortName": "GEN",
+          "city": "Genk",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Royal Antwerp",
+          "shortName": "ANT",
+          "city": "Amberes",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Union Saint-Gilloise",
+          "shortName": "USG",
+          "city": "Bruselas",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#0033A0"
+        },
+        {
+          "name": "KAA Gent",
+          "shortName": "GNT",
+          "city": "Gante",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Standard de Lieja",
+          "shortName": "STA",
+          "city": "Lieja",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Cercle Brugge",
+          "shortName": "CER",
+          "city": "Brujas",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Sporting Charleroi",
+          "shortName": "CHA",
+          "city": "Charleroi",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "KV Mechelen",
+          "shortName": "MEC",
+          "city": "Malinas",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "OH Leuven",
+          "shortName": "OHL",
+          "city": "Lovaina",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "KVC Westerlo",
+          "shortName": "WES",
+          "city": "Westerlo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "Sint-Truiden",
+          "shortName": "STV",
+          "city": "Sint-Truiden",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "KV Kortrijk",
+          "shortName": "KOR",
+          "city": "Cortrique",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FCV Dender",
+          "shortName": "DEN",
+          "city": "Denderleeuw",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Beerschot",
+          "shortName": "BEE",
+          "city": "Amberes",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#4B0082",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 16,
+      "status": "OPEN"
+    },
+    {
+      "name": "Austrian Bundesliga",
+      "shortName": "Austria",
+      "country": "Austria",
+      "countryCode": "AT",
+      "tier": 1,
+      "leagueStrength": 76,
+      "teams": [
+        {
+          "name": "Red Bull Salzburg",
+          "shortName": "RBS",
+          "city": "Salzburgo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "SK Sturm Graz",
+          "shortName": "STU",
+          "city": "Graz",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "LASK",
+          "shortName": "LASK",
+          "city": "Linz",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FK Austria Viena",
+          "shortName": "AUS",
+          "city": "Viena",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#4F2D7F",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "SK Rapid Viena",
+          "shortName": "RAP",
+          "city": "Viena",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Wolfsberger AC",
+          "shortName": "WAC",
+          "city": "Wolfsberg",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "TSV Hartberg",
+          "shortName": "HAR",
+          "city": "Hartberg",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Austria Klagenfurt",
+          "shortName": "KLA",
+          "city": "Klagenfurt",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#4F2D7F",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Blau-Weiß Linz",
+          "shortName": "BWL",
+          "city": "Linz",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "SCR Altach",
+          "shortName": "ALT",
+          "city": "Altach",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Grazer AK",
+          "shortName": "GAK",
+          "city": "Graz",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "WSG Tirol",
+          "shortName": "WSG",
+          "city": "Innsbruck",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "OPEN"
+    },
+    {
+      "name": "Chance Liga",
+      "shortName": "Czech Liga",
+      "country": "Chequia",
+      "countryCode": "CZ",
+      "tier": 1,
+      "leagueStrength": 74,
+      "teams": [
+        {
+          "name": "SK Slavia Praga",
+          "shortName": "SLA",
+          "city": "Praga",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "AC Sparta Praga",
+          "shortName": "SPP",
+          "city": "Praga",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#8B0000",
+          "secondaryColor": "#FFE600"
+        },
+        {
+          "name": "Viktoria Plzeň",
+          "shortName": "PLZ",
+          "city": "Pilsen",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Baník Ostrava",
+          "shortName": "BAN",
+          "city": "Ostrava",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Slovan Liberec",
+          "shortName": "LIB",
+          "city": "Liberec",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Sigma Olomouc",
+          "shortName": "SIG",
+          "city": "Olomouc",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Bohemians 1905",
+          "shortName": "BOH",
+          "city": "Praga",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Mladá Boleslav",
+          "shortName": "MBL",
+          "city": "Mladá Boleslav",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Hradec Králové",
+          "shortName": "HKR",
+          "city": "Hradec Králové",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FK Teplice",
+          "shortName": "TEP",
+          "city": "Teplice",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "FK Jablonec",
+          "shortName": "JAB",
+          "city": "Jablonec",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Dukla Praga",
+          "shortName": "DUK",
+          "city": "Praga",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#6E1129",
+          "secondaryColor": "#FFE600"
+        },
+        {
+          "name": "MFK Karviná",
+          "shortName": "KAR",
+          "city": "Karviná",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFE600"
+        },
+        {
+          "name": "Dynamo Č. Budějovice",
+          "shortName": "DCB",
+          "city": "České Budějovice",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FK Pardubice",
+          "shortName": "PCE",
+          "city": "Pardubice",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "1. FC Slovácko",
+          "shortName": "SLO",
+          "city": "Uherské Hradiště",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 16,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Super League Greece",
+      "shortName": "Greece",
+      "country": "Grecia",
+      "countryCode": "GR",
+      "tier": 1,
+      "leagueStrength": 75,
+      "teams": [
+        {
+          "name": "Olympiacos",
+          "shortName": "OLY",
+          "city": "El Pireo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "PAOK",
+          "shortName": "PAOK",
+          "city": "Salónica",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "AEK Atenas",
+          "shortName": "AEK",
+          "city": "Atenas",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Panathinaikos",
+          "shortName": "PAN",
+          "city": "Atenas",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Aris Salónica",
+          "shortName": "ARI",
+          "city": "Salónica",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Atromitos",
+          "shortName": "ATR",
+          "city": "Atenas",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "PAS Lamia",
+          "shortName": "LAM",
+          "city": "Lamia",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "OFI Creta",
+          "shortName": "OFI",
+          "city": "Heraclión",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Volos NFC",
+          "shortName": "VOL",
+          "city": "Volos",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Panetolikos",
+          "shortName": "PAE",
+          "city": "Agrinio",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Asteras Tripolis",
+          "shortName": "AST",
+          "city": "Trípoli",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "Kallithea",
+          "shortName": "KAL",
+          "city": "Atenas",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Levadiakos",
+          "shortName": "LEV",
+          "city": "Livadiá",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Panserraikos",
+          "shortName": "PAS",
+          "city": "Serres",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 14,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Swiss Super League",
+      "shortName": "Swiss SL",
+      "country": "Suiza",
+      "countryCode": "CH",
+      "tier": 1,
+      "leagueStrength": 77,
+      "teams": [
+        {
+          "name": "BSC Young Boys",
+          "shortName": "YB",
+          "city": "Berna",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Servette FC",
+          "shortName": "SER",
+          "city": "Ginebra",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#6E1129",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC Basel",
+          "shortName": "BAS",
+          "city": "Basilea",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "FC Lugano",
+          "shortName": "LUG",
+          "city": "Lugano",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC Lausanne-Sport",
+          "shortName": "LAU",
+          "city": "Lausana",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC St. Gallen",
+          "shortName": "STG",
+          "city": "San Galo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC Luzern",
+          "shortName": "LUZ",
+          "city": "Lucerna",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC Zürich",
+          "shortName": "FCZ",
+          "city": "Zúrich",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "Grasshopper",
+          "shortName": "GC",
+          "city": "Zúrich",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC Sion",
+          "shortName": "SIO",
+          "city": "Sión",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Yverdon-Sport",
+          "shortName": "YS",
+          "city": "Yverdon",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FC Winterthur",
+          "shortName": "WIN",
+          "city": "Winterthur",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "OPEN"
+    },
+    {
+      "name": "Superliga",
+      "shortName": "Denmark",
+      "country": "Dinamarca",
+      "countryCode": "DK",
+      "tier": 1,
+      "leagueStrength": 76,
+      "teams": [
+        {
+          "name": "FC Copenhague",
+          "shortName": "FCK",
+          "city": "Copenhague",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "FC Midtjylland",
+          "shortName": "FCM",
+          "city": "Herning",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Brøndby IF",
+          "shortName": "BIF",
+          "city": "Brøndby",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "FC Nordsjælland",
+          "shortName": "FCN",
+          "city": "Farum",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "AGF Aarhus",
+          "shortName": "AGF",
+          "city": "Aarhus",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#6E1129"
+        },
+        {
+          "name": "Silkeborg IF",
+          "shortName": "SIF",
+          "city": "Silkeborg",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Viborg FF",
+          "shortName": "VFF",
+          "city": "Viborg",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Randers FC",
+          "shortName": "RFC",
+          "city": "Randers",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Lyngby BK",
+          "shortName": "LBK",
+          "city": "Lyngby",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Vejle BK",
+          "shortName": "VBK",
+          "city": "Vejle",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "SønderjyskE",
+          "shortName": "SJE",
+          "city": "Haderslev",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "AaB",
+          "shortName": "AAB",
+          "city": "Aalborg",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "OPEN"
+    },
+    {
+      "name": "HNL",
+      "shortName": "Croatia",
+      "country": "Croacia",
+      "countryCode": "HR",
+      "tier": 1,
+      "leagueStrength": 73,
+      "teams": [
+        {
+          "name": "Dinamo Zagreb",
+          "shortName": "DIN",
+          "city": "Zagreb",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Hajduk Split",
+          "shortName": "HAJ",
+          "city": "Split",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "HNK Rijeka",
+          "shortName": "RIJ",
+          "city": "Rijeka",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "NK Osijek",
+          "shortName": "OSI",
+          "city": "Osijek",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Lokomotiva Zagreb",
+          "shortName": "LOK",
+          "city": "Zagreb",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "HNK Gorica",
+          "shortName": "GOR",
+          "city": "Velika Gorica",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Slaven Belupo",
+          "shortName": "SLB",
+          "city": "Koprivnica",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFE600"
+        },
+        {
+          "name": "NK Varaždin",
+          "shortName": "VAR",
+          "city": "Varaždin",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Istra 1961",
+          "shortName": "IST",
+          "city": "Pula",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "HNK Šibenik",
+          "shortName": "SIB",
+          "city": "Šibenik",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 10,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Ukrainian Premier League",
+      "shortName": "Ukraine",
+      "country": "Ucrania",
+      "countryCode": "UA",
+      "tier": 1,
+      "leagueStrength": 75,
+      "teams": [
+        {
+          "name": "Shakhtar Donetsk",
+          "shortName": "SHK",
+          "city": "Donetsk",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FF6600",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Dynamo Kyiv",
+          "shortName": "DYK",
+          "city": "Kiev",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "SC Dnipro-1",
+          "shortName": "DNI",
+          "city": "Dnipró",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Zorya Luhansk",
+          "shortName": "ZOR",
+          "city": "Lugansk",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFE600"
+        },
+        {
+          "name": "Vorskla Poltava",
+          "shortName": "VOR",
+          "city": "Poltava",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Kryvbas",
+          "shortName": "KRY",
+          "city": "Krivói Rog",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Oleksandriya",
+          "shortName": "OLE",
+          "city": "Oleksandría",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "Polissya Zhytomyr",
+          "shortName": "POL",
+          "city": "Zhytómyr",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFE600"
+        },
+        {
+          "name": "Kolos Kovalivka",
+          "shortName": "KOL",
+          "city": "Kovalivka",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Rukh Lviv",
+          "shortName": "RUK",
+          "city": "Leópolis",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Veres Rivne",
+          "shortName": "VER",
+          "city": "Rivne",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Chornomorets Odesa",
+          "shortName": "CHO",
+          "city": "Odesa",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Obolon Kyiv",
+          "shortName": "OBO",
+          "city": "Kiev",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "LNZ Cherkasy",
+          "shortName": "LNZ",
+          "city": "Cherkasy",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Inhulets",
+          "shortName": "INH",
+          "city": "Petrove",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Livyi Bereh",
+          "shortName": "LIV",
+          "city": "Kiev",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 16,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Allsvenskan",
+      "shortName": "Sweden",
+      "country": "Suecia",
+      "countryCode": "SE",
+      "tier": 1,
+      "leagueStrength": 74,
+      "teams": [
+        {
+          "name": "Malmö FF",
+          "shortName": "MFF",
+          "city": "Malmö",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#009CDB",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "AIK",
+          "shortName": "AIK",
+          "city": "Estocolmo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFE600"
+        },
+        {
+          "name": "Djurgårdens IF",
+          "shortName": "DIF",
+          "city": "Estocolmo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Hammarby IF",
+          "shortName": "HIF",
+          "city": "Estocolmo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "IFK Göteborg",
+          "shortName": "IFG",
+          "city": "Gotemburgo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "IF Elfsborg",
+          "shortName": "ELF",
+          "city": "Borås",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "BK Häcken",
+          "shortName": "HAC",
+          "city": "Gotemburgo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "IFK Norrköping",
+          "shortName": "IFN",
+          "city": "Norrköping",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Kalmar FF",
+          "shortName": "KFF",
+          "city": "Kalmar",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Mjällby AIF",
+          "shortName": "MAI",
+          "city": "Hällevik",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Halmstads BK",
+          "shortName": "HBK",
+          "city": "Halmstad",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "IFK Värnamo",
+          "shortName": "VNM",
+          "city": "Värnamo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "GAIS",
+          "shortName": "GAIS",
+          "city": "Gotemburgo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "IF Brommapojkarna",
+          "shortName": "BP",
+          "city": "Estocolmo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "IK Sirius",
+          "shortName": "SIR",
+          "city": "Uppsala",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFE600"
+        },
+        {
+          "name": "Västerås SK",
+          "shortName": "VSK",
+          "city": "Västerås",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFE600"
+        }
+      ],
+      "teamCount": 16,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Serbian SuperLiga",
+      "shortName": "Serbia",
+      "country": "Serbia",
+      "countryCode": "RS",
+      "tier": 1,
+      "leagueStrength": 72,
+      "teams": [
+        {
+          "name": "Crvena zvezda",
+          "shortName": "CZV",
+          "city": "Belgrado",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Partizan",
+          "shortName": "PAR",
+          "city": "Belgrado",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FK Vojvodina",
+          "shortName": "VOJ",
+          "city": "Novi Sad",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "TSC Bačka Topola",
+          "shortName": "TSC",
+          "city": "Bačka Topola",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFE600"
+        },
+        {
+          "name": "FK Čukarički",
+          "shortName": "CUK",
+          "city": "Belgrado",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Radnički 1923",
+          "shortName": "R23",
+          "city": "Kragujevac",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FK Napredak",
+          "shortName": "NAP",
+          "city": "Kruševac",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Spartak Subotica",
+          "shortName": "SPK",
+          "city": "Subotica",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Mladost Lučani",
+          "shortName": "MLA",
+          "city": "Lučani",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Radnik Surdulica",
+          "shortName": "RAD",
+          "city": "Surdulica",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "FK IMT",
+          "shortName": "IMT",
+          "city": "Belgrado",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Železničar Pančevo",
+          "shortName": "ZEL",
+          "city": "Pančevo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "OFK Beograd",
+          "shortName": "OFK",
+          "city": "Belgrado",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Novi Pazar",
+          "shortName": "NPZ",
+          "city": "Novi Pazar",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Tekstilac",
+          "shortName": "TEK",
+          "city": "Odžaci",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FK Jedinstvo",
+          "shortName": "JED",
+          "city": "Ub",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 16,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Ekstraklasa",
+      "shortName": "Poland",
+      "country": "Polonia",
+      "countryCode": "PL",
+      "tier": 1,
+      "leagueStrength": 74,
+      "teams": [
+        {
+          "name": "Lech Poznań",
+          "shortName": "LEC",
+          "city": "Poznań",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Legia Warszawa",
+          "shortName": "LEG",
+          "city": "Varsovia",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Jagiellonia Białystok",
+          "shortName": "JAG",
+          "city": "Białystok",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFE600"
+        },
+        {
+          "name": "Raków Częstochowa",
+          "shortName": "RAK",
+          "city": "Częstochowa",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "Pogoń Szczecin",
+          "shortName": "POG",
+          "city": "Szczecin",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Górnik Zabrze",
+          "shortName": "GOR",
+          "city": "Zabrze",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Cracovia",
+          "shortName": "CRA",
+          "city": "Cracovia",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Widzew Łódź",
+          "shortName": "WID",
+          "city": "Łódź",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Śląsk Wrocław",
+          "shortName": "SLA",
+          "city": "Breslavia",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Piast Gliwice",
+          "shortName": "PIA",
+          "city": "Gliwice",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "Korona Kielce",
+          "shortName": "KOR",
+          "city": "Kielce",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "Radomiak Radom",
+          "shortName": "RAD",
+          "city": "Radom",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Zagłębie Lubin",
+          "shortName": "ZAG",
+          "city": "Lubin",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#E2001A"
+        },
+        {
+          "name": "GKS Katowice",
+          "shortName": "GKS",
+          "city": "Katowice",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFE600",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "Motor Lublin",
+          "shortName": "MOT",
+          "city": "Lublin",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#003DA5"
+        },
+        {
+          "name": "Stal Mielec",
+          "shortName": "STA",
+          "city": "Mielec",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003DA5",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Lechia Gdańsk",
+          "shortName": "LGD",
+          "city": "Gdańsk",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Puszcza Niepołomice",
+          "shortName": "PUS",
+          "city": "Niepołomice",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008542",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 18,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Eliteserien",
+      "shortName": "Eliteserien",
+      "country": "Noruega",
+      "countryCode": "NO",
+      "tier": 1,
+      "leagueStrength": 73,
+      "teams": [
+        {
+          "name": "Bodø/Glimt",
+          "shortName": "GLT",
+          "city": "Bodø",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Molde FK",
+          "shortName": "MOL",
+          "city": "Molde",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0046AD",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Rosenborg BK",
+          "shortName": "RBK",
+          "city": "Trondheim",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Brann",
+          "shortName": "BRA",
+          "city": "Bergen",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Viking FK",
+          "shortName": "VIK",
+          "city": "Stavanger",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#11397E",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Lillestrøm SK",
+          "shortName": "LSK",
+          "city": "Lillestrøm",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFF00",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Vålerenga",
+          "shortName": "VIF",
+          "city": "Oslo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#13235B",
+          "secondaryColor": "#0E73C1"
+        },
+        {
+          "name": "Strømsgodset",
+          "shortName": "SIF",
+          "city": "Drammen",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0066B3",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Tromsø IL",
+          "shortName": "TIL",
+          "city": "Tromsø",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E2001A",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Sarpsborg 08",
+          "shortName": "S08",
+          "city": "Sarpsborg",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#1B49A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Haugesund",
+          "shortName": "FKH",
+          "city": "Haugesund",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#15366F",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Odd",
+          "shortName": "ODD",
+          "city": "Skien",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "KFUM Oslo",
+          "shortName": "KFU",
+          "city": "Oslo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0E4DA4",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Sandefjord",
+          "shortName": "SAN",
+          "city": "Sandefjord",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#1A6FC4",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 14,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Premier Liga",
+      "shortName": "RPL",
+      "country": "Rusia",
+      "countryCode": "RU",
+      "tier": 1,
+      "leagueStrength": 78,
+      "teams": [
+        {
+          "name": "Zenit",
+          "shortName": "ZEN",
+          "city": "San Petersburgo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0033A0",
+          "secondaryColor": "#87CEEB"
+        },
+        {
+          "name": "Spartak Moscú",
+          "shortName": "SPA",
+          "city": "Moscú",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#C8102E",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "CSKA Moscú",
+          "shortName": "CSK",
+          "city": "Moscú",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#003A70",
+          "secondaryColor": "#C8102E"
+        },
+        {
+          "name": "Lokomotiv Moscú",
+          "shortName": "LOK",
+          "city": "Moscú",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#008C45",
+          "secondaryColor": "#C8102E"
+        },
+        {
+          "name": "Dinamo Moscú",
+          "shortName": "DIN",
+          "city": "Moscú",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#1B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Krasnodar",
+          "shortName": "KRA",
+          "city": "Krasnodar",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#00843D",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Rubin Kazán",
+          "shortName": "RUB",
+          "city": "Kazán",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#9B1B30",
+          "secondaryColor": "#00713C"
+        },
+        {
+          "name": "Rostov",
+          "shortName": "ROS",
+          "city": "Rostov del Don",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#003366"
+        },
+        {
+          "name": "Akhmat Grozny",
+          "shortName": "AKH",
+          "city": "Grozni",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#006C3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Krylia Sovetov",
+          "shortName": "KRY",
+          "city": "Samara",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#1B63B3",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Dinamo Majachkalá",
+          "shortName": "DMK",
+          "city": "Majachkalá",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0E6B3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Orenburg",
+          "shortName": "ORE",
+          "city": "Oremburgo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Pari NN",
+          "shortName": "PNN",
+          "city": "Nizhni Nóvgorod",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#00A1E0",
+          "secondaryColor": "#0A2A5E"
+        },
+        {
+          "name": "Fakel Vorónezh",
+          "shortName": "FAK",
+          "city": "Vorónezh",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#E30613"
+        }
+      ],
+      "teamCount": 14,
+      "status": "OPEN"
+    },
+    {
+      "name": "Nemzeti Bajnokság I",
+      "shortName": "NB I",
+      "country": "Hungría",
+      "countryCode": "HU",
+      "tier": 1,
+      "leagueStrength": 68,
+      "teams": [
+        {
+          "name": "Ferencváros",
+          "shortName": "FER",
+          "city": "Budapest",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Puskás Akadémia",
+          "shortName": "PUS",
+          "city": "Felcsút",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0A2C66",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Fehérvár",
+          "shortName": "FEH",
+          "city": "Székesfehérvár",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#1B3A8C"
+        },
+        {
+          "name": "Újpest",
+          "shortName": "UJP",
+          "city": "Budapest",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#5A2D82",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Debrecen",
+          "shortName": "DVS",
+          "city": "Debrecen",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "MTK Budapest",
+          "shortName": "MTK",
+          "city": "Budapest",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B4DA2",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Paks",
+          "shortName": "PAK",
+          "city": "Paks",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Kecskemét",
+          "shortName": "KEC",
+          "city": "Kecskemét",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#5A2D82",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Diósgyőr",
+          "shortName": "DVT",
+          "city": "Miskolc",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Zalaegerszeg",
+          "shortName": "ZTE",
+          "city": "Zalaegerszeg",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Kisvárda",
+          "shortName": "KIS",
+          "city": "Kisvárda",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B4DA2"
+        },
+        {
+          "name": "Nyíregyháza",
+          "shortName": "NYI",
+          "city": "Nyíregyháza",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Liga I",
+      "shortName": "Liga I",
+      "country": "Rumanía",
+      "countryCode": "RO",
+      "tier": 1,
+      "leagueStrength": 70,
+      "teams": [
+        {
+          "name": "FCSB",
+          "shortName": "FCS",
+          "city": "Bucarest",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#0B2D6E"
+        },
+        {
+          "name": "CFR Cluj",
+          "shortName": "CFR",
+          "city": "Cluj-Napoca",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A0010",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Universitatea Craiova",
+          "shortName": "UCR",
+          "city": "Craiova",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Rapid Bucureşti",
+          "shortName": "RAP",
+          "city": "Bucarest",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A2E8E",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Universitatea Cluj",
+          "shortName": "UCL",
+          "city": "Cluj-Napoca",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Sepsi OSK",
+          "shortName": "SEP",
+          "city": "Sfântu Gheorghe",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Farul Constanţa",
+          "shortName": "FAR",
+          "city": "Constanza",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Petrolul Ploieşti",
+          "shortName": "PET",
+          "city": "Ploieşti",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B2D6E"
+        },
+        {
+          "name": "UTA Arad",
+          "shortName": "UTA",
+          "city": "Arad",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Botoşani",
+          "shortName": "BOT",
+          "city": "Botoşani",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Oţelul Galaţi",
+          "shortName": "OTE",
+          "city": "Galaţi",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Hermannstadt",
+          "shortName": "HER",
+          "city": "Sibiu",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Ligat ha'Al",
+      "shortName": "Ligat ha'Al",
+      "country": "Israel",
+      "countryCode": "IL",
+      "tier": 1,
+      "leagueStrength": 69,
+      "teams": [
+        {
+          "name": "Maccabi Tel Aviv",
+          "shortName": "MTA",
+          "city": "Tel Aviv",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Maccabi Haifa",
+          "shortName": "MHA",
+          "city": "Haifa",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Hapoel Beer Sheva",
+          "shortName": "HBS",
+          "city": "Beerseba",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Beitar Jerusalem",
+          "shortName": "BEI",
+          "city": "Jerusalén",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Hapoel Tel Aviv",
+          "shortName": "HTA",
+          "city": "Tel Aviv",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Maccabi Netanya",
+          "shortName": "MNE",
+          "city": "Netanya",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Hapoel Haifa",
+          "shortName": "HHA",
+          "city": "Haifa",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Bnei Sakhnin",
+          "shortName": "BSA",
+          "city": "Sakhnin",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Ashdod",
+          "shortName": "ASH",
+          "city": "Asdod",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Maccabi Petah Tikva",
+          "shortName": "MPT",
+          "city": "Petaj Tikva",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Hapoel Jerusalem",
+          "shortName": "HJE",
+          "city": "Jerusalén",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Ironi Kiryat Shmona",
+          "shortName": "KSH",
+          "city": "Kiryat Shmoná",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "First Division",
+      "shortName": "Cyta",
+      "country": "Chipre",
+      "countryCode": "CY",
+      "tier": 1,
+      "leagueStrength": 66,
+      "teams": [
+        {
+          "name": "APOEL",
+          "shortName": "APO",
+          "city": "Nicosia",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Omonia",
+          "shortName": "OMO",
+          "city": "Nicosia",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "AEK Larnaca",
+          "shortName": "AEK",
+          "city": "Larnaca",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Apollon Limassol",
+          "shortName": "APL",
+          "city": "Limasol",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Anorthosis",
+          "shortName": "ANO",
+          "city": "Famagusta",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "AEL Limassol",
+          "shortName": "AEL",
+          "city": "Limasol",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Pafos FC",
+          "shortName": "PAF",
+          "city": "Pafos",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Aris Limassol",
+          "shortName": "ARI",
+          "city": "Limasol",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Omonia Aradippou",
+          "shortName": "ARA",
+          "city": "Aradippou",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Nea Salamis",
+          "shortName": "NSA",
+          "city": "Famagusta",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Doxa Katokopias",
+          "shortName": "DOX",
+          "city": "Katokopia",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Karmiotissa",
+          "shortName": "KAR",
+          "city": "Pano Polemidia",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Parva Liga",
+      "shortName": "Parva Liga",
+      "country": "Bulgaria",
+      "countryCode": "BG",
+      "tier": 1,
+      "leagueStrength": 66,
+      "teams": [
+        {
+          "name": "Ludogorets",
+          "shortName": "LUD",
+          "city": "Razgrad",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Levski Sofia",
+          "shortName": "LEV",
+          "city": "Sofía",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "CSKA Sofia",
+          "shortName": "CSS",
+          "city": "Sofía",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Lokomotiv Plovdiv",
+          "shortName": "LOP",
+          "city": "Plovdiv",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#0B57A4"
+        },
+        {
+          "name": "Botev Plovdiv",
+          "shortName": "BOP",
+          "city": "Plovdiv",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Cherno More",
+          "shortName": "CHM",
+          "city": "Varna",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Slavia Sofia",
+          "shortName": "SLA",
+          "city": "Sofía",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Arda",
+          "shortName": "ARD",
+          "city": "Kardzhali",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Beroe",
+          "shortName": "BER",
+          "city": "Stara Zagora",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Spartak Varna",
+          "shortName": "SPV",
+          "city": "Varna",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Septemvri Sofia",
+          "shortName": "SEP",
+          "city": "Sofía",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Hebar",
+          "shortName": "HEB",
+          "city": "Pazardzhik",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Fortuna Liga",
+      "shortName": "Fortuna Liga",
+      "country": "Eslovaquia",
+      "countryCode": "SK",
+      "tier": 1,
+      "leagueStrength": 66,
+      "teams": [
+        {
+          "name": "Slovan Bratislava",
+          "shortName": "SLB",
+          "city": "Bratislava",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Spartak Trnava",
+          "shortName": "SPT",
+          "city": "Trnava",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Žilina",
+          "shortName": "ZIL",
+          "city": "Žilina",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B7A3B"
+        },
+        {
+          "name": "Dunajská Streda",
+          "shortName": "DAC",
+          "city": "Dunajská Streda",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Ružomberok",
+          "shortName": "RUZ",
+          "city": "Ružomberok",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Trenčín",
+          "shortName": "TRE",
+          "city": "Trenčín",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Podbrezová",
+          "shortName": "POD",
+          "city": "Podbrezová",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Michalovce",
+          "shortName": "MIC",
+          "city": "Michalovce",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Košice",
+          "shortName": "KOS",
+          "city": "Košice",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Skalica",
+          "shortName": "SKA",
+          "city": "Skalica",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Komárno",
+          "shortName": "KOM",
+          "city": "Komárno",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#0B7A3B"
+        },
+        {
+          "name": "Zlaté Moravce",
+          "shortName": "ZLM",
+          "city": "Zlaté Moravce",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "PrvaLiga",
+      "shortName": "PrvaLiga",
+      "country": "Eslovenia",
+      "countryCode": "SI",
+      "tier": 1,
+      "leagueStrength": 65,
+      "teams": [
+        {
+          "name": "Olimpija Ljubljana",
+          "shortName": "OLI",
+          "city": "Liubliana",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Maribor",
+          "shortName": "MAR",
+          "city": "Maribor",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#5A2D82",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Celje",
+          "shortName": "CEL",
+          "city": "Celje",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B57A4"
+        },
+        {
+          "name": "Mura",
+          "shortName": "MUR",
+          "city": "Murska Sobota",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Domžale",
+          "shortName": "DOM",
+          "city": "Domžale",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B7A3B"
+        },
+        {
+          "name": "Koper",
+          "shortName": "KOP",
+          "city": "Koper",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Bravo",
+          "shortName": "BRV",
+          "city": "Liubliana",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Radomlje",
+          "shortName": "RAD",
+          "city": "Radomlje",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Aluminij",
+          "shortName": "ALU",
+          "city": "Kidričevo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Nafta 1903",
+          "shortName": "NAF",
+          "city": "Lendava",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFD200"
+        }
+      ],
+      "teamCount": 10,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Veikkausliiga",
+      "shortName": "Veikkausliiga",
+      "country": "Finlandia",
+      "countryCode": "FI",
+      "tier": 1,
+      "leagueStrength": 63,
+      "teams": [
+        {
+          "name": "HJK Helsinki",
+          "shortName": "HJK",
+          "city": "Helsinki",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "KuPS",
+          "shortName": "KUP",
+          "city": "Kuopio",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Inter Turku",
+          "shortName": "INT",
+          "city": "Turku",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "SJK",
+          "shortName": "SJK",
+          "city": "Seinäjoki",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Ilves",
+          "shortName": "ILV",
+          "city": "Tampere",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Honka",
+          "shortName": "HON",
+          "city": "Espoo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "VPS",
+          "shortName": "VPS",
+          "city": "Vaasa",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Haka",
+          "shortName": "HAK",
+          "city": "Valkeakoski",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "AC Oulu",
+          "shortName": "ACO",
+          "city": "Oulu",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Gnistan",
+          "shortName": "GNI",
+          "city": "Helsinki",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Mariehamn",
+          "shortName": "IFK",
+          "city": "Mariehamn",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Lahti",
+          "shortName": "LAH",
+          "city": "Lahti",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Brasileirão Série A",
+      "shortName": "Brasileirão",
+      "country": "Brasil",
+      "countryCode": "BR",
+      "tier": 1,
+      "leagueStrength": 85,
+      "teams": [
+        {
+          "name": "Flamengo",
+          "shortName": "FLA",
+          "city": "Río de Janeiro",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#C8102E",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Palmeiras",
+          "shortName": "PAL",
+          "city": "São Paulo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#006437",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Atlético Mineiro",
+          "shortName": "CAM",
+          "city": "Belo Horizonte",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "São Paulo",
+          "shortName": "SAO",
+          "city": "São Paulo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FE0000",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Fluminense",
+          "shortName": "FLU",
+          "city": "Río de Janeiro",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A0026",
+          "secondaryColor": "#0B7A3B"
+        },
+        {
+          "name": "Internacional",
+          "shortName": "INT",
+          "city": "Porto Alegre",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Grêmio",
+          "shortName": "GRE",
+          "city": "Porto Alegre",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0099D8",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Corinthians",
+          "shortName": "COR",
+          "city": "São Paulo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Botafogo",
+          "shortName": "BOT",
+          "city": "Río de Janeiro",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Santos",
+          "shortName": "SAN",
+          "city": "Santos",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Athletico Paranaense",
+          "shortName": "CAP",
+          "city": "Curitiba",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Cruzeiro",
+          "shortName": "CRU",
+          "city": "Belo Horizonte",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Vasco da Gama",
+          "shortName": "VAS",
+          "city": "Río de Janeiro",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Bahia",
+          "shortName": "BAH",
+          "city": "Salvador",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Fortaleza",
+          "shortName": "FOR",
+          "city": "Fortaleza",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Vitória",
+          "shortName": "VIT",
+          "city": "Salvador",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        }
+      ],
+      "teamCount": 16,
+      "status": "OPEN"
+    },
+    {
+      "name": "Liga Profesional",
+      "shortName": "Liga Profesional",
+      "country": "Argentina",
+      "countryCode": "AR",
+      "tier": 1,
+      "leagueStrength": 83,
+      "teams": [
+        {
+          "name": "River Plate",
+          "shortName": "RIV",
+          "city": "Buenos Aires",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Boca Juniors",
+          "shortName": "BOC",
+          "city": "Buenos Aires",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Racing Club",
+          "shortName": "RAC",
+          "city": "Avellaneda",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#6CACE4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Independiente",
+          "shortName": "IND",
+          "city": "Avellaneda",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "San Lorenzo",
+          "shortName": "SLO",
+          "city": "Buenos Aires",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Estudiantes",
+          "shortName": "EST",
+          "city": "La Plata",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Vélez Sarsfield",
+          "shortName": "VEL",
+          "city": "Buenos Aires",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Talleres",
+          "shortName": "TAL",
+          "city": "Córdoba",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Lanús",
+          "shortName": "LAN",
+          "city": "Lanús",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A0026",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Argentinos Juniors",
+          "shortName": "ARG",
+          "city": "Buenos Aires",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Defensa y Justicia",
+          "shortName": "DYJ",
+          "city": "Florencio Varela",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Rosario Central",
+          "shortName": "ROS",
+          "city": "Rosario",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Newell's Old Boys",
+          "shortName": "NOB",
+          "city": "Rosario",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Huracán",
+          "shortName": "HUR",
+          "city": "Buenos Aires",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Banfield",
+          "shortName": "BAN",
+          "city": "Banfield",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Godoy Cruz",
+          "shortName": "GOD",
+          "city": "Mendoza",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 16,
+      "status": "OPEN"
+    },
+    {
+      "name": "Categoría Primera A",
+      "shortName": "Primera A",
+      "country": "Colombia",
+      "countryCode": "CO",
+      "tier": 1,
+      "leagueStrength": 74,
+      "teams": [
+        {
+          "name": "Atlético Nacional",
+          "shortName": "NAC",
+          "city": "Medellín",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Millonarios",
+          "shortName": "MIL",
+          "city": "Bogotá",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "América de Cali",
+          "shortName": "AME",
+          "city": "Cali",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Deportivo Cali",
+          "shortName": "DCA",
+          "city": "Cali",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Junior",
+          "shortName": "JUN",
+          "city": "Barranquilla",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Independiente Medellín",
+          "shortName": "DIM",
+          "city": "Medellín",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Santa Fe",
+          "shortName": "SFE",
+          "city": "Bogotá",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Deportes Tolima",
+          "shortName": "TOL",
+          "city": "Ibagué",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Once Caldas",
+          "shortName": "ONC",
+          "city": "Manizales",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#0B7A3B"
+        },
+        {
+          "name": "Atlético Bucaramanga",
+          "shortName": "BUC",
+          "city": "Bucaramanga",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B7A3B"
+        },
+        {
+          "name": "Pereira",
+          "shortName": "PER",
+          "city": "Pereira",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "La Equidad",
+          "shortName": "EQU",
+          "city": "Bogotá",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Águilas Doradas",
+          "shortName": "AGU",
+          "city": "Rionegro",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Envigado",
+          "shortName": "ENV",
+          "city": "Envigado",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FF6600",
+          "secondaryColor": "#0B3A8C"
+        }
+      ],
+      "teamCount": 14,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Primera División",
+      "shortName": "Primera",
+      "country": "Chile",
+      "countryCode": "CL",
+      "tier": 1,
+      "leagueStrength": 71,
+      "teams": [
+        {
+          "name": "Colo-Colo",
+          "shortName": "COL",
+          "city": "Santiago",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Universidad de Chile",
+          "shortName": "UCH",
+          "city": "Santiago",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Universidad Católica",
+          "shortName": "UCA",
+          "city": "Santiago",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Cobreloa",
+          "shortName": "COB",
+          "city": "Calama",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FF6600",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Unión Española",
+          "shortName": "UES",
+          "city": "Santiago",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Huachipato",
+          "shortName": "HUA",
+          "city": "Talcahuano",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Palestino",
+          "shortName": "PAL",
+          "city": "Santiago",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "O'Higgins",
+          "shortName": "OHI",
+          "city": "Rancagua",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#6CACE4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Audax Italiano",
+          "shortName": "AUD",
+          "city": "Santiago",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Coquimbo Unido",
+          "shortName": "COQ",
+          "city": "Coquimbo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Everton",
+          "shortName": "EVE",
+          "city": "Viña del Mar",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Ñublense",
+          "shortName": "NUB",
+          "city": "Chillán",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#0B3A8C"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Primera División",
+      "shortName": "Primera",
+      "country": "Uruguay",
+      "countryCode": "UY",
+      "tier": 1,
+      "leagueStrength": 72,
+      "teams": [
+        {
+          "name": "Peñarol",
+          "shortName": "PEN",
+          "city": "Montevideo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Nacional",
+          "shortName": "NAC",
+          "city": "Montevideo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Liverpool",
+          "shortName": "LIV",
+          "city": "Montevideo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Defensor Sporting",
+          "shortName": "DEF",
+          "city": "Montevideo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#5A2D82",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Danubio",
+          "shortName": "DAN",
+          "city": "Montevideo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Montevideo City Torque",
+          "shortName": "TOR",
+          "city": "Montevideo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#6CACE4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Boston River",
+          "shortName": "BOS",
+          "city": "Montevideo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Cerro Largo",
+          "shortName": "CER",
+          "city": "Melo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Racing",
+          "shortName": "RAC",
+          "city": "Montevideo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "River Plate",
+          "shortName": "RIV",
+          "city": "Montevideo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Plaza Colonia",
+          "shortName": "PLA",
+          "city": "Colonia",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Wanderers",
+          "shortName": "WAN",
+          "city": "Montevideo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "LigaPro Serie A",
+      "shortName": "LigaPro",
+      "country": "Ecuador",
+      "countryCode": "EC",
+      "tier": 1,
+      "leagueStrength": 70,
+      "teams": [
+        {
+          "name": "Independiente del Valle",
+          "shortName": "IDV",
+          "city": "Sangolquí",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Barcelona SC",
+          "shortName": "BAR",
+          "city": "Guayaquil",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Emelec",
+          "shortName": "EME",
+          "city": "Guayaquil",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "LDU Quito",
+          "shortName": "LDU",
+          "city": "Quito",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Aucas",
+          "shortName": "AUC",
+          "city": "Quito",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "El Nacional",
+          "shortName": "NAC",
+          "city": "Quito",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Deportivo Cuenca",
+          "shortName": "CUE",
+          "city": "Cuenca",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Universidad Católica",
+          "shortName": "UCA",
+          "city": "Quito",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Orense",
+          "shortName": "ORE",
+          "city": "Machala",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Delfín",
+          "shortName": "DEL",
+          "city": "Manta",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Macará",
+          "shortName": "MAC",
+          "city": "Ambato",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Técnico Universitario",
+          "shortName": "TEC",
+          "city": "Ambato",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Major League Soccer",
+      "shortName": "MLS",
+      "country": "Estados Unidos",
+      "countryCode": "US",
+      "tier": 1,
+      "leagueStrength": 75,
+      "teams": [
+        {
+          "name": "Inter Miami",
+          "shortName": "MIA",
+          "city": "Miami",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#F7B5CD",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "LAFC",
+          "shortName": "LFC",
+          "city": "Los Ángeles",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#C39E6D"
+        },
+        {
+          "name": "LA Galaxy",
+          "shortName": "LAG",
+          "city": "Los Ángeles",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Seattle Sounders",
+          "shortName": "SEA",
+          "city": "Seattle",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#5A8F2E",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Columbus Crew",
+          "shortName": "CLB",
+          "city": "Columbus",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Cincinnati",
+          "shortName": "CIN",
+          "city": "Cincinnati",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FF6600",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Philadelphia Union",
+          "shortName": "PHI",
+          "city": "Filadelfia",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B2D44",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Atlanta United",
+          "shortName": "ATL",
+          "city": "Atlanta",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#80000C",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "New York City",
+          "shortName": "NYC",
+          "city": "Nueva York",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#6CACE4",
+          "secondaryColor": "#0B2D6E"
+        },
+        {
+          "name": "New York Red Bulls",
+          "shortName": "RBNY",
+          "city": "Harrison",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#0B2D6E"
+        },
+        {
+          "name": "Portland Timbers",
+          "shortName": "POR",
+          "city": "Portland",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B4D2C",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Real Salt Lake",
+          "shortName": "RSL",
+          "city": "Salt Lake City",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#9B1B30",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Austin FC",
+          "shortName": "AUS",
+          "city": "Austin",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#00B140",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "FC Dallas",
+          "shortName": "DAL",
+          "city": "Dallas",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Nashville SC",
+          "shortName": "NSH",
+          "city": "Nashville",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B2D6E"
+        },
+        {
+          "name": "Orlando City",
+          "shortName": "ORL",
+          "city": "Orlando",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#5A2D82",
+          "secondaryColor": "#FFD200"
+        }
+      ],
+      "teamCount": 16,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Liga MX",
+      "shortName": "Liga MX",
+      "country": "México",
+      "countryCode": "MX",
+      "tier": 1,
+      "leagueStrength": 78,
+      "teams": [
+        {
+          "name": "América",
+          "shortName": "AME",
+          "city": "Ciudad de México",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B2D6E"
+        },
+        {
+          "name": "Guadalajara",
+          "shortName": "CHI",
+          "city": "Guadalajara",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Cruz Azul",
+          "shortName": "CAZ",
+          "city": "Ciudad de México",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Tigres UANL",
+          "shortName": "TIG",
+          "city": "Monterrey",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B2D6E"
+        },
+        {
+          "name": "Monterrey",
+          "shortName": "MTY",
+          "city": "Monterrey",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Pumas UNAM",
+          "shortName": "PUM",
+          "city": "Ciudad de México",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B2D6E",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Toluca",
+          "shortName": "TOL",
+          "city": "Toluca",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Santos Laguna",
+          "shortName": "SAN",
+          "city": "Torreón",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Pachuca",
+          "shortName": "PAC",
+          "city": "Pachuca",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "León",
+          "shortName": "LEO",
+          "city": "León",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Atlas",
+          "shortName": "ATL",
+          "city": "Guadalajara",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Tijuana",
+          "shortName": "TIJ",
+          "city": "Tijuana",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Necaxa",
+          "shortName": "NEC",
+          "city": "Aguascalientes",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Puebla",
+          "shortName": "PUE",
+          "city": "Puebla",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Mazatlán",
+          "shortName": "MAZ",
+          "city": "Mazatlán",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#5A2D82",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Querétaro",
+          "shortName": "QRO",
+          "city": "Querétaro",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B2D6E",
+          "secondaryColor": "#000000"
+        }
+      ],
+      "teamCount": 16,
+      "status": "OPEN"
+    },
+    {
+      "name": "J1 League",
+      "shortName": "J1 League",
+      "country": "Japón",
+      "countryCode": "JP",
+      "tier": 1,
+      "leagueStrength": 76,
+      "teams": [
+        {
+          "name": "Vissel Kobe",
+          "shortName": "KOB",
+          "city": "Kobe",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A0026",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Yokohama F. Marinos",
+          "shortName": "YFM",
+          "city": "Yokohama",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Sanfrecce Hiroshima",
+          "shortName": "HIR",
+          "city": "Hiroshima",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#5A2D82",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Urawa Red Diamonds",
+          "shortName": "URA",
+          "city": "Saitama",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Kawasaki Frontale",
+          "shortName": "KAW",
+          "city": "Kawasaki",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Kashima Antlers",
+          "shortName": "KAS",
+          "city": "Kashima",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A0026",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Gamba Osaka",
+          "shortName": "GAM",
+          "city": "Osaka",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Cerezo Osaka",
+          "shortName": "CER",
+          "city": "Osaka",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E5009E",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "FC Tokyo",
+          "shortName": "FCT",
+          "city": "Tokio",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#0B2D6E"
+        },
+        {
+          "name": "Nagoya Grampus",
+          "shortName": "NAG",
+          "city": "Nagoya",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Kashiwa Reysol",
+          "shortName": "KAR",
+          "city": "Kashiwa",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Avispa Fukuoka",
+          "shortName": "AVI",
+          "city": "Fukuoka",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B2D6E",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Júbilo Iwata",
+          "shortName": "JUB",
+          "city": "Iwata",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0099D8",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Albirex Niigata",
+          "shortName": "ALB",
+          "city": "Niigata",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FF6600",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Consadole Sapporo",
+          "shortName": "SAP",
+          "city": "Sapporo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Kyoto Sanga",
+          "shortName": "KYO",
+          "city": "Kioto",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#5A2D82",
+          "secondaryColor": "#E30613"
+        }
+      ],
+      "teamCount": 16,
+      "status": "OPEN"
+    },
+    {
+      "name": "K League 1",
+      "shortName": "K League 1",
+      "country": "Corea del Sur",
+      "countryCode": "KR",
+      "tier": 1,
+      "leagueStrength": 73,
+      "teams": [
+        {
+          "name": "Ulsan HD",
+          "shortName": "ULS",
+          "city": "Ulsan",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Jeonbuk Hyundai",
+          "shortName": "JEO",
+          "city": "Jeonju",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Pohang Steelers",
+          "shortName": "POH",
+          "city": "Pohang",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A0026",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "FC Seoul",
+          "shortName": "SEO",
+          "city": "Seúl",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Gimcheon Sangmu",
+          "shortName": "GIM",
+          "city": "Gimcheon",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Suwon FC",
+          "shortName": "SUW",
+          "city": "Suwon",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Gwangju",
+          "shortName": "GWA",
+          "city": "Gwangju",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Daejeon Hana",
+          "shortName": "DAE",
+          "city": "Daejeon",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#5A2D82",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Gangwon",
+          "shortName": "GAN",
+          "city": "Chuncheon",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FF6600",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Daegu",
+          "shortName": "DAG",
+          "city": "Daegu",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#87CEEB",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Incheon United",
+          "shortName": "INC",
+          "city": "Incheon",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Jeju United",
+          "shortName": "JEJ",
+          "city": "Jeju",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FF6600",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Pro League",
+      "shortName": "Saudi Pro",
+      "country": "Arabia Saudí",
+      "countryCode": "SA",
+      "tier": 1,
+      "leagueStrength": 79,
+      "teams": [
+        {
+          "name": "Al-Hilal",
+          "shortName": "HIL",
+          "city": "Riad",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Al-Nassr",
+          "shortName": "NAS",
+          "city": "Riad",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Al-Ittihad",
+          "shortName": "ITT",
+          "city": "Yeda",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Al-Ahli",
+          "shortName": "AHL",
+          "city": "Yeda",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Al-Ettifaq",
+          "shortName": "ETT",
+          "city": "Dammam",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Al-Shabab",
+          "shortName": "SHA",
+          "city": "Riad",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Al-Taawoun",
+          "shortName": "TAA",
+          "city": "Buraida",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FF6600",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Al-Fateh",
+          "shortName": "FAT",
+          "city": "Al-Ahsa",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Al-Fayha",
+          "shortName": "FAY",
+          "city": "Al-Majma'ah",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Al-Khaleej",
+          "shortName": "KHA",
+          "city": "Saihat",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Al-Riyadh",
+          "shortName": "RIY",
+          "city": "Riad",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Damac",
+          "shortName": "DAM",
+          "city": "Khamis Mushait",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Al-Wehda",
+          "shortName": "WEH",
+          "city": "La Meca",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Al-Raed",
+          "shortName": "RAE",
+          "city": "Buraida",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        }
+      ],
+      "teamCount": 14,
+      "status": "OPEN"
+    },
+    {
+      "name": "Super League",
+      "shortName": "CSL",
+      "country": "China",
+      "countryCode": "CN",
+      "tier": 1,
+      "leagueStrength": 70,
+      "teams": [
+        {
+          "name": "Shanghai Port",
+          "shortName": "SHP",
+          "city": "Shanghái",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Shanghai Shenhua",
+          "shortName": "SHE",
+          "city": "Shanghái",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Shandong Taishan",
+          "shortName": "SHA",
+          "city": "Jinan",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Beijing Guoan",
+          "shortName": "BGA",
+          "city": "Pekín",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Chengdu Rongcheng",
+          "shortName": "CHE",
+          "city": "Chengdú",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Wuhan Three Towns",
+          "shortName": "WUH",
+          "city": "Wuhan",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Zhejiang",
+          "shortName": "ZHE",
+          "city": "Hangzhou",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Tianjin Jinmen Tiger",
+          "shortName": "TIA",
+          "city": "Tianjin",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Henan",
+          "shortName": "HEN",
+          "city": "Zhengzhou",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Qingdao Hainiu",
+          "shortName": "QIN",
+          "city": "Qingdao",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Changchun Yatai",
+          "shortName": "CHA",
+          "city": "Changchun",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Meizhou Hakka",
+          "shortName": "MEI",
+          "city": "Meizhou",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B7A3B"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Stars League",
+      "shortName": "QSL",
+      "country": "Catar",
+      "countryCode": "QA",
+      "tier": 1,
+      "leagueStrength": 67,
+      "teams": [
+        {
+          "name": "Al-Sadd",
+          "shortName": "SAD",
+          "city": "Doha",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A0026",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Al-Duhail",
+          "shortName": "DUH",
+          "city": "Doha",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A0026",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Al-Rayyan",
+          "shortName": "RAY",
+          "city": "Al Rayyan",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Al-Gharafa",
+          "shortName": "GHA",
+          "city": "Doha",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Al-Arabi",
+          "shortName": "ARB",
+          "city": "Doha",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Qatar SC",
+          "shortName": "QSC",
+          "city": "Doha",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A0026",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Umm Salal",
+          "shortName": "UMM",
+          "city": "Umm Salal",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FF6600",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Al-Wakrah",
+          "shortName": "WAK",
+          "city": "Al Wakrah",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Al-Shamal",
+          "shortName": "SHM",
+          "city": "Madinat ash Shamal",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Al-Khor",
+          "shortName": "KHO",
+          "city": "Al Khor",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Al-Ahli",
+          "shortName": "AHL",
+          "city": "Doha",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Al-Markhiya",
+          "shortName": "MAR",
+          "city": "Doha",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "A-League Men",
+      "shortName": "A-League",
+      "country": "Australia",
+      "countryCode": "AU",
+      "tier": 1,
+      "leagueStrength": 70,
+      "teams": [
+        {
+          "name": "Melbourne City",
+          "shortName": "MCY",
+          "city": "Melbourne",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#6CACE4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Melbourne Victory",
+          "shortName": "MVC",
+          "city": "Melbourne",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B2D6E",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Sydney FC",
+          "shortName": "SYD",
+          "city": "Sídney",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#87CEEB"
+        },
+        {
+          "name": "Western Sydney Wanderers",
+          "shortName": "WSW",
+          "city": "Sídney",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Central Coast Mariners",
+          "shortName": "CCM",
+          "city": "Gosford",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B2D6E"
+        },
+        {
+          "name": "Adelaide United",
+          "shortName": "ADE",
+          "city": "Adelaida",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#0B2D6E"
+        },
+        {
+          "name": "Brisbane Roar",
+          "shortName": "BRI",
+          "city": "Brisbane",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FF6600",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Macarthur FC",
+          "shortName": "MAC",
+          "city": "Sídney",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#0B7A3B"
+        },
+        {
+          "name": "Wellington Phoenix",
+          "shortName": "WEL",
+          "city": "Wellington",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFF00",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Perth Glory",
+          "shortName": "PER",
+          "city": "Perth",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#5A2D82",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Newcastle Jets",
+          "shortName": "NEW",
+          "city": "Newcastle",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Western United",
+          "shortName": "WUN",
+          "city": "Melbourne",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#000000"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Premier League",
+      "shortName": "Egyptian PL",
+      "country": "Egipto",
+      "countryCode": "EG",
+      "tier": 1,
+      "leagueStrength": 71,
+      "teams": [
+        {
+          "name": "Al Ahly",
+          "shortName": "AHL",
+          "city": "El Cairo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Zamalek",
+          "shortName": "ZAM",
+          "city": "El Cairo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFFFFF",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Pyramids",
+          "shortName": "PYR",
+          "city": "El Cairo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Al Masry",
+          "shortName": "MAS",
+          "city": "Port Said",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Ismaily",
+          "shortName": "ISM",
+          "city": "Ismailía",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Future FC",
+          "shortName": "FUT",
+          "city": "El Cairo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Ceramica Cleopatra",
+          "shortName": "CER",
+          "city": "El Cairo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A0026",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "ENPPI",
+          "shortName": "ENP",
+          "city": "El Cairo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Smouha",
+          "shortName": "SMO",
+          "city": "Alejandría",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Al Ittihad",
+          "shortName": "ITT",
+          "city": "Alejandría",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "National Bank",
+          "shortName": "NBE",
+          "city": "El Cairo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Pharco",
+          "shortName": "PHA",
+          "city": "Alejandría",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Botola Pro",
+      "shortName": "Botola",
+      "country": "Marruecos",
+      "countryCode": "MA",
+      "tier": 1,
+      "leagueStrength": 70,
+      "teams": [
+        {
+          "name": "Raja Casablanca",
+          "shortName": "RAJ",
+          "city": "Casablanca",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Wydad Casablanca",
+          "shortName": "WAC",
+          "city": "Casablanca",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "AS FAR",
+          "shortName": "FAR",
+          "city": "Rabat",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "RS Berkane",
+          "shortName": "RSB",
+          "city": "Berkane",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FF6600",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "FUS Rabat",
+          "shortName": "FUS",
+          "city": "Rabat",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Maghreb Fez",
+          "shortName": "MAS",
+          "city": "Fez",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A0026",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Hassania Agadir",
+          "shortName": "HUS",
+          "city": "Agadir",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Olympic Safi",
+          "shortName": "OCS",
+          "city": "Safí",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Moghreb Tétouan",
+          "shortName": "MAT",
+          "city": "Tetuán",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Difaa El Jadidi",
+          "shortName": "DHJ",
+          "city": "El Jadida",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Renaissance Zemamra",
+          "shortName": "RBZ",
+          "city": "Zemamra",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Union Touarga",
+          "shortName": "UTS",
+          "city": "Rabat",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Premiership",
+      "shortName": "PSL",
+      "country": "Sudáfrica",
+      "countryCode": "ZA",
+      "tier": 1,
+      "leagueStrength": 69,
+      "teams": [
+        {
+          "name": "Mamelodi Sundowns",
+          "shortName": "SUN",
+          "city": "Pretoria",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Orlando Pirates",
+          "shortName": "ORL",
+          "city": "Johannesburgo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Kaizer Chiefs",
+          "shortName": "KAI",
+          "city": "Johannesburgo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "SuperSport United",
+          "shortName": "SSU",
+          "city": "Pretoria",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Stellenbosch",
+          "shortName": "STE",
+          "city": "Stellenbosch",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A0026",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Sekhukhune United",
+          "shortName": "SEK",
+          "city": "Polokwane",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Cape Town City",
+          "shortName": "CPT",
+          "city": "Ciudad del Cabo",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "AmaZulu",
+          "shortName": "AMA",
+          "city": "Durban",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Polokwane City",
+          "shortName": "POL",
+          "city": "Polokwane",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Golden Arrows",
+          "shortName": "ARR",
+          "city": "Durban",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B7A3B"
+        },
+        {
+          "name": "Chippa United",
+          "shortName": "CHI",
+          "city": "Gqeberha",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Royal AM",
+          "shortName": "RAM",
+          "city": "Durban",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFD200"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Ligue 1",
+      "shortName": "Ligue 1 DZ",
+      "country": "Argelia",
+      "countryCode": "DZ",
+      "tier": 1,
+      "leagueStrength": 68,
+      "teams": [
+        {
+          "name": "CR Belouizdad",
+          "shortName": "CRB",
+          "city": "Argel",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "ES Sétif",
+          "shortName": "ESS",
+          "city": "Sétif",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "MC Alger",
+          "shortName": "MCA",
+          "city": "Argel",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "USM Alger",
+          "shortName": "USM",
+          "city": "Argel",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "JS Kabylie",
+          "shortName": "JSK",
+          "city": "Tizi Ouzou",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B7A3B"
+        },
+        {
+          "name": "CS Constantine",
+          "shortName": "CSC",
+          "city": "Constantina",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Paradou AC",
+          "shortName": "PAC",
+          "city": "Argel",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "MC Oran",
+          "shortName": "MCO",
+          "city": "Orán",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "JS Saoura",
+          "shortName": "JSS",
+          "city": "Béchar",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "USM Khenchela",
+          "shortName": "USMK",
+          "city": "Khenchela",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "ASO Chlef",
+          "shortName": "ASO",
+          "city": "Chlef",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Olympique Akbou",
+          "shortName": "OA",
+          "city": "Akbou",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Ligue Professionnelle 1",
+      "shortName": "Ligue 1 TN",
+      "country": "Túnez",
+      "countryCode": "TN",
+      "tier": 1,
+      "leagueStrength": 68,
+      "teams": [
+        {
+          "name": "Espérance de Tunis",
+          "shortName": "EST",
+          "city": "Túnez",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Étoile du Sahel",
+          "shortName": "ESS",
+          "city": "Susa",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Club Africain",
+          "shortName": "CA",
+          "city": "Túnez",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "CS Sfaxien",
+          "shortName": "CSS",
+          "city": "Sfax",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#000000",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "US Monastir",
+          "shortName": "USM",
+          "city": "Monastir",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Stade Tunisien",
+          "shortName": "ST",
+          "city": "Túnez",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "CA Bizertin",
+          "shortName": "CAB",
+          "city": "Bizerta",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "US Ben Guerdane",
+          "shortName": "USBG",
+          "city": "Ben Gardane",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Olympique Béja",
+          "shortName": "OB",
+          "city": "Béja",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FF6600",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "AS Marsa",
+          "shortName": "ASM",
+          "city": "La Marsa",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "JS Kairouan",
+          "shortName": "JSK",
+          "city": "Kairuán",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "ES Métlaoui",
+          "shortName": "ESM",
+          "city": "Métlaoui",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFFFFF"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    },
+    {
+      "name": "Premier League",
+      "shortName": "Ghana PL",
+      "country": "Ghana",
+      "countryCode": "GH",
+      "tier": 1,
+      "leagueStrength": 65,
+      "teams": [
+        {
+          "name": "Asante Kotoko",
+          "shortName": "KOT",
+          "city": "Kumasi",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#E30613",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Hearts of Oak",
+          "shortName": "HOO",
+          "city": "Acra",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#7A0026",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Aduana Stars",
+          "shortName": "ADU",
+          "city": "Dormaa Ahenkro",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#E30613"
+        },
+        {
+          "name": "Medeama",
+          "shortName": "MED",
+          "city": "Tarkwa",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B7A3B"
+        },
+        {
+          "name": "Bechem United",
+          "shortName": "BEC",
+          "city": "Bechem",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Nations FC",
+          "shortName": "NAT",
+          "city": "Kumasi",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Bibiani Gold Stars",
+          "shortName": "GOL",
+          "city": "Bibiani",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#000000"
+        },
+        {
+          "name": "Karela United",
+          "shortName": "KAR",
+          "city": "Anyinase",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B7A3B",
+          "secondaryColor": "#FFD200"
+        },
+        {
+          "name": "Dreams FC",
+          "shortName": "DRE",
+          "city": "Dawu",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Berekum Chelsea",
+          "shortName": "BCH",
+          "city": "Berekum",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B3A8C",
+          "secondaryColor": "#FFFFFF"
+        },
+        {
+          "name": "Accra Lions",
+          "shortName": "LIO",
+          "city": "Acra",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#FFD200",
+          "secondaryColor": "#0B3A8C"
+        },
+        {
+          "name": "Legon Cities",
+          "shortName": "LEG",
+          "city": "Acra",
+          "sofascoreId": null,
+          "badge": null,
+          "primaryColor": "#0B57A4",
+          "secondaryColor": "#FFD200"
+        }
+      ],
+      "teamCount": 12,
+      "status": "WAITLIST"
+    }
+  ]
+}

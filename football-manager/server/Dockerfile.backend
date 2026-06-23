@@ -1,0 +1,81 @@
+# syntax=docker/dockerfile:1.7
+# ─── Manager FDF — backend (Fastify + Prisma) + frontend estático ────────────
+# Multistage:
+#   1. deps        → instala deps del frontend con cache (package.json)
+#   2. frontend    → compila el bundle Vite
+#   3. backend-deps → instala deps del backend con cache
+#   4. backend     → genera Prisma client + compila TypeScript
+#   5. runtime     → imagen final mínima con dist + public + node_modules prod
+#
+# Context: football-manager/ (repo root del frontend), backend en ./server.
+
+# ─── 1. Deps del frontend ────────────────────────────────────────────────────
+FROM node:20-alpine AS frontend-deps
+WORKDIR /frontend
+COPY package*.json ./
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci
+
+# ─── 2. Build del frontend ───────────────────────────────────────────────────
+FROM node:20-alpine AS frontend-build
+WORKDIR /frontend
+COPY --from=frontend-deps /frontend/node_modules ./node_modules
+COPY . .
+# El backend sirve los estáticos bajo /, la API bajo /api → URL relativa.
+ENV VITE_API_URL=/api
+RUN npm run build
+
+# ─── 3. Deps del backend ─────────────────────────────────────────────────────
+FROM node:20-alpine AS backend-deps
+RUN apk add --no-cache openssl
+WORKDIR /app
+COPY server/package*.json ./
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci
+
+# ─── 4. Build del backend ────────────────────────────────────────────────────
+FROM node:20-alpine AS backend-build
+RUN apk add --no-cache openssl
+WORKDIR /app
+COPY --from=backend-deps /app/node_modules ./node_modules
+COPY server/ ./
+RUN npx prisma generate \
+    && npm run build
+
+# ─── 5. Runtime mínimo ───────────────────────────────────────────────────────
+FROM node:20-alpine AS runtime
+RUN apk add --no-cache openssl wget
+WORKDIR /app
+
+ENV NODE_ENV=production \
+    API_PORT=3001
+
+# Prune a producción solo (sin devDeps).
+COPY server/package*.json ./
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --omit=dev
+
+# Prisma necesita el schema en runtime para `migrate deploy` y el client generado.
+COPY --from=backend-build /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=backend-build /app/node_modules/@prisma ./node_modules/@prisma
+COPY --from=backend-build /app/prisma ./prisma
+COPY --from=backend-build /app/dist ./dist
+
+# Frontend compilado servido como estáticos por Fastify (./public).
+COPY --from=frontend-build /frontend/dist ./public
+
+# Entrypoint que aplica migraciones y arranca.
+COPY server/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
+    && addgroup -S fdf \
+    && adduser -S fdf -G fdf \
+    && chown -R fdf:fdf /app
+
+USER fdf
+
+EXPOSE 3001
+
+HEALTHCHECK --interval=10s --timeout=5s --start-period=30s --retries=5 \
+    CMD wget -qO- http://localhost:3001/health || exit 1
+
+CMD ["docker-entrypoint.sh"]

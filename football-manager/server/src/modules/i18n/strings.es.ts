@@ -1,0 +1,17 @@
+export const SERVER_STRINGS_ES = {
+  'notification.turn_processed.title': 'Turno procesado',
+  'notification.turn_processed.body': 'Se ha procesado el turno. Revisa tu plantilla y finanzas.',
+  'notification.push_test.title': 'Manager FDF',
+  'notification.push_test.body': 'Notificación de prueba',
+  'news.press_conference.subject': 'Rueda de prensa publicada',
+  'news.press_conference.body': 'Tu declaración ha sido recogida por la prensa.',
+  'press.answer.published.subject': 'Respuesta publicada en prensa',
+  'press.answer.humble': 'Seguimos trabajando, esto es mérito del grupo.',
+  'press.answer.neutral': 'Analizaremos el partido con calma y corregiremos detalles.',
+  'press.answer.aggressive': 'Tenemos que exigir mucho más, no podemos conformarnos.',
+  'market.offer_sent': 'Oferta enviada.',
+  'market.offer_rejected': 'Oferta rechazada.',
+  'manager.vacancy_applied': 'Candidatura enviada.',
+  'push.live_goal.title': 'Gol en directo',
+  'push.auction_outbid.title': 'Te han superado en una subasta',
+} as const;

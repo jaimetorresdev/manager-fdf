@@ -1,0 +1,1975 @@
+// ─── Prisma Schema — Football Manager Online ──────────────────────────────────
+// Database: PostgreSQL (usado por docker compose y Antigravity).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─── Auth & Users ─────────────────────────────────────────────────────────────
+
+model User {
+  id           Int       @id @default(autoincrement())
+  username     String    @unique
+  email        String    @unique
+  passwordHash String
+  role         String    @default("manager") // manager | admin | agente_fifa
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  lastIp       String? // Para sistema antitrampa
+  isBanned     Boolean   @default(false)
+  bannedReason String?
+  avatarSeed   String?
+  // Q25 (BLOQUE Q): último login real para contar "mánagers activos" (<30 días).
+  lastLoginAt  DateTime?
+  tokenVersion Int      @default(0)
+
+  manager           Manager?
+  agent             Agent?
+  notifications     Notification[]
+  anticheatAlerts   AnticheatAlert[]
+  resolvedAlerts    AnticheatAlert[]   @relation("ResolvedAlerts")
+  matchSeen         MatchSeen[]
+  pushSubscriptions PushSubscription[]
+  matchComments     MatchComment[]
+  shares            Share[]            // AUDIT H-28: relación real owner→User
+  shareTransactions ShareTransaction[] // AUDIT H-28
+}
+
+model Manager {
+  id     Int    @id @default(autoincrement())
+  userId Int    @unique
+  user   User   @relation(fields: [userId], references: [id])
+  clubId Int?   @unique
+  club   Club?  @relation(fields: [clubId], references: [id], onDelete: SetNull)
+  // AUDIT 5.6: fecha (in-game) en que el mánager se incorporó a su club actual. Acota
+  // `currentClubRecord` a sus partidos. Nullable/aditiva → no rompe datos existentes.
+  clubJoinedAt DateTime?
+  name   String
+
+  // FDF extensions
+  prestige          Int     @default(0)
+  personality       String  @default("Normal") // inmutable
+  mentality         String  @default("Normal")
+  affinityGroup     String?
+  // AUDIT H-4 / 3.3: suspensión REAL del mánager (FIDA). Antes `suspendTurns` era
+  // decorativo. Se persiste el turno hasta el que está suspendido; `assertCanOperate`
+  // lo comprueba y bloquea operaciones de mercado mientras dure.
+  suspendedUntilTurn Int?
+  nationality       String  @default("España")
+  wealth            Float   @default(0)
+  objectiveStatus   String  @default("Pending")
+  level             Int     @default(1)
+  xp                Int     @default(0)
+  reputation        Int     @default(100) // Base reputation
+  tutorialStep      Int     @default(0)
+  tutorialCompleted Boolean @default(false)
+  tutorialSkipped   Boolean @default(false)
+  avatarSeed        String?
+  // Q22 (BLOQUE Q): foto de perfil subida por el usuario (≤512KB, jpeg/png/webp,
+  // validada por magic bytes). Servida por GET /api/public/avatar/:managerId.
+  avatarImage       Bytes?
+  avatarImageMime   String?
+
+  createdAt        DateTime             @default(now())
+  tactics          Tactic[]
+  prestiges        Prestige[]
+  contracts        ManagerContract[]
+  boardConfidences BoardConfidence[]
+  news             News[]
+  pressQuestions   PressQuestion[]
+  pressConferences PressConference[]
+  marketShortlists MarketShortlist[]
+  skills           ManagerSkill[]
+  achievements     ManagerAchievement[]
+  managerOffers    ManagerOffer[]
+  applications     ManagerApplication[]
+  rumorSabotages   RumorSabotage[]      @relation("RumorSabotageAttacker")
+  proposedAgreements     TransferAgreement[] @relation("AgreementProposer")     // AUDIT H-28
+  counterpartyAgreements TransferAgreement[] @relation("AgreementCounterparty") // AUDIT H-28
+  auctionBids      AuctionBid[]
+  missionProgress  MissionProgress[]
+  weeklyMissions   WeeklyMission[]
+  goalOfWeekVotes  GoalOfWeekVote[]
+  vacationMode     Boolean              @default(false)
+  prestigeLogs     ManagerPrestigeLog[]
+  nationalTeam     NationalTeam?
+}
+
+model ManagerPrestigeLog {
+  id          Int      @id @default(autoincrement())
+  managerId   Int
+  manager     Manager  @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  seasonId    Int?
+  description String
+  points      Int
+  createdAt   DateTime @default(now())
+}
+
+// ─── Country & Geography ──────────────────────────────────────────────────────
+
+model Country {
+  id              Int              @id @default(autoincrement())
+  name            String           @unique
+  level           Int              @default(1)
+  livingStandard  Int              @default(1)
+  historicCoef    Float            @default(0)
+  // CONTRATO Carril 2 (manual §6): confederación para competiciones continentales
+  // (UEFA → Champions/EL; CONMEBOL → Libertadores/Sudamericana; etc.).
+  confederation   String?          // UEFA | CONMEBOL | CONCACAF | CAF | AFC | OFC
+  nationalTeam    NationalTeam?
+  leagueDivisions LeagueDivision[]
+  elections       Election[]
+}
+
+model LeagueDivision {
+  id        Int     @id @default(autoincrement())
+  countryId Int
+  country   Country @relation(fields: [countryId], references: [id])
+  level     Int     @default(1) // 1, 2, 3
+  slots     Int     @default(20)
+}
+
+// ─── Club ────────────────────────────────────────────────────────────────────
+
+model Club {
+  id             Int    @id @default(autoincrement())
+  // AUDIT 5.1: `name` sin `@unique` permitía clubes homónimos que rompen búsquedas/joins
+  // por nombre. La migración incluye un preámbulo de deduplicación (sufijo por id) antes
+  // de crear el índice único, para que aplique sobre datos con posibles duplicados.
+  name           String @unique
+  shortName      String
+  badge          String @default("⚽")
+  primaryColor   String @default("#000000")
+  secondaryColor String @default("#FFFFFF")
+  city           String
+  country        String
+  budget         Float  @default(500000)
+
+  // FDF extensions
+  fdfValuation          Float   @default(0)
+  historicCoef          Float   @default(0)
+  mainShareholderClubId Int?
+  mainShareholderClub   Club?   @relation("MainShareholder", fields: [mainShareholderClubId], references: [id], onDelete: SetNull)
+  subsidiaryClubs       Club[]  @relation("MainShareholder")
+  cash                  Float   @default(500000)
+  fixedAssets           Float   @default(5000000)
+  fans                  Int     @default(50000)
+  reputation            Int     @default(50) // 0-100
+  isUserClub            Boolean @default(false)
+
+  stadiumCapacity Int    @default(20000) // Legacy
+  stadiumName     String @default("Estadio Municipal")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  manager        Manager?
+  players        Player[]
+  homeMatches    Match[]           @relation("HomeClub")
+  awayMatches    Match[]           @relation("AwayClub")
+  standings      Standing[]
+  transfersFrom  TransferOffer[]   @relation("FromClub")
+  transfersTo    TransferOffer[]   @relation("ToClub")
+  financeHistory FinanceSnapshot[]
+  trainedPlays   TrainedPlay[]
+  legends        ClubLegend[]
+  loanedPlayers  Player[]          @relation("LoanOwner")
+
+  // Phase 2: Economy & Fans
+  socialMass       Int       @default(10000)
+  highClass        Int       @default(500)
+  countryLevel     Int       @default(2) // 1-3
+  ticketPriceLevel String    @default("medium") // low | medium | high
+  vacancyOpenedAt  DateTime?
+
+  subcontract Subcontract?
+  sponsors    SponsorContract[]
+  coaches     Coach[]
+
+  stadium                Stadium?
+  youthAcademy           YouthAcademy?
+  fanBase                FanBase?
+  ideology               Ideology?
+  staff                  Staff?
+  sponsorships           Sponsorship[]
+  outsourcings           Outsourcing[]
+  managerContracts       ManagerContract[]
+  shares                 Share[]
+  sharePriceHistory      SharePriceHistory[]
+  shareTransactions      ShareTransaction[]
+  scoutAssignments       ScoutAssignment[]
+  seasonHistories        SeasonHistory[]
+  honours                Honour[]
+  records                ClubRecord[]
+  boardObjectives        BoardObjective[]
+  boardConfidences       BoardConfidence[]
+  rivalriesA             Rivalry[]            @relation("RivalryClubA")
+  rivalriesB             Rivalry[]            @relation("RivalryClubB")
+  awards                 Award[]
+  managerOffers          ManagerOffer[]
+  managerApplications    ManagerApplication[]
+  kits                   ClubKit[]
+  transferBanUntil       DateTime? // Sanción por antitrampas
+  auctionsAsSeller       Auction[]            @relation("AuctionSeller")
+  auctionsWon            Auction[]            @relation("AuctionWinner") // AUDIT H-28
+  transferAgreementsFrom TransferAgreement[]  @relation("FromClubTransfer")
+  transferAgreementsTo   TransferAgreement[]  @relation("ToClubTransfer")
+  draftPicks             DraftPick[]
+  clubCoefficients       ClubCoefficient[]
+
+  // FDF Actions
+  trainingClosedUntilTurn Int?
+  trainingClosedUses      Int  @default(0)
+  homeStimulatedUntilTurn Int?
+  homeStimulatedUses      Int  @default(0)
+  npcCoach                NpcCoach?
+  rumorSabotages          RumorSabotage[]
+
+  // CONTRATO Carril 2 (manual §1): continuidad de estilo. Cuenta los turnos
+  // consecutivos con el MISMO estilo ofensivo/defensivo; el manual da −1 confianza por
+  // cada punto de continuidad (de 4) que falte al cambiar de estilo.
+  offensiveStyleContinuity Int @default(0)
+  defensiveStyleContinuity Int @default(0)
+}
+
+// ─── X3 · Entrenadores NPC con carrera persistida ─────────────────────────────
+
+model NpcCoach {
+  id              String   @id
+  currentClubId   Int?     @unique
+  currentClub     Club?    @relation(fields: [currentClubId], references: [id], onDelete: SetNull)
+  name            String
+  nationality     String
+  avatarSeed      String
+  profileJson     String   @default("{}")
+  tenureStartedAt DateTime @default(now())
+  previousClubs   Int      @default(0)
+  promotions      Int      @default(0)
+  careerStage     String   @default("emergente")
+  status          String   @default("active")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  careerEntries   NpcCoachCareerEntry[]
+}
+
+model NpcCoachCareerEntry {
+  id         Int      @id @default(autoincrement())
+  npcCoachId String
+  npcCoach   NpcCoach @relation(fields: [npcCoachId], references: [id], onDelete: Cascade)
+  clubId     Int
+  clubName   String
+  season     String?
+  event      String
+  note       String?
+  createdAt  DateTime @default(now())
+
+  @@index([npcCoachId])
+}
+
+// ─── N4-2 · Sabotaje informativo (rumor plantado con prestigio) ───────────────
+
+model RumorSabotage {
+  id                Int       @id @default(autoincrement())
+  attackerManagerId Int
+  attackerManager   Manager   @relation("RumorSabotageAttacker", fields: [attackerManagerId], references: [id], onDelete: Cascade)
+  targetClubId      Int
+  targetClub        Club      @relation(fields: [targetClubId], references: [id], onDelete: Cascade)
+  seasonId          Int
+  seasonWeek        Int
+  prestigeSpent     Int
+  headline          String
+  debunked          Boolean   @default(false)
+  debunkedAt        DateTime?
+  debunkManagerId   Int?
+  moodPenalty       Int       @default(8)
+  createdAt         DateTime  @default(now())
+
+  @@unique([attackerManagerId, targetClubId, seasonId, seasonWeek])
+  @@index([targetClubId, seasonId, seasonWeek])
+}
+
+// ─── Players ─────────────────────────────────────────────────────────────────
+
+model Player {
+  id               Int     @id @default(autoincrement())
+  clubId           Int?
+  club             Club?   @relation(fields: [clubId], references: [id], onDelete: SetNull)
+  name             String
+  nationality      String
+  flag             String  @default("🌍")
+  age              Int
+  position         String // POR | DEF | MED | DEL
+  // WT1 (11 jun 2026): posición detallada ADITIVA (15: POR LD LI CT PIV ORG MCO
+  // BOX INTD INTI MP EXTD EXTI DC F9). La macro `position` NO se toca. Backfill
+  // por derivación de atributos en la migración 20260611150000 (doc de diseño §1.1).
+  detailedPosition String?
+  squadNumber      Int?
+
+  // FDF Core attributes (0-99)
+  passing      Int @default(50)
+  tackling     Int @default(50)
+  shooting     Int @default(50)
+  organization Int @default(50)
+  unmarking    Int @default(50)
+  finishing    Int @default(50)
+  dribbling    Int @default(50)
+  fouls        Int @default(50)
+  goalkeeping  Int @default(50) // salidas (distribución y posicionamiento del portero)
+  reflexes     Int @default(50) // reflejos (paradas reactivas; solo meaningful para porteros)
+
+  // Legacy (keep for compatibility if needed)
+  speed     Int @default(50)
+  defending Int @default(50)
+  physical  Int @default(50)
+
+  // Status
+  fitness         Int @default(100)
+  muscularFitness Int @default(100)
+  mentalSharpness Int @default(100)
+  matchRhythm     Int @default(100)
+  morale          Int @default(75)
+  experience      Int @default(0) // 0-99, grows per match
+  talent          Int @default(50) // 1-99 FDF specific
+  potential       Int @default(70) // max reachable average
+  // CONTRATO Carril 2 (manual §2): cansancio acumulado (>90% → forma cae a 40%).
+  accumulatedFatigue Int @default(0)
+  // CONTRATO Carril 2 (manual §2): motivación. `isPermanentlyMotivated` = afín al
+  // psicólogo/manager (motivación de feb que no decae); `motivatedUntilTurn` = bonus
+  // temporal por estímulo de plantilla (efecto 2 turnos). `affinityGroup` (abajo) ya
+  // modela los 8 grupos de afinidad.
+  isPermanentlyMotivated Boolean @default(false)
+  motivatedUntilTurn     Int?
+
+  // FDF Status
+  originalNationality String  @default("España")
+  // AUDIT 5.1-3: `birthDate` String 'd/m' impide ordenar/calcular edad de forma fiable.
+  // Se añade `birthDateAt` DateTime? como representación canónica MODERNA (aditiva, no
+  // rompe a Carril 2 que aún lee el String). Cutover: backfill desde 'd/m' + año
+  // derivado de `age`, luego retirar el String. Plan en docs/contracts/MONEY-CUTOVER.md
+  // (sección esquema). Mientras tanto ambos coexisten.
+  birthDate           String  @default("1/1")
+  birthDateAt         DateTime?
+  mentality           String  @default("Normal")
+  personality         String  @default("Normal")
+  affinityGroup       String?
+  preferredFoot       String  @default("Right")
+  injuryProneness     Int     @default(50)
+  consistency         Int     @default(50)
+  preferredPosition   String?
+  homegrown           Boolean @default(false)
+
+  // Contract & Value
+  salary          Int       @default(2000)
+  wage            Int     @default(2000)  // AUDIT H-6: dinero entero (alineado con sus pares Int)
+  marketValue     Int       @default(500000)
+  releaseClause   Float?
+  contractYears   Int       @default(2)
+  contractStartAt DateTime?
+  contractEndAt   DateTime?
+
+  // Game state
+  isStarter        Boolean   @default(false)
+  isForSale        Boolean   @default(false)
+  salePrice        Int?
+  injuredUntil     DateTime?
+  suspendedMatches Int       @default(0)
+
+  // Transfers & Loans
+  lastTransferAt    DateTime?
+  lastTransferValue Float?
+  loanOwnerClubId   Int?
+  loanOwnerClub     Club?     @relation("LoanOwner", fields: [loanOwnerClubId], references: [id], onDelete: SetNull)
+  loanEndDate       DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  injuries            Injury[]
+  suspensions         Suspension[]
+  development         PlayerDevelopment[]
+  matchEvents         MatchEvent[]
+  transferOffers      TransferListing[]    @relation("TransferPlayer")
+  legacyOffers        TransferOffer[]      @relation("TransferPlayer")
+  selectorCalls       SelectorCall[]
+  sanctions           Sanction[]
+  emblematicFor       EmblematicPlayer[]
+  agentRepresentation AgentRepresentation?
+  honours             Honour[]
+  records             PlayerRecord[]
+  seasonStats         PlayerSeasonStat[]
+  callUps             CallUp[]
+  marketShortlists    MarketShortlist[]
+  awards              Award[]
+  matchStats          PlayerMatchStat[]
+  auctions            Auction[]
+  transferAgreements  TransferAgreement[] @relation("AgreementPlayer")
+  offeredInAgreements TransferAgreement[] @relation("AgreementOfferedPlayer") // AUDIT H-28
+  draftPicks          DraftPick[]
+  topScorerHistories  SeasonHistory[]
+  specialInspections  PlayerSpecialInspection[]
+
+  @@unique([clubId, squadNumber])
+  // WT1: filtros de mercado/scouting por posición detallada.
+  @@index([detailedPosition])
+}
+
+// ─── Season & Competition ─────────────────────────────────────────────────────
+
+model Season {
+  id        Int      @id @default(autoincrement())
+  // AUDIT-2026 (e): unique para que el rollover de temporada (findFirst+create) sea idempotente.
+  name      String   @unique // "2002-03"
+  year      Int // 2002
+  startDate DateTime @default(now())
+  endDate   DateTime @default(now())
+  isActive  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  competitions       Competition[]
+  drafts             Draft[]
+  gameStates         GameState[]
+  PlayerSeasonStat   PlayerSeasonStat[]
+  clubCoefficients   ClubCoefficient[]
+  leagueCoefficients LeagueCoefficient[]
+  slotAllocations    EuropeanSlotAllocation[]
+}
+
+model Competition {
+  id        Int    @id @default(autoincrement())
+  seasonId  Int
+  // AUDIT H-29: borrar una temporada elimina sus competiciones (dato hijo).
+  season    Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  name      String // "Primera División"
+  shortName String // "LaLiga"
+  type      String // league | cup
+  country   String
+  tier      Int    @default(1)
+
+  format        String?       @default("round_robin")
+  isContinental Boolean       @default(false)
+  parentId      Int?
+  // AUDIT H-29: fase de una competición padre; al borrar el padre se anula el puntero.
+  parent        Competition?  @relation("PhaseOf", fields: [parentId], references: [id], onDelete: SetNull)
+  phases        Competition[] @relation("PhaseOf")
+
+  // Y1 (12 jun 2026): metadatos de escalado para 50 ligas. Aditivos y
+  // cacheables; el tick los usa para priorizar sin barrer todo el mundo.
+  humanStatus           String    @default("OPEN") // OPEN | WAITLIST | CLOSED
+  defaultSimulationTier String    @default("B") // A | B | C
+  activityScore         Int       @default(0)
+  humanManagersCount    Int       @default(0)
+  lastHumanLoginAt      DateTime?
+  processingShard       String?
+
+  matchdays                Matchday[]
+  standings                Standing[]
+  seasonHistories          SeasonHistory[]
+  internationalCompetition InternationalCompetition?
+  groups                   Group[]
+
+  @@index([seasonId, type, country, tier])
+  @@index([humanStatus, type, tier])
+  @@index([processingShard])
+}
+
+model Matchday {
+  id            Int         @id @default(autoincrement())
+  competitionId Int
+  // AUDIT H-29: borrar una competición elimina sus jornadas (dato hijo).
+  competition   Competition @relation(fields: [competitionId], references: [id], onDelete: Cascade)
+  groupId       Int?
+  group         Group?      @relation(fields: [groupId], references: [id], onDelete: SetNull)
+  number        Int // Jornada 1, 2, etc.
+  status        String      @default("pending") // pending | simulated
+
+  type       String  @default("league")
+  isKnockout Boolean @default(false)
+  leg        Int     @default(1)
+  dateLabel  String?
+
+  matches Match[]
+
+  @@index([competitionId])  // AUDIT H-30: índice FK (consultas calientes del tick)
+  @@index([groupId])  // AUDIT H-30: índice FK
+}
+
+// ─── Matches ─────────────────────────────────────────────────────────────────
+
+model Match {
+  id         Int       @id @default(autoincrement())
+  matchdayId Int?
+  // AUDIT H-29: matchdayId es opcional (partidos de copa sin jornada). Al borrar
+  // una jornada, el partido queda sin jornada (SetNull) en vez de bloquear el borrado.
+  matchday   Matchday? @relation(fields: [matchdayId], references: [id], onDelete: SetNull)
+  homeClubId Int
+  homeClub   Club      @relation("HomeClub", fields: [homeClubId], references: [id], onDelete: Cascade)
+  awayClubId Int
+  awayClub   Club      @relation("AwayClub", fields: [awayClubId], references: [id], onDelete: Cascade)
+
+  // Result
+  homeGoals Int?
+  awayGoals Int?
+  status    String  @default("scheduled") // scheduled | played
+  groupName String? // For group stages (e.g., "Group A")
+
+  // Knockout & Brackets
+  winner          String? // "home" | "away"
+  decidedBy       String? // "regular" | "extra_time" | "penalties"
+  penaltiesHome   Int?
+  penaltiesAway   Int?
+  round           String? // "playoff", "round_of_16", "quarter_final", "semi_final", "final"
+  leg             Int? // 1 or 2
+  isKnockout      Boolean @default(false)
+  // AUDIT-2026: índices para las queries calientes del tick (Postgres no indexa FKs solo).
+  nextMatchId     Int?
+  nextMatch       Match?  @relation("BracketProgression", fields: [nextMatchId], references: [id])
+  previousMatches Match[] @relation("BracketProgression")
+
+  // Match Conditions
+  weatherCondition String @default("normal") // normal | rain | snow | hot
+  temperature      Int    @default(20)
+
+  // Tactics snapshots (saved before simulation)
+  homeFormation            String  @default("4-4-2")
+  homeConstruction         Int     @default(50)
+  homeDestruction          Int     @default(50)
+  homePressing             Int     @default(50)
+  homeTempo                Int     @default(50)
+  homeWidth                Int     @default(50)
+  homeMentality            String  @default("balanced")
+  homeMarking              String  @default("zonal")
+  homeOffensiveStyle       String?
+  homeDefensiveStyle       String?
+  homeAttackZones          String?
+  homeDefenseReinforcement String?
+  homeSubsLogic            String?
+
+  awayFormation            String  @default("4-4-2")
+  awayConstruction         Int     @default(50)
+  awayDestruction          Int     @default(50)
+  awayPressing             Int     @default(50)
+  awayTempo                Int     @default(50)
+  awayWidth                Int     @default(50)
+  awayMentality            String  @default("balanced")
+  awayMarking              String  @default("zonal")
+  awayOffensiveStyle       String?
+  awayDefensiveStyle       String?
+  awayAttackZones          String?
+  awayDefenseReinforcement String?
+  awaySubsLogic            String?
+
+  // Stats stored as JSON strings (SQLite limitation)
+  homeStatsJson String?
+  awayStatsJson String?
+  motm          String? // Man of the match (player name)
+
+  // Y1: prioridad y nivel de simulación para Match Center/colas de tick.
+  simulationTier   String  @default("A") // A | B | C
+  priorityScore    Int     @default(0)
+  hasTimeline      Boolean @default(true)
+  hasAdvancedStats Boolean @default(true)
+
+  playedAt  DateTime?
+  createdAt DateTime  @default(now())
+
+  events         MatchEvent[]
+  refereeId      Int?
+  referee        Referee?          @relation(fields: [refereeId], references: [id])
+  playerStats    PlayerMatchStat[]
+  seenBy         MatchSeen[]
+  pressQuestions PressQuestion[]
+  comments       MatchComment[]
+
+  @@index([matchdayId, status])
+  @@index([homeClubId, status])
+  @@index([awayClubId, status])
+  @@index([simulationTier, status])
+  @@index([priorityScore])
+}
+
+model MatchSeen {
+  id      Int      @id @default(autoincrement())
+  matchId Int
+  match   Match    @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  userId  Int
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  seenAt  DateTime @default(now())
+
+  @@unique([matchId, userId])
+}
+
+model MatchComment {
+  id        Int      @id @default(autoincrement())
+  matchId   Int
+  match     Match    @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  text      String
+  minute    Int?
+  createdAt DateTime @default(now())
+
+  @@index([matchId])
+  @@index([userId])
+}
+
+model MatchEvent {
+  id          Int     @id @default(autoincrement())
+  matchId     Int
+  match       Match   @relation(fields: [matchId], references: [id], onDelete: Cascade) // AUDIT 5.1-8/H-29: dato hijo puro
+  playerId    Int?
+  player      Player? @relation(fields: [playerId], references: [id], onDelete: SetNull)
+  type        String // goal | yellow | red | save | foul | corner
+  minute      Int
+  team        String // home | away
+  description String
+  cardCount   Int     @default(0)
+
+  @@index([matchId])
+  @@index([type, playerId])
+}
+
+model PlayerMatchStat {
+  id              Int     @id @default(autoincrement())
+  matchId         Int
+  match           Match   @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  playerId        Int
+  player          Player  @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  rating          Float
+  goals           Int     @default(0)
+  assists         Int     @default(0)
+  minutes         Int     @default(0)
+  shots           Int     @default(0)
+  passes          Int     @default(0)
+  xG              Float   @default(0)
+  shotsOnTarget   Int     @default(0)
+  passesCompleted Int     @default(0)
+  passAccuracy    Float   @default(0)
+  tackles         Int     @default(0)
+  interceptions   Int     @default(0)
+  keyPasses       Int     @default(0)
+  heatmap         String? // JSON
+  shotmap         String? // JSON
+  // AUDIT 1.8: el motor (game.service.ts:~1509, Carril 2) envía name/position pero no
+  // se persistían. Se añaden como snapshot histórico (el jugador puede cambiar de
+  // nombre/posición o ser borrado). Columnas nullables; Carril 2 las rellena al crear.
+  name            String?
+  position        String?
+
+  // AUDIT-2026: índice para groupBy/lecturas por jugador (leaderboards, cierre de temporada).
+  @@index([playerId])
+  @@unique([matchId, playerId])  // AUDIT 1.6: 1 stat por (partido, jugador)
+}
+
+// ─── Standings ────────────────────────────────────────────────────────────────
+
+model Standing {
+  id            Int         @id @default(autoincrement())
+  competitionId Int
+  // AUDIT H-29: la clasificación es dato hijo de la competición y del club.
+  competition   Competition @relation(fields: [competitionId], references: [id], onDelete: Cascade)
+  clubId        Int
+  club          Club        @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  groupName     String?
+
+  played       Int @default(0)
+  won          Int @default(0)
+  drawn        Int @default(0)
+  lost         Int @default(0)
+  goalsFor     Int @default(0)
+  goalsAgainst Int @default(0)
+  points       Int @default(0)
+
+  @@unique([competitionId, clubId])
+  @@index([clubId])  // AUDIT H-30: índice FK (el unique ya cubre competitionId)
+}
+
+// ─── Game State ───────────────────────────────────────────────────────────────
+
+model GameState {
+  id         Int    @id @default(autoincrement())
+  seasonId   Int
+  season     Season @relation(fields: [seasonId], references: [id])
+  week       Int    @default(1)
+  // Q2 (BLOQUE Q): jornada RELATIVA a la temporada activa. `week` es acumulada
+  // entre temporadas (la usan FinanceSnapshot y otros uniques — NO tocar);
+  // seasonWeek se resetea a 1 en cada rollover y es la que debe mostrar la UI.
+  seasonWeek Int    @default(1)
+
+  // FDF extensions
+  inGameDate     DateTime  @default(now())
+  // AUDIT-2026 (a): fecha in-game ANTERIOR real, persistida en cada tick.
+  // Sustituye a todos los cálculos "fecha anterior = inGameDate − 3 días",
+  // que detectaban cruces de mes/año dos veces (saltos reales de 2 días).
+  prevInGameDate DateTime?
+  turn           Int       @default(1)
+  nextTickAt     DateTime?
+  isLocked       Boolean   @default(false)
+  // QA1: reloj propio del lock del tick. No usar updatedAt porque otros cambios
+  // del estado pueden renovar el timestamp y ocultar un lock zombie.
+  lockUpdatedAt  DateTime?
+
+  phase    String  @default("regular") // regular | cup | european | end
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Transfers ────────────────────────────────────────────────────────────────
+
+model TransferOffer {
+  id            Int       @id @default(autoincrement())
+  playerId      Int
+  player        Player    @relation("TransferPlayer", fields: [playerId], references: [id])
+  fromClubId    Int
+  fromClub      Club      @relation("FromClub", fields: [fromClubId], references: [id])
+  toClubId      Int?
+  toClub        Club?     @relation("ToClub", fields: [toClubId], references: [id])
+  amount        Int
+  status        String    @default("pending") // pending | accepted | rejected | withdrawn | accepted_pending_window
+  effectiveAt   DateTime?
+  salary        Int?
+  contractYears Int?
+  releaseClause Float?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  turn      Int      @default(0)
+  @@index([playerId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+  @@index([fromClubId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model Auction {
+  id                 Int      @id @default(autoincrement())
+  playerId           Int
+  player             Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  sellerClubId       Int
+  sellerClub         Club     @relation("AuctionSeller", fields: [sellerClubId], references: [id], onDelete: Cascade)
+  startPrice         Int  // AUDIT H-6: dinero entero (alineado con sus pares Int)
+  status             String   @default("active") // active | finished | cancelled
+  endsAt             DateTime
+  winningClubId      Int?
+  // AUDIT H-28: FK lógica → relación real. Si el club ganador se borra, el puntero
+  // se anula (SetNull) en vez de quedar como id huérfano.
+  winningClub        Club?    @relation("AuctionWinner", fields: [winningClubId], references: [id], onDelete: SetNull)
+  closedNoSaleReason String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  bids AuctionBid[]
+
+  @@index([status, endsAt])
+  @@index([winningClubId])  // AUDIT H-30: índice FK
+}
+
+model AuctionBid {
+  id        Int     @id @default(autoincrement())
+  auctionId Int
+  auction   Auction @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  managerId Int
+  manager   Manager @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  amount    Int  // AUDIT H-6: dinero entero (alineado con sus pares Int)
+
+  createdAt DateTime @default(now())
+  @@index([auctionId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model TransferAgreement {
+  id                    Int       @id @default(autoincrement())
+  playerId              Int
+  player                Player    @relation("AgreementPlayer", fields: [playerId], references: [id])
+  fromClubId            Int
+  fromClub              Club      @relation("FromClubTransfer", fields: [fromClubId], references: [id])
+  toClubId              Int
+  toClub                Club      @relation("ToClubTransfer", fields: [toClubId], references: [id])
+  amount                Int  // AUDIT H-6: dinero entero (alineado con sus pares Int)
+  type                  String // transfer | loan | exchange
+  status                String    @default("draft") // draft | proposed | accepted | rejected
+  // AUDIT H-28: FKs lógicas → relaciones reales (jugador ofrecido en intercambio,
+  // mánagers proponente/contraparte de la negociación, y la contraoferta padre).
+  offeredPlayerId       Int?
+  offeredPlayer         Player?   @relation("AgreementOfferedPlayer", fields: [offeredPlayerId], references: [id], onDelete: SetNull)
+  proposerManagerId     Int?
+  proposerManager       Manager?  @relation("AgreementProposer", fields: [proposerManagerId], references: [id], onDelete: SetNull)
+  counterpartyManagerId Int?
+  counterpartyManager   Manager?  @relation("AgreementCounterparty", fields: [counterpartyManagerId], references: [id], onDelete: SetNull)
+  parentId              Int?
+  parent                TransferAgreement?  @relation("AgreementParent", fields: [parentId], references: [id], onDelete: SetNull)
+  children              TransferAgreement[] @relation("AgreementParent")
+  message               String?
+  loanUntil             DateTime?
+  optionToBuyAmount     Int?
+  cashDelta             Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([playerId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+  @@index([fromClubId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+  @@index([toClubId])  // AUDIT H-30: índice FK
+  @@index([offeredPlayerId])  // AUDIT H-30: índice FK
+  @@index([proposerManagerId])  // AUDIT H-30: índice FK
+  @@index([counterpartyManagerId])  // AUDIT H-30: índice FK
+  @@index([parentId])  // AUDIT H-30: índice FK
+}
+
+// ─── Player Development ───────────────────────────────────────────────────────
+
+model PlayerDevelopment {
+  id       Int    @id @default(autoincrement())
+  playerId Int
+  player   Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  week     Int
+  season   String
+
+  speedDelta     Int @default(0)
+  shootingDelta  Int @default(0)
+  passingDelta   Int @default(0)
+  dribblingDelta Int @default(0)
+  defendingDelta Int @default(0)
+  physicalDelta  Int @default(0)
+
+  createdAt DateTime @default(now())
+  @@index([playerId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+// ─── Injuries & Suspensions ───────────────────────────────────────────────────
+
+model Injury {
+  id        Int    @id @default(autoincrement())
+  playerId  Int
+  player    Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  type      String // muscle | knee | ankle | head | back
+  severity  Int // total weeks
+  weeksLeft Int // remaining
+
+  createdAt DateTime @default(now())
+  @@index([playerId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model Suspension {
+  id       Int    @id @default(autoincrement())
+  playerId Int
+  player   Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  matches  Int    @default(1)
+  reason   String
+
+  createdAt DateTime @default(now())
+
+  // AUDIT-2026 (e): idempotencia de sanciones por tarjetas (cards:yellow:N / cards:red:event:N).
+  @@unique([playerId, reason])
+}
+
+// ─── Finances ─────────────────────────────────────────────────────────────────
+
+model FinanceSnapshot {
+  id     Int    @id @default(autoincrement())
+  clubId Int
+  club   Club   @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  week   Int
+  season String
+
+  budget           Float
+  income           Float @default(0)
+  expenses         Float @default(0)
+  ticketRevenue    Float @default(0)
+  tvRevenue        Float @default(0)
+  transferIncome   Float @default(0)
+  sponsorRevenue   Float @default(0)
+  salaryExpenses   Float @default(0)
+  staffExpenses    Float @default(0)
+  facilityExpenses Float @default(0)
+
+  createdAt DateTime @default(now())
+
+  // AUDIT-2026 (e): idempotencia de premios de competición (season =
+  // "competition_income:<matchId>:<concepto>") y de snapshots mensuales
+  // (un snapshot por club, temporada y semana del turno).
+  @@unique([clubId, season, week])
+}
+
+// ─── Notifications ────────────────────────────────────────────────────────────
+
+model Notification {
+  id      Int     @id @default(autoincrement())
+  userId  Int
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type    String // match_result | transfer | injury | week_advance
+  title   String
+  message String
+  isRead  Boolean @default(false)
+  data    String? // JSON blob (SQLite)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+// ─── Tactics & Training ───────────────────────────────────────────────────────
+
+model Tactic {
+  id                   Int     @id @default(autoincrement())
+  managerId            Int
+  manager              Manager @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  name                 String
+  formation            String  @default("4-4-2")
+  construction         Int     @default(50)
+  destruction          Int     @default(50)
+  pressing             Int     @default(50)
+  tempo                Int     @default(50)
+  width                Int     @default(50)
+  mentality            String  @default("balanced")
+  marking              String  @default("zonal")
+  zones                String? // JSON: right, center, left
+  passingStyle         String? // JSON: short, long, mixed
+  subsLogic            String? // JSON: conditional subs
+  offensiveStyle       String?
+  defensiveStyle       String?
+  attackZones          String? // JSON
+  defenseReinforcement String? // JSON
+  // WT2 (11 jun 2026): roles modernos ADITIVOS por hueco de la pizarra. JSON
+  // { "<slotIndex>": "lateral_invertido" | "carrilero" | "pierna_cambiada" |
+  //   "portero_libero" | "falso_9" | "central_salidor" }. null = sin roles.
+  roleInstructions     String? // JSON
+  isDefault            Boolean @default(false)
+  @@index([managerId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model TrainedPlay {
+  id       Int     @id @default(autoincrement())
+  clubId   Int
+  club     Club    @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  type     String // attack, defense, freekick
+  level    Int     @default(1) // 1-15
+  progress Int     @default(0) // turns invested
+  isActive Boolean @default(false)
+  status   String  @default("developing") // developing | trainable | maxed
+  // CONTRATO Carril 2 (manual §1, playbook): jugadores designados para ejecutar la
+  // jugada entrenada (puntuación = base × presentes / 3). JSON array de playerId.
+  executorPlayerIds String? // JSON: number[]
+  @@index([clubId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+// ─── Economy & Staff ──────────────────────────────────────────────────────────
+
+model Subcontract {
+  id           Int  @id @default(autoincrement())
+  clubId       Int  @unique
+  club         Club @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  travelAgency Int  @default(0) // Level 0-5
+  maintenance  Int  @default(0)
+  cleaning     Int  @default(0)
+  security     Int  @default(0)
+  food         Int  @default(0)
+  medical      Int  @default(0)
+  media        Int  @default(0)
+}
+
+model SponsorContract {
+  id           Int      @id @default(autoincrement())
+  clubId       Int
+  club         Club     @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  type         String // tv | ads | merch
+  years        Int // 1-3
+  percentage   Float // relative to club valuation
+  yearlyIncome Float
+  createdAt    DateTime @default(now())
+  @@index([clubId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model Coach {
+  id              Int      @id @default(autoincrement())
+  clubId          Int
+  club            Club     @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  category        String // GK | DEF | MID | ATT
+  level           Int      @default(1) // Coach quality
+  salary          Int      @default(2000)
+  assignedPlayers String? // JSON array of player IDs (max 6)
+  // CONTRATO Carril 2 (manual §4): tipo de entrenador. Determina la tabla de
+  // penalizadores de progresión (juvenil −40/−35/−60, técnico, primer equipo) y el
+  // orden de contratación. FIRST_TEAM | YOUTH | TECHNICAL.
+  role            String   @default("FIRST_TEAM")
+  createdAt       DateTime @default(now())
+  @@index([clubId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+// ─── FDF Specific Models ──────────────────────────────────────────────────────
+
+model Stadium {
+  id         Int           @id @default(autoincrement())
+  clubId     Int           @unique
+  club       Club          @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  capacity   Int           @default(20000)
+  seats      String        @default("[0,0,0,0,0]") // 5 levels
+  boxes      String        @default("[0,0,0,0,0]") // 5 levels
+  parking    String        @default("[0,0,0,0,0]") // 5 levels
+  sportsCity Int           @default(0) // 0-8
+  works      StadiumWork[]
+}
+
+model StadiumWork {
+  id              Int     @id @default(autoincrement())
+  stadiumId       Int
+  stadium         Stadium @relation(fields: [stadiumId], references: [id], onDelete: Cascade)
+  type            String
+  monthsRemaining Int
+  @@index([stadiumId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model YouthAcademy {
+  id               Int           @id @default(autoincrement())
+  clubId           Int           @unique
+  club             Club          @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  level            Int           @default(1)
+  residences       Int           @default(1)
+  facilities       Int           @default(1)
+  budget           Float         @default(100000)
+  nextPlayerAt     DateTime?
+  // N4-3: JSON ["attrName","attrName","attrName"] — top 3 attrs de la última leyenda retirada ≥450 PJ
+  legacyAttributes String?
+  youthPlayers     YouthPlayer[]
+}
+
+model YouthPlayer {
+  id             Int          @id @default(autoincrement())
+  youthAcademyId Int
+  youthAcademy   YouthAcademy @relation(fields: [youthAcademyId], references: [id], onDelete: Cascade)
+  age            Int          @default(16)
+  talent         Int
+  potential      Int          @default(70)
+  preferredFoot  String       @default("Right")
+  attributes     String // JSON of attributes
+  @@index([youthAcademyId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model FanBase {
+  id        Int           @id @default(autoincrement())
+  clubId    Int           @unique
+  club      Club          @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  youngLow  Int           @default(1000)
+  youngMid  Int           @default(500)
+  youngHigh Int           @default(100)
+  adultLow  Int           @default(5000)
+  adultMid  Int           @default(2000)
+  adultHigh Int           @default(500)
+  campaigns FanCampaign[]
+}
+
+model FanCampaign {
+  id        Int      @id @default(autoincrement())
+  fanBaseId Int
+  fanBase   FanBase  @relation(fields: [fanBaseId], references: [id], onDelete: Cascade)
+  type      String
+  cost      Float
+  expiresAt DateTime
+  @@index([fanBaseId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model Ideology {
+  id         Int                @id @default(autoincrement())
+  clubId     Int                @unique
+  club       Club               @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  values     String // JSON array
+  emblematic EmblematicPlayer[]
+}
+
+model EmblematicPlayer {
+  id         Int      @id @default(autoincrement())
+  ideologyId Int
+  ideology   Ideology @relation(fields: [ideologyId], references: [id], onDelete: Cascade)
+  playerId   Int
+  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  retireYear Int
+  @@index([ideologyId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+  @@index([playerId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+// Q7 (BLOQUE Q): desbloqueo REAL de mejoras de ideología, persistido por club.
+// Cada fila es un gasto de puntos de ideología (manual §8.2: puntos por
+// temporada según emblemáticos, máx. 15/temporada). Sin @relation a propósito
+// (patrón de FK aditiva pendiente, anotado en la deuda de diseño del BLOQUE S).
+model IdeologyUnlock {
+  id         Int      @id @default(autoincrement())
+  clubId     Int
+  seasonId   Int
+  upgradeKey String
+  cost       Int
+  createdAt  DateTime @default(now())
+
+  @@index([clubId, seasonId])
+}
+
+model Staff {
+  id      Int           @id @default(autoincrement())
+  clubId  Int           @unique
+  club    Club          @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  members StaffMember[]
+}
+
+model StaffMember {
+  id               Int               @id @default(autoincrement())
+  staffId          Int
+  staff            Staff             @relation(fields: [staffId], references: [id], onDelete: Cascade)
+  role             String // Enum-like: SecretarioTecnico, EntrenadorPrincipal, etc.
+  attributes       String // JSON
+  salary           Float
+  zone             String?
+  scoutAssignments ScoutAssignment[]
+  @@index([staffId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model TrainingSession {
+  id        Int    @id @default(autoincrement())
+  turnId    Int
+  clubId    Int
+  type      String
+  playerIds String // JSON array of player IDs
+
+  @@unique([turnId, clubId, type])
+}
+
+model Sponsorship {
+  id              Int    @id @default(autoincrement())
+  clubId          Int
+  club            Club   @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  type            String // TV, Vallas, Merch
+  level           String // A, B, C
+  monthsRemaining Int
+  @@index([clubId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model Outsourcing {
+  id     Int     @id @default(autoincrement())
+  clubId Int
+  club   Club    @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  type   String
+  active Boolean @default(false)
+
+  // AUDIT-2026 (e): un registro por servicio y club (el código hace findFirst+update/create).
+  @@unique([clubId, type])
+}
+
+model Prestige {
+  id        Int      @id @default(autoincrement())
+  managerId Int
+  manager   Manager  @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  value     Int
+  history   String // JSON
+  updatedAt DateTime @updatedAt
+  @@index([managerId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model ManagerContract {
+  id        Int     @id @default(autoincrement())
+  managerId Int
+  manager   Manager @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  clubId    Int
+  club      Club    @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  objective String
+  season    String
+  @@index([managerId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+  @@index([clubId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model NationalTeam {
+  id                Int               @id @default(autoincrement())
+  countryId         Int               @unique
+  country           Country           @relation(fields: [countryId], references: [id])
+  managerSelectorId Int?              @unique
+  managerSelector   Manager?          @relation(fields: [managerSelectorId], references: [id], onDelete: SetNull)
+  selectorCalls     SelectorCall[]
+  rankingPoints     Int               @default(1000)
+  callUps           CallUp[]
+  rankingHistory    NationalRanking[]
+}
+
+model SelectorCall {
+  id             Int          @id @default(autoincrement())
+  nationalTeamId Int
+  nationalTeam   NationalTeam @relation(fields: [nationalTeamId], references: [id])
+  playerId       Int
+  player         Player       @relation(fields: [playerId], references: [id])
+  match          String
+
+  @@unique([nationalTeamId, playerId])
+}
+
+model Tournament {
+  id   Int    @id @default(autoincrement())
+  name String
+  type String // Mundial, Eurocopa, Champions...
+}
+
+model Friendly {
+  id       Int      @id @default(autoincrement())
+  clubAId  Int
+  clubBId  Int
+  dateTurn DateTime
+  incomeA  Float    @default(0)
+  incomeB  Float    @default(0)
+  result   String?
+}
+
+model ChatChannel {
+  id       Int           @id @default(autoincrement())
+  name     String
+  // AUDIT 5.1: antes `type` era `@unique`, impidiendo dos canales del mismo tipo (p. ej.
+  // un solo chat de liga para TODAS las ligas). Se separa el `type` del `scopeId` (id de
+  // la entidad a la que pertenece el canal: liga, federación, club…) y la unicidad pasa a
+  // ser el par `[type, scopeId]`. `scopeId` nullable conserva los canales globales únicos
+  // existentes (`[type, null]`), por lo que el cambio es retrocompatible.
+  type     String
+  scopeId  Int?
+  messages ChatMessage[]
+
+  @@unique([type, scopeId])
+}
+
+model ChatMessage {
+  id           Int            @id @default(autoincrement())
+  channelId    Int
+  channel      ChatChannel    @relation(fields: [channelId], references: [id])
+  authorId     Int
+  text         String
+  timestamp    DateTime       @default(now())
+  mentionsJson String?
+  reactions    ChatReaction[]
+}
+
+model ChatReaction {
+  id        Int         @id @default(autoincrement())
+  messageId Int
+  message   ChatMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  userId    Int
+  emoji     String
+  createdAt DateTime    @default(now())
+
+  @@unique([messageId, userId, emoji])
+  @@index([messageId])
+}
+
+model SocialClub {
+  id        Int    @id @default(autoincrement())
+  captainId Int
+  members   String // JSON array of manager IDs
+  cash      Float  @default(0)
+}
+
+model Share {
+  id      Int   @id @default(autoincrement())
+  clubId  Int
+  club    Club  @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  ownerId Int
+  owner   User  @relation(fields: [ownerId], references: [id], onDelete: Cascade) // AUDIT H-28: integridad referencial (antes Int suelto)
+  pct     Float
+  value   Float
+
+  @@unique([clubId, ownerId])
+  @@index([clubId])
+  @@index([ownerId])
+}
+
+model SharePriceHistory {
+  id          Int       @id @default(autoincrement())
+  clubId      Int
+  club        Club      @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  shareValue  Float
+  totalShares Int       @default(1500)
+  totalAssets Float
+  cash        Float
+  fixedAssets Float
+  squadValue  Float
+  inGameDate  DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([clubId, createdAt])
+  @@index([clubId, inGameDate])
+}
+
+model ShareTransaction {
+  id            Int       @id @default(autoincrement())
+  clubId        Int
+  club          Club      @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  ownerId       Int
+  owner         User      @relation(fields: [ownerId], references: [id], onDelete: Cascade) // AUDIT H-28
+  type          String // buy | sell
+  shares        Int
+  pct           Float
+  pricePerShare Float
+  grossAmount   Float
+  inGameDate    DateTime?
+  createdAt     DateTime  @default(now())
+
+  @@index([ownerId, createdAt])
+  @@index([clubId, createdAt])
+}
+
+model PrivateMessage {
+  id        Int      @id @default(autoincrement())
+  fromId    Int
+  toId      Int
+  subject   String
+  body      String
+  timestamp DateTime @default(now())
+  read      Boolean  @default(false)
+}
+
+model ScoutAssignment {
+  id             Int         @id @default(autoincrement())
+  scoutStaffId   Int
+  scoutStaff     StaffMember @relation(fields: [scoutStaffId], references: [id], onDelete: Cascade)
+  clubTargetId   Int
+  clubTarget     Club        @relation(fields: [clubTargetId], references: [id])
+  analysisPoints Int         @default(0) // 0-100
+  zone           String?
+  lastProgressTurn Int       @default(-1) // AUDIT H-25: último turno in-game que avanzó (1 paso/turno)
+
+  @@unique([scoutStaffId, clubTargetId])
+}
+
+model Sanction {
+  id        Int      @id @default(autoincrement())
+  playerId  Int
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  matches   Int
+  reason    String
+  type      String
+  createdAt DateTime @default(now())
+  // NOTA para Codex:
+  // MatchEvent almacena las tarjetas individuales (MatchEvent.cardCount).
+  // El motor/Codex procesa esos MatchEvents y cuando un jugador acumula sanciones o recibe roja directa,
+  // genera un registro en este modelo Sanction, descontando los partidos en Player.suspendedMatches.
+  @@index([playerId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model Election {
+  id         Int     @id @default(autoincrement())
+  countryId  Int
+  country    Country @relation(fields: [countryId], references: [id])
+  period     String
+  candidates String // JSON array
+  winnerId   Int?
+  votes      Vote[]
+}
+
+model Vote {
+  id                 Int      @id @default(autoincrement())
+  electionId         Int
+  election           Election @relation(fields: [electionId], references: [id])
+  voterManagerId     Int
+  candidateManagerId Int
+
+  @@unique([electionId, voterManagerId])
+}
+
+model ForumThread {
+  id       Int         @id @default(autoincrement())
+  category String // dudas, bugs
+  title    String
+  posts    ForumPost[]
+}
+
+model ForumPost {
+  id       Int         @id @default(autoincrement())
+  threadId Int
+  thread   ForumThread @relation(fields: [threadId], references: [id])
+  authorId Int
+  text     String
+}
+
+model AdminAction {
+  id          Int      @id @default(autoincrement())
+  agentFifaId Int
+  target      String
+  reason      String
+  date        DateTime @default(now())
+}
+
+model Purchase {
+  id        Int      @id @default(autoincrement())
+  managerId Int
+  type      String
+  date      DateTime @default(now())
+}
+
+model WorldEconomy {
+  id             Int      @id @default(autoincrement())
+  value          Float // Historical baseline value
+  inflationIndex Float    @default(1.0) // 1.0 = baseline
+  demandFactor   Float    @default(0.0) // Moving average of aggregate demand
+  inGameDate     DateTime
+}
+
+model RankingSnapshot {
+  id      Int      @id @default(autoincrement())
+  type    String
+  date    DateTime @default(now())
+  payload String // JSON
+
+  @@index([type, id])
+}
+
+model CommunityContribution {
+  id          Int    @id @default(autoincrement())
+  managerId   Int
+  type        String
+  description String
+  reward      String
+}
+
+model AnticheatAlert {
+  id         Int       @id @default(autoincrement())
+  userId     Int?
+  user       User?     @relation(fields: [userId], references: [id])
+  clubId     Int?
+  ip         String?
+  type       String // Ej: MULTIACCOUNT, SUSPICIOUS_TRANSFER
+  details    String // JSON
+  status     String    @default("pending") // pending | investigating | resolved_banned | resolved_ignored
+  createdAt  DateTime  @default(now())
+  resolvedAt DateTime?
+  resolvedBy Int?
+  resolver   User?     @relation("ResolvedAlerts", fields: [resolvedBy], references: [id])
+}
+
+// ─── Global ───────────────────────────────────────────────────────────────────
+
+model GlobalSettings {
+  id              Int      @id @default(autoincrement())
+  turnHours       String   @default("[11, 23]") // JSON array of hours
+  economyModifier Float    @default(1.0)
+  maintenanceMode Boolean  @default(false)
+  featureFlags    String   @default("{}") // JSON
+  updatedAt       DateTime @updatedAt
+}
+
+// ─── Market & Agents ──────────────────────────────────────────────────────────
+
+model TransferListing {
+  id        Int      @id @default(autoincrement())
+  playerId  Int      @unique
+  player    Player   @relation("TransferPlayer", fields: [playerId], references: [id])
+  price     Float
+  type      String   @default("transfer") // transfer | loan
+  createdAt DateTime @default(now())
+}
+
+model Agent {
+  id              Int                   @id @default(autoincrement())
+  userId          Int                   @unique
+  user            User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reputation      Int                   @default(50)
+  createdAt       DateTime              @default(now())
+  representations AgentRepresentation[]
+}
+
+model AgentRepresentation {
+  id         Int      @id @default(autoincrement())
+  agentId    Int
+  agent      Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  playerId   Int      @unique
+  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  commission Float    @default(0.10) // 10%
+  createdAt  DateTime @default(now())
+  @@index([agentId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+// ─── History & Palmares ───────────────────────────────────────────────────────
+
+model SeasonHistory {
+  id            Int         @id @default(autoincrement())
+  clubId        Int
+  club          Club        @relation(fields: [clubId], references: [id])
+  competitionId Int
+  competition   Competition @relation(fields: [competitionId], references: [id])
+  season        String // e.g. "2024/2025"
+  position      Int
+  points        Int
+  topScorerId   Int? // Referencia opcional al jugador
+  topScorer     Player?     @relation(fields: [topScorerId], references: [id], onDelete: SetNull)
+  createdAt     DateTime    @default(now())
+
+  // AUDIT-2026 (e): idempotencia del cierre de temporada (un historial por club/competición/temporada).
+  @@unique([clubId, competitionId, season])
+}
+
+model Honour {
+  id        Int      @id @default(autoincrement())
+  name      String // e.g. "Campeón Primera 24/25", "Bota de Oro"
+  season    String
+  clubId    Int?
+  club      Club?    @relation(fields: [clubId], references: [id])
+  playerId  Int?
+  player    Player?  @relation(fields: [playerId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model ClubRecord {
+  id          Int      @id @default(autoincrement())
+  clubId      Int
+  club        Club     @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  recordType  String // e.g. "MostGoals", "HighestTransferFee"
+  value       Float
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([clubId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model PlayerRecord {
+  id          Int      @id @default(autoincrement())
+  playerId    Int
+  player      Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  recordType  String // e.g. "MostGoalsInMatch"
+  value       Float
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([playerId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+// ─── National Teams & Board ───────────────────────────────────────────────────
+
+model CallUp {
+  id             Int          @id @default(autoincrement())
+  nationalTeamId Int
+  nationalTeam   NationalTeam @relation(fields: [nationalTeamId], references: [id])
+  playerId       Int
+  player         Player       @relation(fields: [playerId], references: [id])
+  season         String       @default("2025/2026")
+  createdAt      DateTime     @default(now())
+}
+
+model NationalRanking {
+  id             Int          @id @default(autoincrement())
+  nationalTeamId Int
+  nationalTeam   NationalTeam @relation(fields: [nationalTeamId], references: [id])
+  points         Int
+  position       Int
+  dateTurn       DateTime     @default(now())
+}
+
+model BoardObjective {
+  id             Int      @id @default(autoincrement())
+  clubId         Int
+  club           Club     @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  season         String
+  type           String // "liga", "copa", "economia"
+  targetPosition Int?
+  targetAmount   Float?
+  status         String   @default("Pending") // Pending, Achieved, Failed
+  createdAt      DateTime @default(now())
+  @@index([clubId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model InternationalCompetition {
+  id            Int         @id @default(autoincrement())
+  competitionId Int         @unique
+  competition   Competition @relation(fields: [competitionId], references: [id])
+  hostCountry   String
+  year          Int
+}
+
+// ─── Institution, Press & Awards ──────────────────────────────────────────────
+
+model BoardConfidence {
+  id        Int      @id @default(autoincrement())
+  clubId    Int
+  club      Club     @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  managerId Int?
+  manager   Manager? @relation(fields: [managerId], references: [id], onDelete: SetNull)
+  level     Int      @default(50) // 0-100
+  history   String? // JSON array of past confidence levels
+  updatedAt DateTime @updatedAt
+  @@index([clubId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model News {
+  id          Int      @id @default(autoincrement())
+  type        String // transfer | board | media
+  subject     String
+  body        String
+  isRead      Boolean  @default(false)
+  recipientId Int
+  recipient   Manager  @relation(fields: [recipientId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@index([recipientId, createdAt])
+}
+
+model PushSubscription {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  userAgent String?
+  createdAt DateTime @default(now())
+}
+
+model PressItem {
+  id         Int      @id @default(autoincrement())
+  matchdayId Int? // Can be null for global news
+  headline   String
+  content    String?
+  createdAt  DateTime @default(now())
+}
+
+model PressQuestion {
+  id           Int       @id @default(autoincrement())
+  managerId    Int
+  manager      Manager   @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  matchId      Int?
+  match        Match?    @relation(fields: [matchId], references: [id], onDelete: SetNull)
+  question     String
+  options      Json
+  answeredTone String?
+  effectsJson  Json?
+  createdAt    DateTime  @default(now())
+  answeredAt   DateTime?
+
+  @@unique([managerId, matchId])
+}
+
+model PressConference {
+  id          Int      @id @default(autoincrement())
+  managerId   Int
+  manager     Manager  @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  topic       String
+  tone        String
+  effectsJson Json
+  createdAt   DateTime @default(now())
+}
+
+model Award {
+  id             Int      @id @default(autoincrement())
+  name           String // e.g. "Balón de Oro", "MVP", "Pichichi"
+  type           String // e.g. "player", "club", "manager"
+  season         String
+  winnerPlayerId Int?
+  player         Player?  @relation(fields: [winnerPlayerId], references: [id])
+  winnerClubId   Int?
+  club           Club?    @relation(fields: [winnerClubId], references: [id])
+  createdAt      DateTime @default(now())
+
+  // AUDIT-2026 (e): idempotencia de premios de cierre de temporada (Pichichi/MVP por competición).
+  @@unique([name, season])
+}
+
+model Rivalry {
+  id        Int    @id @default(autoincrement())
+  name      String // e.g. "El Clásico"
+  intensity Int    @default(50) // 0-100
+  clubAId   Int
+  clubA     Club   @relation("RivalryClubA", fields: [clubAId], references: [id], onDelete: Cascade)
+  clubBId   Int
+  clubB     Club   @relation("RivalryClubB", fields: [clubBId], references: [id], onDelete: Cascade)
+
+  // AUDIT (L-schema-rivalry-unique): par único canónico. El @@unique veta el par
+  // EXACTO duplicado; el par INVERTIDO (B,A) se impide con la normalización
+  // `clubAId < clubBId` + el CHECK `Rivalry_canonical_order` que añade la migración
+  // (los lectores no dependen del orden, comparan el conjunto {A,B}).
+  @@unique([clubAId, clubBId])
+  @@index([clubBId])  // AUDIT H-30: índice FK (clubA queda cubierto por el unique)
+}
+
+model Referee {
+  id         Int     @id @default(autoincrement())
+  name       String
+  strictness Int     @default(50) // 0-100, influences fouls/cards
+  reputation Int     @default(50) // 0-100
+  matches    Match[]
+}
+
+model MarketShortlist {
+  id        Int      @id @default(autoincrement())
+  managerId Int
+  manager   Manager  @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  playerId  Int
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([managerId, playerId])
+}
+
+// ─── RPG Manager ─────────────────────────────────────────────────────────────
+
+model ManagerSkill {
+  id         Int      @id @default(autoincrement())
+  managerId  Int
+  manager    Manager  @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  nodeId     String // e.g. "tactics_1"
+  unlockedAt DateTime @default(now())
+
+  @@unique([managerId, nodeId])
+}
+
+model ManagerAchievement {
+  id        Int      @id @default(autoincrement())
+  managerId Int
+  manager   Manager  @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  type      String // e.g. "PROMOTION", "CUP_WIN"
+  title     String
+  date      DateTime @default(now())
+  @@unique([managerId, type, title])  // AUDIT 1.6: evita logros duplicados (title distingue temporada)
+}
+
+model ManagerOffer {
+  id        Int      @id @default(autoincrement())
+  managerId Int
+  manager   Manager  @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  clubId    Int
+  club      Club     @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  wage      Float
+  status    String   @default("PENDING") // PENDING, ACCEPTED, REJECTED
+  createdAt DateTime @default(now())
+  @@index([managerId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+  @@index([clubId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+model ManagerApplication {
+  id        Int      @id @default(autoincrement())
+  managerId Int
+  manager   Manager  @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  clubId    Int
+  club      Club     @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  status    String   @default("PENDING") // PENDING, SHORTLISTED, REJECTED, ACCEPTED
+  createdAt DateTime @default(now())
+  @@index([managerId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+  @@index([clubId])  // AUDIT H-30: índice FK (Postgres no los crea solo)
+}
+
+// ─── Phase 10 Extended Models ──────────────────────────────────────────────────
+
+model Group {
+  id            Int         @id @default(autoincrement())
+  name          String
+  competitionId Int
+  competition   Competition @relation(fields: [competitionId], references: [id], onDelete: Cascade)
+  matchdays     Matchday[]
+}
+
+model ClubKit {
+  id          Int      @id @default(autoincrement())
+  clubId      Int
+  club        Club     @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  kind        String // "HOME", "AWAY", "THIRD"
+  colors      String // JSON string or hex
+  pattern     String
+  sponsorName String?
+  createdAt   DateTime @default(now())
+}
+
+model PlayerSeasonStat {
+  id            Int    @id @default(autoincrement())
+  playerId      Int
+  player        Player @relation(fields: [playerId], references: [id])
+  seasonId      Int
+  season        Season @relation(fields: [seasonId], references: [id])
+  matchesPlayed Int    @default(0)
+  minutes       Int    @default(0)
+  goals         Int    @default(0)
+  assists       Int    @default(0)
+  shots         Int    @default(0)
+  shotsOnTarget Int    @default(0)
+  keyPasses     Int    @default(0)
+  interceptions Int    @default(0)
+  xG            Float  @default(0)
+  ratingCount   Int    @default(0)
+  ratingTotal   Float  @default(0)
+  averageRating Float  @default(0)
+
+  @@unique([playerId, seasonId])
+}
+
+model ClubCoefficient {
+  id       Int    @id @default(autoincrement())
+  clubId   Int
+  club     Club   @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  seasonId Int
+  season   Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  points   Float  @default(0)
+
+  @@unique([clubId, seasonId])
+}
+
+model LeagueCoefficient {
+  id       Int    @id @default(autoincrement())
+  country  String
+  seasonId Int
+  season   Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  points   Float  @default(0)
+  numClubs Int    @default(0)
+
+  @@unique([country, seasonId])
+}
+
+model EuropeanSlotAllocation {
+  id       Int    @id @default(autoincrement())
+  country  String
+  seasonId Int
+  season   Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  ucl      Int    @default(0)
+  uel      Int    @default(0)
+  uecl     Int    @default(0)
+
+  @@unique([country, seasonId])
+}
+
+model MissionProgress {
+  id              Int       @id @default(autoincrement())
+  managerId       Int
+  manager         Manager   @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  missionId       String
+  progress        Int       @default(0)
+  target          Int
+  completedAt     DateTime?
+  rewardClaimedAt DateTime?
+  @@unique([managerId, missionId])  // AUDIT 1.6: 1 progreso por (mánager, misión)
+}
+
+// QW-20 (BLOQUE Q · 11 jun 2026): misiones semanales generadas en el tick
+// (3/semana in-game por mánager humano), evaluadas al cerrar jornada y con
+// claim automático. Recompensa SOLO XP/prestigio (cero dinero, cero P2W).
+model WeeklyMission {
+  id             Int      @id @default(autoincrement())
+  managerId      Int
+  manager        Manager  @relation(fields: [managerId], references: [id])
+  seasonId       Int?
+  weekKey        String // "s13-w7"
+  type           String // clean_sheet | academy_minutes | renew_contract | sign_u23 | beat_direct_rival | win_next
+  title          String
+  description    String
+  target         Int      @default(1)
+  progress       Int      @default(0)
+  status         String   @default("pending") // pending | claimed | expired
+  rewardXp       Int      @default(50)
+  rewardPrestige Int      @default(1)
+  baseline       String? // JSON: contexto al generarla (inGameDate, rivalClubId…)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([managerId, weekKey, type])
+  @@index([managerId, status])
+}
+
+model GoalOfWeekVote {
+  id        Int      @id @default(autoincrement())
+  weekKey   String
+  goalKey   String
+  managerId Int
+  manager   Manager  @relation(fields: [managerId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([weekKey, managerId])
+  @@index([weekKey, goalKey])
+}
+
+model Draft {
+  id           Int         @id @default(autoincrement())
+  seasonId     Int
+  season       Season      @relation(fields: [seasonId], references: [id])
+  status       String      @default("pending") // pending | active | completed
+  currentRound Int         @default(1)
+  currentPick  Int         @default(1)
+  startsAt     DateTime?
+  picks        DraftPick[]
+}
+
+model DraftPick {
+  id         Int     @id @default(autoincrement())
+  draftId    Int
+  draft      Draft   @relation(fields: [draftId], references: [id], onDelete: Cascade)
+  clubId     Int?
+  club       Club?   @relation(fields: [clubId], references: [id], onDelete: SetNull)
+  playerId   Int?
+  player     Player? @relation(fields: [playerId], references: [id], onDelete: SetNull)
+  round      Int
+  pickNumber Int
+
+  // AUDIT H-26: integridad del draft. Cada turno de pick es único por draft, y un
+  // mismo jugador no puede ser elegido dos veces en el mismo draft (idempotencia de
+  // makePick / reintentos del tick). playerId nullable: Postgres permite múltiples
+  // NULL en un unique, así que los picks aún sin asignar no colisionan.
+  @@unique([draftId, pickNumber])
+  @@unique([draftId, playerId])
+  @@index([draftId])  // AUDIT H-30: índice FK
+  @@index([clubId])  // AUDIT H-30: índice FK
+  @@index([playerId])  // AUDIT H-30: índice FK
+}
+
+model TurnSnapshot {
+  id           Int      @id @default(autoincrement())
+  turn         Int
+  inGameDate   DateTime
+  snapshotData String
+  createdAt    DateTime @default(now())
+}
+
+// ─── Phase 4 & 5: Memoria y Mundo Vivo ────────────────────────────────────────
+
+model ClubLegend {
+  id            Int       @id @default(autoincrement())
+  clubId        Int
+  club          Club      @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  playerId      Int?
+  name          String
+  position      String
+  nationality   String
+  matchesPlayed Int       @default(0)
+  goals         Int       @default(0)
+  assists       Int       @default(0)
+  legendScore   Int       @default(0)
+  retiredAt     DateTime?
+  createdAt     DateTime  @default(now())
+}
+
+// ─── CONTRATOS Carril 2 (esquema añadido por Carril 1) ───────────────────────────
+
+// AUDIT 2.8 / H-20 — idempotencia del tick. `TickRun` registra cada turno procesado
+// (único por turno) y `TickStep` cada paso aditivo dentro del turno, para que un
+// reintento tras crash NO vuelva a ejecutar healFitness/staff/training/scouting/etc.
+// Carril 2 consulta/inserta estas filas para hacer los pasos aditivos idempotentes.
+model TickRun {
+  id          Int        @id @default(autoincrement())
+  turn        Int        @unique // turno de GameState procesado (idempotencia)
+  seasonId    Int?
+  inGameDate  DateTime?
+  status      String     @default("running") // running | completed | failed
+  startedAt   DateTime   @default(now())
+  finishedAt  DateTime?
+  steps       TickStep[]
+  @@index([status])
+}
+
+model TickStep {
+  id        Int      @id @default(autoincrement())
+  tickRunId Int
+  tickRun   TickRun  @relation(fields: [tickRunId], references: [id], onDelete: Cascade)
+  step      String   // healFitness | staffEffects | training | scouting | worldEconomy | ...
+  status    String   @default("done") // done | failed
+  createdAt DateTime @default(now())
+  @@unique([tickRunId, step]) // un paso aditivo se aplica una sola vez por turno
+  @@index([tickRunId])
+}
+
+// AUDIT manual §4 — "Lupa": inspección especial de un jugador (1/turno) que revela
+// atributos no-máximos. Carril 2 implementa la mecánica; Carril 1 aporta el modelo.
+model PlayerSpecialInspection {
+  id         Int      @id @default(autoincrement())
+  playerId   Int
+  player     Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  clubId     Int
+  turn       Int      // turno en que se usó la lupa (límite 1/turno por club)
+  revealed   String?  // JSON: atributos revelados
+  createdAt  DateTime @default(now())
+  @@index([playerId])
+  @@index([clubId, turn])
+}

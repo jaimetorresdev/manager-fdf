@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#001A09" rx="100" />
+  <rect x="30" y="30" width="452" height="452" fill="none" stroke="#00FF41" stroke-width="20" rx="70" />
+  <text x="256" y="220" font-family="monospace" font-size="120" font-weight="bold" fill="#00FF41" text-anchor="middle">FDF</text>
+  <text x="256" y="340" font-family="monospace" font-size="60" font-weight="bold" fill="#00FF41" text-anchor="middle">MANAGER</text>
+</svg>

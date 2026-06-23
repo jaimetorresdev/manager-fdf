@@ -1,0 +1,114 @@
+# ─── Manager FDF — stack de producción (también base para dev) ───────────────
+# Servicios: postgres + redis + backend (sirve API y frontend compilado).
+# Para desarrollo con hot reload del frontend usa además docker-compose.dev.yml.
+#
+#   docker compose up                                # solo prod
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up   # dev
+#
+# Requiere un .env (copia .env.example) con secretos reales.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-fdf}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD before starting the stack}
+      POSTGRES_DB: ${POSTGRES_DB:-managerfdf}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-fdf} -d ${POSTGRES_DB:-managerfdf}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - fdf
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:?Set REDIS_PASSWORD before starting the stack}"]
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD before starting the stack}
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:?Set REDIS_PASSWORD before starting the stack}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - fdf
+
+  backend:
+    build:
+      context: .
+      dockerfile: server/Dockerfile.backend
+    restart: unless-stopped
+    ports:
+      - "8081:3001"
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET before starting the stack}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-30d}
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL before starting the stack}
+      # directUrl del schema (conexión sin pooler; en dev apunta a la misma DB)
+      DIRECT_URL: ${DIRECT_URL:?Set DIRECT_URL before starting the stack}
+      REDIS_URL: ${REDIS_URL:-redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD before starting the stack}@redis:6379}
+      MASTER_PASSWORD: ${MASTER_PASSWORD:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      FIFA_PASSWORD: ${FIFA_PASSWORD:-}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:-}
+      RUN_DB_SEED: ${RUN_DB_SEED:-false}
+      ENSURE_STAFF_ROLES: ${ENSURE_STAFF_ROLES:-false}
+      TICK_CRON_T1: ${TICK_CRON_T1:-0 11 * * *}
+      TICK_CRON_T2: ${TICK_CRON_T2:-0 23 * * *}
+      TICK_ENABLED: ${TICK_ENABLED:-true}
+      TZ: ${TZ:-Europe/Madrid}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      CORS_ORIGINS: ${CORS_ORIGINS:?Set CORS_ORIGINS before starting the stack}
+      API_PORT: 3001
+      # Motor de partido en Python. Si no responde, el backend usa su motor TS de respaldo.
+      ENGINE_URL: ${ENGINE_URL:-http://engine:8000}
+      ENGINE_API_KEY: ${ENGINE_API_KEY:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      engine:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - fdf
+
+  # ─── Motor de partido (Python/FastAPI) ──────────────────────────────────────
+  engine:
+    build:
+      context: ./engine
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ:-Europe/Madrid}
+      ENGINE_API_KEY: ${ENGINE_API_KEY:-}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health').status==200 else 1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - fdf
+
+networks:
+  fdf:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:

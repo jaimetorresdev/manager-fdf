@@ -1,0 +1,52 @@
+# ─── Overlay de desarrollo ───────────────────────────────────────────────────
+# Añade un servicio `frontend` con Vite en modo HMR montando ./ como volumen.
+# El backend se sigue ejecutando como en producción pero contra la misma BD.
+#
+# Uso:
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+#
+# Frontend: http://localhost:5173 (HMR)
+# Backend:  http://localhost:8081/api
+# Postgres: localhost:5432 (expuesto para que conectes con TablePlus/DBeaver)
+# Redis:    localhost:6379
+# Engine:   localhost:8000
+
+services:
+  postgres:
+    ports:
+      - "5432:5432"
+
+  redis:
+    ports:
+      - "6379:6379"
+
+  backend:
+    environment:
+      NODE_ENV: development
+      LOG_LEVEL: debug
+
+  engine:
+    ports:
+      - "8000:8000"
+
+  frontend:
+    image: node:20-alpine
+    working_dir: /app
+    # Reinstala deps si package.json cambió (p. ej. facesjs); volumen node_modules puede quedar obsoleto
+    command: sh -c "npm install --include=dev && npm run dev -- --host 0.0.0.0"
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - frontend-node-modules:/app/node_modules
+    environment:
+      VITE_API_URL: ${VITE_API_URL:-http://localhost:8081/api}
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - fdf
+
+volumes:
+  frontend-node-modules:
